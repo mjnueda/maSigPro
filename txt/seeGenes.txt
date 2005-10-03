@@ -1,0 +1,83 @@
+see.groups                   package:maSigPro                   Documentation
+
+Wrapping function for visualization of gene expression values of time course experiments
+
+Description:
+
+     This function provides visualization tools for he gene expression values in a time course 
+     experiment. The function first calls the heatmap limma function for a general overview of 
+     experiment results. Next a partioning of the data is generated using a clustering method.
+     The results of the clustering are visualized both as gene expression profiles extended along all
+     arrays in the experiment, as provided by the plot.profiles function, and as summary expression 
+     profiles for  comparison among experimental groups             
+
+Usage:
+
+      see.genes (data, edesign = data$edesign, time.col = 1, repl.col = 2, group.cols = c(3:ncol(edesign)), 
+      names.groups = colnames(edesign)[3: ncol(edesign)], cluster.data= 2, groups.vector = data$groups.vector,
+      k = 9, cluster.method = "hclust", distance = "cor", agglo.method = "complete", iter.max = 500, show.fit = FALSE, 
+      betas = NULL, show.lines = TRUE,  main = NULL, ...)
+
+Arguments:
+
+     data: either a list or  matrix containing the gene expression data, typically a get.siggnes object
+
+     edesign: matrix of experimental design
+    
+     time.col: column in edesign containing time values. Default is first column
+
+     repl.col: column in edesign containing coding for replicates arrays. Default is second column
+
+     group.cols: columns indicating the coding for each group (treatment, tissue,...) in the experiment (see details)
+
+     colnames.groups: names for groups
+
+     cluster.data: Type of data used by the cluster algorith (see details)
+
+     groups.vector: Vector indicating experimental group of each variable    
+
+     k: number of clusters
+
+     cluster.method: clustering method for data partioning.
+
+     distance: Distance measurement function for when cluster.method = 'hclust'
+
+     agglo.method: aggregation method used when cluster.method = 'hclust'
+  
+     iter.max: max. number of iteration when cluster.method = 'kmeans'
+
+     show.fit: Logical indicating whether regression fit curves must be plotted
+    
+     betas: Required when show.fit = T. Matrix of regression coefficients. By default betas are taken from data object
+
+     show.lines: Logical indicating whether a line must be drawn joining plotted data points for reach group
+
+     main: title for plotting functions
+
+     ...: further plotting arguments
+
+    
+Details:
+
+    Data can be provided either as a single data matrix of expression values, or a 'get.siggenes' object. In the later case
+    the other argument of the fuction can be taken directly from 'data'.
+     
+    Data clustering can be done on the basis of either the original expression values, the regression coefficients, 
+    or the t.scores. In case 'data' is a 'get.siggenes' object, this is given by providing the element names of the list
+    (c("sig.profiles","coefficients","t.score")) of their list position (1,2 or 3).
+     
+Value:
+
+    cut: vector indicating gene partioning into clusters
+
+    c.algo.used: clustering algorith used
+
+    groups: groups matrix used for plotting functions
+
+
+References:
+
+     Conesa, A   aconesa@ivia.es
+     Nueda, MJ   mj.nueda@ua.es
+
+

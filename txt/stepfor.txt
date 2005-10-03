@@ -1,0 +1,44 @@
+stepfor                   package:maSigPro                   Documentation
+
+Fitting a linear model by forward-stepwise regression.
+
+Description:
+
+     'stepfor' fit a linear regression model applying fordward-stepwise strategy.
+
+Usage:
+
+      stepfor(y,d,alfa = 0.05) 
+
+Arguments:
+
+     y: dependent variable 
+
+     d: data frame containing by columns the set of variables that could be in the 	selected model.
+  
+     alfa: significance level to decide if a variable is or is not in the model.
+    
+Details:
+
+     The strategy begins analysing all the possible models with only one of the      variables included in d. The most statistically significant variable (with the      least p-value) is included in the model and then it is considered to introduce in      the model another variable analysing all the possible models with two variables      (the selected variable in the previous step plus a new variable). Again the most      statistically significant variable (with least p-value) is included in the model.      The process is repeated till there is not any statistically significant variable      to include.
+
+     Each time that a variable is entered in the model, it is considered the      possibility of one or more variables introduced can go out.      
+       
+     
+Value:
+	
+     'stepfor' returns an object of 'class' "lm", where the model uses "y" as            dependent variable and all the selected variables from "d" as independent            variables.
+
+     The function 'summary' are used to obtain and print a
+     summary and analysis of variance table of the results.  The
+     generic accessor functions 'coefficients', 'effects',
+     'fitted.values' and 'residuals' extract various useful features of
+     the value returned by 'lm'.
+
+
+References:
+
+     Conesa, A   aconesa@ivia.es
+     Nueda, MJ   mj.nueda@ua.es
+
+

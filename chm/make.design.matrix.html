@@ -1,0 +1,107 @@
+<html><head><title>Make a design matrix for regression fit of time series gene expression experiments</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>make.design.matrix(maSigPro)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   make.design.matrix">
+<param name="keyword" value=" Make a design matrix for regression fit of time series gene expression experiments">
+</object>
+
+
+<h2>Make a design matrix for regression fit of time series gene expression experiments</h2>
+
+
+<h3>Description</h3>
+
+<p>
+<code>make.design.matrix</code> creates the design matrix of dummies for fitting time series micorarray
+gene expression experiments.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+make.design.matrix(edesign, degree = 2, time.col = 1, 
+                   repl.col = 2, group.cols = c(3:ncol(edesign)))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>edesign</code></td>
+<td>
+matrix describing experimental design. Rows must be arrays and columns experiment descriptors</td></tr>
+<tr valign="top"><td><code>degree</code></td>
+<td>
+the degree of the regression fit polynome. <code>degree</code> = 1 returns linear regression, <code>degree</code> = 2 returns quadratic regression, etc</td></tr>
+<tr valign="top"><td><code>time.col</code></td>
+<td>
+column number in edesign containing time values. Default is first column </td></tr>
+<tr valign="top"><td><code>repl.col</code></td>
+<td>
+column number in edesign containing coding for replicate arrays. Default is second column</td></tr>
+<tr valign="top"><td><code>group.cols</code></td>
+<td>
+column numbers in edesign indicating the coding for each experimental group (treatment, tissue, ...). See details </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+rownames of edesign object should contain the arrays naming (i.e. array1, array2, ...). 
+colnames of edesign must contain the names of experiment descriptors(i.e. "Time", "Replicates", "Treatment A", "Treatment B", etc.).
+for each experimental group a different column must be present in edesign, coding with 1 and 0 whether each array belongs to that group or not.
+</p>
+<p>
+<code>make.design.matrix</code> returns a design matrix where rows represent arrays and column variables of time, dummies and their interactions for up to the <code>degree</code> given.
+Dummies show the relative effect of each experimental group related to the first one. Single dummies indicate the abcissa component of each group.
+$Time*dummy$ variables indicate slope changes, $Time^2*dummy$ indicates curvature changes. Higher grade values could model complex responses. 
+In case experimental groups share a initial state (i.e. common time 0), no single dummies are modeled.
+</p>
+
+
+<h3>Value</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dis </code></td>
+<td>
+design matrix of dummies for fitting time series </td></tr>
+<tr valign="top"><td><code>groups.vector </code></td>
+<td>
+vector coding the experimental group to which each variable belongs to</td></tr>
+<tr valign="top"><td><code>edesign </code></td>
+<td>
+<code>edesign</code> value passed as argument </td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2005.
+maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(edesign.abiotic, edesignCT)
+make.design.matrix(edesign.abiotic)  # quadratic model
+make.design.matrix(edesignCT, degree = 3)  # cubic model with common starting time point
+</pre>
+
+
+
+<hr><div align="center">[Package <em>maSigPro</em> version 1.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

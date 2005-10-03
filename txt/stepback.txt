@@ -1,0 +1,43 @@
+stepback                   package:maSigPro                   Documentation
+
+Fitting a linear model by backward-stepwise regression.
+
+Description:
+
+     'stepback' fits a linear regression model applying backward-stepwise strategy.
+
+Usage:
+
+      stepback(y,d,alfa = 0.05) 
+
+Arguments:
+
+     y: dependent variable 
+
+     d: data frame containing by columns the set of variables that could be in the 	selected model.
+  
+     alfa: significance level to decide if a variable is or is not in the model.
+    
+Details:
+
+     The strategy begins analysing a model with all the variables included in d. If 	     all the variables are statistically significant (all the variables have a 	            p-value less than alfa)  this model will be the result, either, the least  	     statistically significant variable will be removed and the model is 	            re-calculated and the argument is repeated up to find a model with all the 	     variables statistically significant.
+     Each time that a variable is removed from matrix d, it is considered the      possibility of one or more removed variables can come in again. 
+       
+     
+Value:
+	
+     'stepback' returns an object of 'class' "lm", where the model uses "y" as       dependent variable and all the selected variables from "d" as independent       variables. 
+             
+     The function 'summary' are used to obtain and print a
+     summary and analysis of variance table of the results.  The
+     generic accessor functions 'coefficients', 'effects',
+     'fitted.values' and 'residuals' extract various useful features of
+     the value returned by 'lm'.
+
+
+References:
+
+     Conesa, A   aconesa@ivia.es
+     Nueda, MJ   mj.nueda@ua.es
+
+

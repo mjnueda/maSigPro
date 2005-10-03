@@ -1,0 +1,84 @@
+<html><head><title>Average rows by match and index</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>average.rows(maSigPro)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   average.rows">
+<param name="keyword" value=" Average rows by match and index">
+</object>
+
+
+<h2>Average rows by match and index</h2>
+
+
+<h3>Description</h3>
+
+<p>
+<code>average.rows</code> matches rownames of a matrix to a <code>match</code> vector and performs averaging of the rows
+by the index provided by an <code>index</code> vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+average.rows(x, index, match, r = 0.7)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+a matrix</td></tr>
+<tr valign="top"><td><code>index</code></td>
+<td>
+index vector indicating how rows must be averaged </td></tr>
+<tr valign="top"><td><code>match</code></td>
+<td>
+match vector for indexing rows </td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+minimal correlation value between rows to compute average </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+rows will be averaged only if the pearson correlation coefficient between all rows of each given
+index is greater than r. If not, that group of rows is discarded in the result matrix.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+a matrix of averaged rows</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Ana Conesa, aconesa@ivia.es
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## create data matrix for row averaging
+x &lt;- matrix(rnorm(30), nrow = 6,ncol = 5)
+rownames(x) &lt;- paste("ID", c(1, 2, 11, 12, 19, 20), sep = "")
+i &lt;- paste("g", rep(c(1:10), each = 2), sep = "")  # index vector
+m &lt;- paste("ID", c(1:20), sep = "")  # match vector
+average.rows(x, i, m, r = 0) 
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>maSigPro</em> version 1.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

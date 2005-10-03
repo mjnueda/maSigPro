@@ -1,0 +1,37 @@
+reg.coeffs                   package:maSigPro                   Documentation
+
+Calculate true regression coefficients 
+
+Description:
+
+     'reg.coeffs' re-calculates groups regression coefficients from dummy variables regression coefficients 
+
+Usage:
+
+      reg.coeffs (coefficients, abcissa = "Time", groups.vector, group)  
+
+Arguments:
+
+     coefficients: vector of regression coefficients obtained from a regression model with dummy variables
+
+     abcissa: variable x of the regression formula
+
+     group: group for which regression coefficients are to be computed 
+  
+     groups.vector: vector with the group value of each variable in 'coefficients' 
+       
+Details:
+
+     regression coefficients in coefficients vector should be ordered by natural position in a regression formula,
+     ie: intercept, x term, x^2 term, X^3 term, and so on... 
+
+Value:
+   
+    reg.coeff: vector of calculated regression coefficients
+
+References:
+
+     Conesa, A   aconesa@ivia.es
+     Nueda, MJ   mj.nueda@ua.es
+
+

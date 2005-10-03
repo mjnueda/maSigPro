@@ -1,0 +1,84 @@
+<html><head><title>Creates a Venn Diagram from a matrix of characters</title>
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>suma2Venn(maSigPro)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   suma2Venn">
+<param name="keyword" value=" Creates a Venn Diagram from a matrix of characters">
+</object>
+
+
+<h2>Creates a Venn Diagram from a matrix of characters</h2>
+
+
+<h3>Description</h3>
+
+<p>
+<code>suma2Venn</code> transforms a matrix of characters into a binary matrix and creates 
+a vennDiagram of the common elements between columns
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+suma2Venn(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+data frame of character values</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+plotting arguments for the vennDiagram function </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+<code>suma2Venn</code> creates a list of all elements of a matrix or data frame of characters and computes  
+the presence/absence of each element in each column of the matrix. This results is a numeric
+matrix of 1 and 0 which can be taken by the <code>vennDiagram</code> to generate a Venn Plot
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+<code>suma2Venn</code> returns a Venn Plot such as that created by the <code>vennDiagram</code> funcion</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Ana Conesa, aconesa@ivia.es
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code>vennDiagram</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+a &lt;- c("a","b","c", "d", "e", NA, NA)
+b &lt;- c("a","b","f", NA, NA, NA, NA)
+c &lt;- c("b","e","f", "h", "i", "j", "k")
+x &lt;- cbind(a, b,c)
+suma2Venn(x)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>maSigPro</em> version 1.0 <a href="00Index.html">Index]</a></div>
+
+</body></html>

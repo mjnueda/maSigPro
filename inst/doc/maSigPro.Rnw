@@ -1,0 +1,36 @@
+% \VignetteIndexEntry{maSigPro Vignette}
+% \VignetteDepends{Biobase,tools}
+% \VignetteKeywords{Expression Analysis, Time course}
+% \VignettePackage{maSigPro}
+
+\documentclass[a4paper,9pt]{article}
+\usepackage{Sweave} 
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{lscape}
+%para pdfscreen
+\usepackage{times}
+\usepackage{fancyvrb}
+\usepackage{xspace,colortbl}
+%\usepackage[print,nopanel,sectionbreak,code,spanish]{pdfscreen}
+%\usepackage[screen,nopanel,sectionbreak,code,spanish]{pdfscreen}
+%\margins{.5in}{.5in}{.5in}{.5in}
+%\screensize{5.08in}{6.5in}
+
+\begin{document}
+
+\title{maSigPro Package Vignette}
+
+\author{Ana Conesa}
+
+\date{4 August 2005}
+\maketitle
+
+maSigPro is a R package for the analysis of single and multiseries time course microarray experiments. maSigPro follows a two steps regression strategy to find genes with significant temporal expression changes and significant differences between experimetal groups. The method firsly defines a general regression model for the data where the experimental groups are identified by dummy variables. The procedure first adjusts this global model by the least squared technique to identify differentially expressed genes and selects significant genes aplying false discovery rate control procedures. Secondly, stepwise regression is applied as a variable selection strategy to study differences between experimental groups and to find statistically significant different profiles. The coefficients obtained in the second regression model will be useful to cluster together significant genes with similar expression patterns and to visualize the results. 
+
+A complete maSigPro User's Guide is part of the package documentation. To obtain the User's Guide you need to install the maSigPro package. Type at the R prompt:
+<<echo=TRUE,eval=FALSE,results=hide>>=
+shell.exec("./library.maSigPro/doc/maSigPro-tutorial.pdf")
+@ 
+
+\end{document}

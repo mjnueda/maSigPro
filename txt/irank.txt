@@ -1,0 +1,31 @@
+i.rank                   package:maSigPro                   Documentation
+
+Ranks a vector to index 
+
+Description:
+
+     Ranks the values in a vector to sucessive values. Ties are given the same value               
+
+Usage:
+
+      i.rank (x)  
+
+Arguments:
+
+     x: vector
+       
+Details:
+
+     i.rank(c(1,1,1,3,3,5,7,7,7) ) returns:  
+     1 1 1 2 2 3 4 4 
+
+Value:
+
+    Vector of ranked values
+
+References:
+
+     Conesa, A   aconesa@ivia.es
+     Nueda, MJ   mj.nueda@ua.es
+
+

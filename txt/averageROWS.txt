@@ -1,0 +1,38 @@
+average.rows                   package:maSigPro                   Documentation
+
+Average rows by match & index
+
+Description:
+
+     'average.rows' matches rownames of a matrix to a 'match' vector and performs averaging of the rows
+      by the index provided by an 'index' vector               
+
+Usage:
+
+      average.rows (x, index, match, r = 0.7)  
+
+Arguments:
+
+     x: a matrix
+
+     match: match vector for indexing rows
+
+     index: index vector indicating how rows must be averaged
+
+     r: minimal correlation value between rows to compute average
+    
+Details:
+
+    rows will be averaged only if the pearson correlation coefficient between all rows of each given
+    index is greater than r. If not, that group of rows is discarded in the result matrix.    
+     
+Value:
+
+    a matrix where 'nrows' equals 'length(unique(index))'
+
+References:
+
+     Conesa, A   aconesa@ivia.es
+     Nueda, MJ   mj.nueda@ua.es
+
+

@@ -1,0 +1,36 @@
+plot.profiles                   package:maSigPro                   Documentation
+
+Function for visualization of gene expression profiles
+
+Description:
+
+     plot.profiles displays the expression profiles of a group of genes              
+
+Usage:
+
+      plot.profiles (data, cond, repvect, main = main, cex.xaxis = 0.5, ylim = ylim)
+
+Arguments:
+
+     data: a matrix containing the gene expression data
+
+     cond: vector for x axis labeling, typically array names
+  
+     repvect: index vector indicating experimental replicates
+
+     main, cex.axis, ylim: argument for plot.function
+        
+Details:
+
+    The repvect argument is used to indicate with vertical lines groups of replicated arrays
+          
+Value:
+
+    plot of profiles
+
+References:
+
+     Conesa, A   aconesa@ivia.es
+     Nueda, MJ   mj.nueda@ua.es
+
+
