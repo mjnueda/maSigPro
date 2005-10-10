@@ -18,16 +18,16 @@ suma2Venn(x, ...)
 \details{
   \code{suma2Venn} creates a list of all elements of a matrix or data frame of characters and computes  
 the presence/absence of each element in each column of the matrix. This results is a numeric
-matrix of 1 and 0 which can be taken by the \code{\link{vennDiagram}} to generate a Venn Plot
+matrix of 1 and 0 which can be taken by the \code{\link[limma]{vennDiagram}} to generate a Venn Plot
 }
 
 \value{
-\code{suma2Venn} returns a Venn Plot such as that created by the \code{\link{vennDiagram}} funcion
+\code{suma2Venn} returns a Venn Plot such as that created by the \code{\link[limma]{vennDiagram}} funcion
 }
 
 \author{ Ana Conesa, aconesa@ivia.es}
 
-\seealso{  \code{\link{vennDiagram}}}
+\seealso{  \code{\link[limma]{vennDiagram}}}
 \examples{
 a <- c("a","b","c", "d", "e", NA, NA)
 b <- c("a","b","f", NA, NA, NA, NA)
