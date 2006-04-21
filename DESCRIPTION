@@ -12,3 +12,4 @@ Suggests: marray, EMV, limma
 URL: http://www.ivia.es/centrogenomica/bioinformatics.htm
 SaveImage: yes
 License: GPL (version 2 or newer)
+biocViews: Microarray, DifferentialExpression, TimeCourse
