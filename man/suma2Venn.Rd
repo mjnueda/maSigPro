@@ -27,7 +27,7 @@ matrix of 1 and 0 which can be taken by the \code{\link[limma]{vennDiagram}} to 
 
 \author{ Ana Conesa, aconesa@ivia.es}
 
-\seealso{  \code{\link[limma]{vennDiagram}}}
+\seealso{ \code{\link[limma]{vennDiagram}}}
 \examples{
 a <- c("a","b","c", "d", "e", NA, NA)
 b <- c("a","b","f", NA, NA, NA, NA)

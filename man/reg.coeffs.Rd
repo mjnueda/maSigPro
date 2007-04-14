@@ -6,7 +6,8 @@
   \code{reg.coeffs} calculates back regression coefficients for true variables (experimental groups) from dummy variables regression coefficients. 
 }
 \usage{
-reg.coeffs(coefficients, indepen = groups.vector[1], groups.vector, group)
+reg.coeffs(coefficients, indepen = groups.vector[nchar(groups.vector)==min(nchar(groups.vector))][1], groups.vector, 
+    group) 
 }
 
 \arguments{
@@ -30,8 +31,8 @@ maSigPro: a Method to Identify Significant Differential Expression Profiles in T
 \author{ Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
 
 \examples{
-groups.vector <-c("CT", "T1vsCT", "T2vsCT", "T1vsCT","T2vsCT", "CT", "T1vsCT", "T2vsCT")
-coefficients <- c(0.1, 1.2, -0.8, 3.3, 0.4, 0.0, 2.1, -0.9)
+groups.vector <-c("CT", "T1vsCT", "T2vsCT", "CT", "T1vsCT","T2vsCT", "CT", "T1vsCT", "T2vsCT")
+coefficients <- c(0.1, 1.2, -0.8, 1.7, 3.3, 0.4, 0.0, 2.1, -0.9)
 ## calculate true regression coefficients for variable "T1"
 reg.coeffs(coefficients, groups.vector = groups.vector, group = "T1")
 }

@@ -1,4 +1,4 @@
-"two.ways.stepback" <-
+"two.ways.stepback" <- 
 function (y = y, d = dis, alfa = 0.05) 
 {
     OUT <- NULL

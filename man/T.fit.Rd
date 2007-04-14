@@ -7,7 +7,7 @@
 }
 \usage{
 T.fit(data, design = data$dis, step.method = "backward", 
-      min.obs = data$min.obs, alfa = data$Q)
+      min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE)
 }
 
 \arguments{
@@ -18,6 +18,7 @@ T.fit(data, design = data$dis, step.method = "backward",
   \item{step.method}{argument to be passed to the step function. Can be either \code{"backward"}, \code{"forward"}, \code{"two.ways.backward"} or \code{"two.ways.forward"} }
   \item{min.obs}{ genes with less than this number of true numerical values will be excluded from the analysis }
   \item{alfa}{significance level used for variable selection in the stepwise regression }
+  \item{nvar.correction}{argument for correcting T.fit significance level. See details}
 }
 \details{
      In the maSigPro approach \code{\link{p.vector}} and \code{\link{T.fit}} are subsequent steps, meaning that significant genes are
@@ -26,29 +27,30 @@ T.fit(data, design = data$dis, step.method = "backward",
      The step regression can be \code{"backward"} or \code{"forward"} indicating whether the step procedure starts from the 
      model with all or none variables. With the \code{"two.ways.backward"} or \code{"two.ways.forward"} options the variables are both allowed to get in and out.
      At each step the p-value of each variable is computed and variables get in/out the model when this p-value is
-     lower or higher than given threshold alfa.
+     lower or higher than given threshold alfa. When nva.correction is TRUE the given significance level is corrected by the number of variables in the model
 }
 \value{
-  \item{sol}{ matrix for summary results of the stepwise regression. For each selected gene the following values are given:
-\newline \qquad p-value of the regression ANOVA, 
-\newline \qquad R-squared of the model 
-\newline \qquad p-value of the regression coefficients of the selected variables}
+  \item{sol}{matrix for summary results of the stepwise regression. For each selected gene the following values are given:}
+\newline \qquad {p-value of the regression ANOVA}
+\newline \qquad {R-squared of the model}
+\newline \qquad {p-value of the regression coefficients of the selected variables}
   \item{sig.profiles}{expression values for the genes contained in \code{sol}}
-  \item{coefficients }{matrix containing regression coefficients for the adjusted models}
-  \item{t.score }{matix containing t.scores for the adjusted models}
-  \item{variables }{variables in the complete regression model}
+  \item{coefficients}{matrix containing regression coefficients for the adjusted models}
+  \item{groups.coeffs}{matrix containing the coefficients of the impiclit models of each experimental group}
+  \item{variables}{variables in the complete regression model}
   \item{G}{total number of input genes}
   \item{g}{number of genes taken in the regression fit}
-  \item{dat }{input analysis data matrix}
+  \item{dat}{input analysis data matrix}
   \item{dis}{regression design matrix}
   \item{step.method}{imputed step method for stepwise regression}
   \item{edesign}{matrix of experimental design}
-  \item{influ.info }{data frame of genes containing influencial data}
+  \item{influ.info}{data frame of genes containing influencial data}
 }
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2005.
-maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
- }
-\author{ Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2006.
+maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+Bioinformatics 22, 1096-1102
+}
+\author{Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
 
 \seealso{\code{\link{p.vector}}, \code{\link{step}}}
 \examples{

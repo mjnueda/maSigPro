@@ -9,8 +9,8 @@
 \usage{
 PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(edesign))], 
            repvect = edesign[,2], show.fit = FALSE, dis = NULL, step.method = "backward", 
-           min.obs = 2, alfa = 0.01, show.lines = TRUE, groups.vector = NULL, xlab = "time", cex.xaxis = 1, 
-           ylim = NULL, main = NULL, cexlab = 0.8, legend = TRUE, sub = NULL)
+           min.obs = 2, alfa = 0.05, nvar.correction = FALSE, summary.mode = "median", show.lines = TRUE, groups.vector = NULL, 
+           xlab = "time", cex.xaxis = 1, ylim = NULL, main = NULL, cexlab = 0.8, legend = TRUE, sub = NULL)
 }
 
 \arguments{
@@ -24,6 +24,8 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
   \item{step.method}{stepwise regression method to fit models for cluster mean profiles. It can be either \code{"backward"}, \code{"forward"}, \code{"two.ways.backward"} or \code{"two.ways.forward"} }
   \item{min.obs}{minimal number of observations for a gene to be included in the analysis}
   \item{alfa}{ significance level used for variable selection in the stepwise regression }
+  \item{nvar.correction}{argument for correcting stepwise regression significance level. See \code{\link{T.fit}} }
+  \item{summary.mode}{ the method to condensate expression information when more than one gene is present in the data. Possible values are \code{"representative"} and \code{"median"} }
   \item{show.lines}{ logical indicating whether a line must be drawn joining plotted data points for reach group}
   \item{groups.vector}{ vector indicating experimental group to which each variable belongs }
   \item{xlab}{ label for the x axis }
@@ -42,17 +44,20 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
 \newline
      When there are array replicates in the data (as indicated by \code{repvect}), values are averaged by \code{repvect}.
 \newline
+     PlotGroups plots one single expression profile for each experimental group even if there are more that one genes in the data set. The way data
+     is condensated for this is given by \code{summary.mode}. When this argument takes the value \code{"representative"}, the gene with the lowest
+     distance to all genes in the cluster will be plotted. When the argument is  \code{"median"}, then median expression value is computed.
+\newline
      When \code{show.fit} is \code{TRUE} the stepwise regression fit for the data will be computed and the regression curves will be displayed. 
-     If data is a matrix of genes, the regression fit will be computed for the averaged expression value.
+     If data is a matrix of genes and \code{summary.mode} is \code{"median"}, the regression fit will be computed for the median expression value.
 }
 \value{
   Plot of gene expression profiles by-group.
-
 }
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{ Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
+\author{Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
 
 \seealso{\code{\link{PlotProfiles}}}
 

@@ -7,7 +7,7 @@
 }
 \usage{
 get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1, 
-             only.names = FALSE, vars = c("all", "each", "groups"), 
+             only.names = FALSE, vars = c("all", "each", "groups"), significant.intercept = "dummy", 
              groups.vector = NULL, trat.repl.spots = "none", 
              index = IDs[, (matchID.col + 1)], match = IDs[, matchID.col], r = 0.7)
 }
@@ -20,6 +20,7 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
   \item{matchID.col}{ number of matching column in matrix IDs for adding genes ids }
   \item{only.names}{ logical. If \code{TRUE}, expression values are ommited in the results }
   \item{vars}{ variables for which to extract significant genes (see details) }
+  \item{significant.intercept}{ experimental groups for which significant intercept coefficients are considered (see details) }
   \item{groups.vector}{ required when \code{vars} is \code{"groups"}.}
   \item{trat.repl.spots}{ treatment given to replicate spots. Possible values are \code{"none"} and \code{"average"}}
   \item{index}{ argument of the \code{\link{average.rows}} function to use when \code{ trat.repl.spots} is \code{"average"} }
@@ -33,14 +34,20 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
  \newline \qquad \code{"groups"}: generates a significant genes extraction for each experimental group.  
  \newline  The difference between \code{"each"} and \code{"groups"} is that in the first case the variables of the same group (e.g.  \code{"TreatmentA"} and 
      \code{"time*TreatmentA" }) will be extracted separately and in the second case jointly.
-
+ \newline
     When \code{add.IDs} is \code{TRUE}, a matrix of gene ids must be provided as argument of IDs, the \code{matchID.col} 
     column of which having same levels as in the row names of \code{sig.profiles}. The option \code{only.names} is \code{TRUE} will generate a vector of significant genes or a matrix when \code{add.IDs} is set also to \code{TRUE}.
-
+ \newline
     When \code{trat.repl.spots} is \code{"average"}, \code{match} and \code{index} vectors are required for the \code{\link{average.rows}} function.
     In gene expression data context, the \code{index} vector would contain geneIDs and indicate which spots 
     are replicates. The \code{match} vector is used to match these genesIDs to rows in the significant genes 
     matrix, and must have the same levels as the row names of \code{sig.profiles}.
+ \newline
+    The argument \code{significant.intercept} modulates the treatment for intercept coefficients to apply for selecting significant genes
+    when \code{vars} equals \code{"groups"}. There are three possible values: \code{"none"}, no significant intercept (differences) are
+    considered for significant gene selection, \code{"dummy"}, includes genes with significant intercept differences between control and experimental
+    groups, and \code{"all"} when both significant intercept coefficient for the control group and significant intercept
+    differences are considered for selecting significant genes.    
 
     \code{add.IDs} = TRUE and \code{trat.repl.spots} = \code{"average"} are not compatible argumet values.
     \code{add.IDs} = TRUE and \code{only.names} = \code{TRUE} are  compatible argumet values.
@@ -50,16 +57,16 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
   \item{summary}{a vector or matrix listing significant genes for the variables given by the function parameters}
   \item{sig.genes}{a list with detailed information on the significant genes found for the variables given by the function parameters. Each element of the list is also a list containing:
    \newline \quad \code{sig.profiles}: expression values of significant genes
-   \newline \quad \code{coefficients}: regression coefficients for significant genes
-   \newline \quad \code{t.score}: t.score of significant genes
+   \newline \quad \code{coefficients}: regression coefficients of the adjusted models
+   \newline \quad \code{groups.coeffs}: regression coefficients of the impiclit models of each experimental group
    \newline \quad \code{sig.pvalues}: p-values of the regression coefficients for significant genes
    \newline \quad \code{g}: number of genes
    \newline \quad \code{...}: arguments passed by previous functions}
-
 }
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2005.
-maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
- }
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2006.
+maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+Bioinformatics 22, 1096-1102
+}
 \author{Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
 \examples{
 
@@ -124,6 +131,7 @@ tc.sigs <- get.siggenes (tc.tstep, rsq = 0.9, vars = "groups")
 IDs <- rbind(paste("feature", c(1:300), sep = ""), 
        rep(paste("gene", c(1:150), sep = ""), each = 2))
 tc.sigs.ALL <- get.siggenes (tc.tstep, rsq = 0, vars = "all", IDs = IDs)
+tc.sigs.groups <- get.siggenes (tc.tstep, rsq = 0, vars = "groups", significant.intercept="dummy")
 
 }
 \keyword{ manip }

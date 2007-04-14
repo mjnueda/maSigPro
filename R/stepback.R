@@ -1,5 +1,4 @@
 "stepback" <-
-
 function (y = y, d = dis, alfa = 0.05) 
 {
     lm1 <- lm(y ~ ., data = d)
@@ -32,6 +31,3 @@ function (y = y, d = dis, alfa = 0.05)
     }
     return(lm1)
 }
-
-
-

@@ -12,43 +12,45 @@
      profiles for  comparison among experimental groups.
 }
 \usage{
-see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2, group.cols = 
-          c(3:ncol(edesign)), names.groups = colnames(edesign)[3:ncol(edesign)], 
-          cluster.data = 1, groups.vector = data$groups.vector, k = 9, 
-          cluster.method = "kmeans", distance = "cor", agglo.method = "complete", 
-          show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
-          alfa = 0.01, show.lines = TRUE, iter.max = 500, cexlab = 1, legend = TRUE, 
-          newX11 = TRUE, ylim = NULL, main = NULL, ...)
+see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2, 
+    group.cols = c(3:ncol(edesign)), names.groups = colnames(edesign)[3:ncol(edesign)], 
+    cluster.data = 1, groups.vector = data$groups.vector, k = 9, 
+    cluster.method = "hclust", distance = "cor", agglo.method = "ward", 
+    show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
+    alfa = 0.05, nvar.correction = FALSE, show.lines = TRUE, iter.max = 500, 
+    summary.mode = "median", color.mode = "rainbow", cexlab = 1, legend = TRUE, 
+    newX11 = TRUE,  ylim = NULL, main = NULL, ...) 
 }
 
 \arguments{
   \item{data}{ either matrix or a list containing the gene expression data, typically a \code{\link{get.siggenes}} object}
   \item{edesign}{ matrix of experimental design }
   \item{time.col}{  column in edesign containing time values. Default is first column}
-  \item{repl.col}{ column in edesign containing coding for replicates arrays. Default is second column
-}
-  \item{group.cols}{ columns indicating the coding for each group (treatment, tissue,...) in the experiment (see details)
- }
-  \item{names.groups}{ names for experimental groups}
-  \item{cluster.data}{ type of data used by the cluster algorithm (see details) }
-  \item{groups.vector}{Vector indicating the experimental group to which each variable belongs  }
+  \item{repl.col}{ column in edesign containing coding for replicates arrays. Default is second column}
+  \item{group.cols}{ columns indicating the coding for each group (treatment, tissue,...) in the experiment (see details) }
+  \item{names.groups}{names for experimental groups}
+  \item{cluster.data}{type of data used by the cluster algorithm (see details) }
+  \item{groups.vector}{vector indicating the experimental group to which each variable belongs  }
   \item{k}{number of clusters for data partioning}
-  \item{cluster.method}{  clustering method for data partioning }
-  \item{distance}{distance measurement function for when \code{cluster.method} is \code{"hclust"} }
-  \item{agglo.method}{aggregation method used when \code{cluster.method} is "hclust" }
+  \item{cluster.method}{clustering method for data partioning. Currently \code{"hclust"} and \code{"kmeans"} are supported}
+  \item{distance}{distance measurement function for when \code{cluster.method} is \code{\link{hclust}}}
+  \item{agglo.method}{aggregation method used when \code{cluster.method} is \code{\link{hclust}} }
   \item{show.fit}{logical indicating whether regression fit curves must be plotted }
   \item{dis}{regression design matrix }
   \item{step.method}{stepwise regression method to fit models for cluster mean profiles. Can be either \code{"backward"}, \code{"forward"}, \code{"two.ways.backward"} or \code{"two.ways.forward"} }
   \item{min.obs}{minimal number of observations for a gene to be included in the analysis}
-  \item{alfa}{ significance level used for variable selection in the stepwise regression }
-  \item{show.lines}{ logical indicating whether a line must be drawn joining plotted data points for reach group}
-  \item{iter.max}{ max. number of iteration when \code{cluster.method} = \code{"kmeans"} }
+  \item{alfa}{significance level used for variable selection in the stepwise regression }
+  \item{nvar.correction}{argument for correcting \code{T.fit}significance level. See \code{\link{T.fit}} }
+  \item{show.lines}{logical indicating whether a line must be drawn joining plotted data points for reach group}
+  \item{iter.max}{maximum number of iterations when \code{cluster.method} is \code{\link{kmeans}} }
+  \item{summary.mode}{ the method \code{\link{PlotGroups}} takes to condensate expression information when more than one gene is present in the data. Possible values are \code{"representative"} and \code{"median"} }  
+  \item{color.mode}{ color scale for plotting profiles. Can be either \code{"rainblow"} or \code{"gray"}}
   \item{cexlab}{ graphical parameter maginfication to be used for x labels in plotting functions }
   \item{legend}{logical indicating whether legend must be added when plotting profiles  }
-  \item{main}{ plot title } 
-  \item{ylim}{ range of the y axis to be used by \code{\link{PlotProfiles}} and \code{\link{PlotGroups}} }   
-  \item{newX11}{ If \code{TRUE}, plot each type of plot in a diferent graphical device }
-  \item{\dots}{  other graphical function argument }
+  \item{main}{plot title} 
+  \item{ylim}{range of the y axis to be used by \code{\link{PlotProfiles}} and \code{\link{PlotGroups}} }   
+  \item{newX11}{when \code{TRUE}, plot each type of plot in a diferent graphical device }
+  \item{\dots}{other graphical function argument }
 }
 \details{
     Data can be provided either as a single data matrix of expression values, or a \code{\link{get.siggenes}} object. In the later case
@@ -64,9 +66,10 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2, group.cols =
   \item{c.algo.used}{clustering algorith used for data partioning}
   \item{groups}{groups matrix used for plotting functions}
 }
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2005.
-maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
- }
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2006.
+maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+Bioinformatics 22, 1096-1102
+}
 \author{ Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
 \seealso{ \code{\link{PlotProfiles}}, \code{\link{PlotGroups}}}
 \examples{

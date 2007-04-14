@@ -8,20 +8,21 @@
       \code{\link{get.siggenes}} and \code{\link{see.genes}}.
 }
 \usage{
-maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL, degree = 2, 
-         time.col = 1, repl.col = 2, group.cols = c(3:ncol(edesign)), 
-         Q = 0.05, alfa = Q, step.method = "backward", rsq = 0.7, min.obs = 3, 
-         vars = "groups", cluster.data = 1, add.IDs = FALSE, IDs = NULL, 
-         matchID.col = 1, only.names = FALSE, k = 9, cluster.method = "kmeans", 
-         distance = "cor", agglo.method = "complete", iter.max = 500, 
-         trat.repl.spots = "none", index = IDs[, (matchID.col + 1)], 
-         match = IDs[, matchID.col], rs = 0.7, show.fit = TRUE, show.lines = TRUE, 
-         pdf = TRUE, cexlab = 0.8, legend = TRUE, main = NULL, ...)
+maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL, 
+    degree = 2, time.col = 1, repl.col = 2, group.cols = c(3:ncol(edesign)), 
+    Q = 0.05, alfa = Q, nvar.correction = FALSE, step.method = "backward", rsq = 0.7,
+    min.obs = 3, vars = "groups", significant.intercept = "dummy", cluster.data = 1, 
+    add.IDs = FALSE, IDs = NULL, matchID.col = 1, only.names = FALSE, k = 9, 
+    cluster.method = "hclust", distance = "cor", agglo.method = "ward", iter.max = 500, 
+    summary.mode = "median", color.mode = "rainbow", trat.repl.spots = "none",
+    index = IDs[, (matchID.col + 1)], match = IDs[, matchID.col], rs = 0.7, 
+    show.fit = TRUE, show.lines = TRUE, pdf = TRUE, cexlab = 0.8, 
+    legend = TRUE, main = NULL, ...)
 }
 
 \arguments{
   \item{data}{ matrix with normalized gene expression data. Genes must be in rows and arrays in columns. Row names must contain geneIDs
-\newline \quad	(argument of \code{\link{p.vector}})}
+    \newline \quad	(argument of \code{\link{p.vector}})}
   \item{edesign}{ matrix of experimental design. Row names must contain arrayIDs
     \newline \quad      (argument of \code{\link{make.design.matrix}} and \code{\link{see.genes}})}
   \item{matrix}{ design matrix for regression analysis. By default design is calculated with make.design.matrix
@@ -38,13 +39,19 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL, degree = 2,
     \newline \quad      (argument of \code{\link{make.design.matrix}} and \code{\link{see.genes}}) }
   \item{Q}{ level of false discovery rate (FDR) control
     \newline \quad      (argument of \code{\link{p.vector}})}
-  \item{alfa}{ significance level used for variable selection in the stepwise regression }
-  \item{step.method}{ argument to be passed to the step function. Can be either \code{"backward"}, \code{"forward"}, \code{"two.ways.backward"} or \code{"two.ways.forward"} }
-  \item{min.obs}{ genes with less than this number of true numerical values will be excluded from the analysis. Default is  3 (minimun value for a quadratic fit) }
-  \item{rsq}{ cut-off level at the R-squared value for the stepwise regression fit. Only genes with R-squared greater than \code{rsq} are selected }
-  \i\newline \quadtem{min.obs}{ genes with less than this number of true numerical values will be excluded from the analysis 
-	(argument of \code{\link{p.vector}} and \code{\link{T.fit}})}
+  \item{alfa}{ significance level used for variable selection in the stepwise regression
+    \newline \quad      (argument of \code{\link{T.fit}})}
+  \item{nvar.correction}{logical for indicating correcting of stepwise regression significance level
+    \newline \quad      (argument of \code{\link{T.fit}})}
+  \item{step.method}{ argument to be passed to the step function. 
+    \newline \quad  Can be either \code{"backward"}, \code{"forward"}, \code{"two.ways.backward"} or \code{"two.ways.forward"} }
+  \item{rsq}{ cut-off level at the R-squared value for the stepwise regression fit. 
+    \newline \quad Only genes with R-squared greater than \code{rsq} are selected }
+  \item{min.obs}{ genes with less than this number of true numerical values will be excluded from the analysis 
+    \newline \quad      (argument of \code{\link{p.vector}} and \code{\link{T.fit}})}
   \item{vars}{ variables for which to extract significant genes
+    \newline \quad     (argument of \code{\link{get.siggenes}})}
+  \item{significant.intercept}{ experimental groups for which significant intercept coefficients are considered
     \newline \quad     (argument of \code{\link{get.siggenes}})}
   \item{cluster.data}{ Type of data used by the cluster algorithm
     \newline \quad     (argument of \code{\link{see.genes}}) }
@@ -62,10 +69,15 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL, degree = 2,
     \newline \quad     (argument of \code{\link{see.genes}}) }
   \item{distance}{ distance measurement function used when \code{cluster.method} is \code{"hclust"}
     \newline \quad     (argument of \code{\link{see.genes}}) }
-  \item{agglo.method}{ aggregation method used when \code{cluster.method} is "hclust"
+  \item{agglo.method}{ aggregation method used when \code{cluster.method} is \code{"hclust"}
     \newline \quad     (argument of \code{see.genes}) }
   \item{iter.max}{ number of iterations when \code{cluster.method} is \code{"kmeans"}
     \newline \quad     (argument of \code{\link{see.genes}}) }
+  \item{summary.mode}{ the method to condensate expression information when more than one gene is present in the data. 
+    \newline \quad Possible values are \code{"representative"} and \code{"median"} 
+    \newline \quad     (argument of \code{\link{PlotGroups}}) }  
+ \item{color.mode}{ color scale for plotting profiles. Can be either \code{"rainblow"} or \code{"gray"}
+    \newline \quad     (argument of \code{\link{PlotProfiles}}) }  
   \item{trat.repl.spots}{ treatment givent to replicate spots. Possible values are \code{"none"} and \code{"average"}
     \newline \quad     (argument of \code{\link{get.siggenes}}) }
   \item{index}{ argument of the \code{\link{average.rows}} function to use when \code{trat.repl.spots} is \code{"average"}
@@ -84,7 +96,7 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL, degree = 2,
   \item{legend}{ logical indicating whether legend must be added when plotting profiles 
    \newline \quad (argument of \code{\link{see.genes}}) }
   \item{main}{ title for pdf results file }
-  \item{\dots}{ other graphical function arguments}
+  \item{...}{ other graphical function arguments}
 }
 \details{
 

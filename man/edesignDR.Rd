@@ -3,7 +3,7 @@
 \docType{data}
 \title{Experimental design with different replicates}
 \description{
-\code{edesignDR} contains experimental set up of a replicated time course microarray experiment where ratas were submitted to 3 different dosis of a toxic compound. A control and an placebo treatments are also present in the experiment.
+\code{edesignDR} contains experimental set up of a replicated time course microarray experiment where rats were submitted to 3 different dosis of a toxic compound. A control and an placebo treatments are also present in the experiment.
 }
 \usage{data(edesignDR)}
 \format{

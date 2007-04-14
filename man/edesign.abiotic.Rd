@@ -1,10 +1,9 @@
 \name{edesign.abiotic}
 \alias{edesign.abiotic}
 \docType{data}
-\title{ Experimental design potato abiotic stress}
+\title{Experimental design potato abiotic stress}
 \description{
  \code{edesign.abiotic} contains experimental set up of a time course microarray experiment where potato plants were submitted to 3 different abiotic stresses.
-
 }
 \usage{data(edesign.abiotic)}
 \format{
@@ -23,7 +22,6 @@
   \code{"Replicates"} is an index indicating replicate hyridizations, i.e. hybridizations are numbered, giving replicates the same number.
  \newline
 	\code{"Control"}, \code{"Cold"}, \code{"Heat"} and \code{"Salt"} columns indicate array assigment to experimental groups, coding with 1 and 0 whether each array belongs to that group or not.
-
 }
 
 \references{
