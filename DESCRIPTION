@@ -10,6 +10,6 @@ Description: maSigPro is a regression based approach to find genes for which the
 Depends: R (>= 2.3.1), Biobase  
 Suggests: marray, EMV, limma, Mfuzz
 URL: http://bioinfo.cipf.es/
-SaveImage: yes
+LazyLoad: yes
 License: GPL (version 2 or newer)
 biocViews: Microarray, DifferentialExpression, TimeCourse
