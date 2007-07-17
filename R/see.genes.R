@@ -1,7 +1,7 @@
 "see.genes" <-
 function (data, edesign = data$edesign, time.col = 1, repl.col = 2, 
     group.cols = c(3:ncol(edesign)), names.groups = colnames(edesign)[3:ncol(edesign)], 
-    cluster.data = 1, groups.vector = data$groups.vector, k = 9, 
+    cluster.data = 1, groups.vector = data$groups.vector, k = 9, m = 1.45, 
     cluster.method = "hclust", distance = "cor", agglo.method = "ward", 
     show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
     alfa = 0.05, nvar.correction = FALSE, show.lines = TRUE, iter.max = 500, 
@@ -50,6 +50,8 @@ function (data, edesign = data$edesign, time.col = 1, repl.col = 2,
     else {
         print("warning: no rows without missing values or less than 2 rows; impossible to compute heatmap")
     }
+    if (newX11)
+        X11()
     if (nrow(dat) > 1) {
         if (cluster.data != 1 || cluster.data != "sig.profiles") {
             if (any(is.na(clusterdata))) 
@@ -88,6 +90,32 @@ function (data, edesign = data$edesign, time.col = 1, repl.col = 2,
             else if (cluster.method == "kmeans") {
                 cut <- kmeans(clusterdata, k, iter.max)$cluster
                 c.algo.used = paste("kmeans", k, iter.max, sep = "_")
+            }
+                        else if (cluster.method == "mfuzz") { 
+                library(Mfuzz)
+                n<-dim(clusterdata)[2]
+		    clusterdata[is.na(clusterdata)]<-0
+		    temp <- tempfile()
+		    write.table(clusterdata, temp, quote = FALSE, sep = "\t", row.names =TRUE, col.names = TRUE)
+		    signif <- read.exprSet(temp)
+	 	    cl <- mfuzz(signif, c = k, m = m)
+		    clus<-acore(signif,cl=cl,min.acore=(1/k))
+		    for(i in 1:k){
+		    	clus[[i]]<-transform(clus[[i]],cluster= i )
+		    }
+		    cut0<-clus[[1]][,c(1,3)]
+		    for(i in 2:k){
+		    	cut0<-rbind(cut0, clus[[i]][,c(1,3)])
+		    }
+		    cut<-transform(clusterdata, name="")
+		    cut<-transform(cut, cluster=0)
+		    cut<-cut[,c(n+1,n+2)]
+		    cut[,1]<-rownames(cut)
+		    for(i in 1:dim(clusterdata)[1]){
+			cut[i,2]<-cut0[cut[i,1],2]
+		    }
+		    cut<-cut[,2]
+                c.algo.used = paste("mfuzz", k, m, sep = "_")
             }
             else stop("Invalid cluster algorithm")
             if (newX11) 

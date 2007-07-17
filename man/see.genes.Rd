@@ -1,7 +1,7 @@
 \name{see.genes}
 \alias{see.genes}
 
-\title{Wrapping function for visualization of gene expression values of time course experiments}
+\title{Wrapper function for visualization of gene expression values of time course experiments}
 
 \description{
      This function provides visualisation tools for gene expression values in a time course 
@@ -14,7 +14,7 @@
 \usage{
 see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2, 
     group.cols = c(3:ncol(edesign)), names.groups = colnames(edesign)[3:ncol(edesign)], 
-    cluster.data = 1, groups.vector = data$groups.vector, k = 9, 
+    cluster.data = 1, groups.vector = data$groups.vector, k = 9, m = 1.45, 
     cluster.method = "hclust", distance = "cor", agglo.method = "ward", 
     show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
     alfa = 0.05, nvar.correction = FALSE, show.lines = TRUE, iter.max = 500, 
@@ -30,9 +30,10 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2,
   \item{group.cols}{ columns indicating the coding for each group (treatment, tissue,...) in the experiment (see details) }
   \item{names.groups}{names for experimental groups}
   \item{cluster.data}{type of data used by the cluster algorithm (see details) }
-  \item{groups.vector}{vector indicating the experimental group to which each variable belongs  }
-  \item{k}{number of clusters for data partioning}
-  \item{cluster.method}{clustering method for data partioning. Currently \code{"hclust"} and \code{"kmeans"} are supported}
+  \item{groups.vector}{vector indicating the experimental group to which each variable belongs }
+  \item{k}{number of clusters for data partioning }
+  \item{m}{m parameter when \code{"mfuzz"} clustering algorithm is used. See \code{\link[Mfuzz]{mfuzz}} }
+  \item{cluster.method}{clustering method for data partioning. Currently \code{"hclust"}, \code{"kmeans"} and  \code{"mfuzz"} are supported}
   \item{distance}{distance measurement function for when \code{cluster.method} is \code{\link{hclust}}}
   \item{agglo.method}{aggregation method used when \code{cluster.method} is \code{\link{hclust}} }
   \item{show.fit}{logical indicating whether regression fit curves must be plotted }
