@@ -27,10 +27,10 @@ The \code{repvect} argument is used to indicate with vertical lines groups of re
 }
 \value{Plot of experiment-wide gene expression profiles.
 }
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2005.
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{ Ana Conesa, aconesa@ivia.es, María José Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa, aconesa@ivia.es, Maria Jose Nueda, mj.nueda@ua.es}
 
 \seealso{ \code{\link{PlotGroups}} }
 \examples{

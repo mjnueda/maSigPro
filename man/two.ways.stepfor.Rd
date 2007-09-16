@@ -6,7 +6,7 @@
    \code{two.ways.stepfor} fits a linear regression model applying forward-stepwise strategy.
 }
 \usage{
-two.ways.stepfor(y = y, d = dis, alfa = 0.05)
+two.ways.stepfor(y = y, d = d, alfa = 0.05)
 }
 
 \arguments{
@@ -32,11 +32,11 @@ variables to include. Each time that a variable enters the model, the p-values o
      \code{\link{fitted.values}} and \code{\link{residuals}} extract various useful features of the value returned by \code{\link{lm}}.
 }
 
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2005.
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
 
-\author{ Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
 
 \seealso{ \code{\link{lm}}, \code{\link{step}}, \code{\link{stepback}}, \code{\link{stepfor}}, \code{\link{two.ways.stepback}}}
 

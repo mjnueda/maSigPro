@@ -5,6 +5,3 @@ if(.Platform$OS.type == "windows" && require(Biobase) && interactive() && .Platf
 addVigs2WinMenu("maSigPro")
      }
 }
-
-
-

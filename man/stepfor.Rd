@@ -6,7 +6,7 @@
   \code{stepfor} fits a linear regression model applying forward-stepwise strategy.
 }
 \usage{
-stepfor(y = y, d = dis, alfa = 0.05)
+stepfor(y = y, d = d, alfa = 0.05)
 }
 
 \arguments{
@@ -30,10 +30,10 @@ repeated till there are no more statistically significant variables to include.
      The generic accessor functions \code{\link{coefficients}}, \code{\link{effects}},
      \code{\link{fitted.values}} and \code{\link{residuals}} extract various useful features of the value returned by \code{\link{lm}}.
 }
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2005.
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{ Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
 \seealso{ \code{\link{lm}}, \code{\link{step}}, \code{\link{stepback}}, \code{\link{two.ways.stepback}}, \code{\link{two.ways.stepfor}}}
 \examples{
 

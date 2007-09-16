@@ -63,11 +63,11 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
    \newline \quad \code{g}: number of genes
    \newline \quad \code{...}: arguments passed by previous functions}
 }
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2006.
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
+\author{Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
 \examples{
 
 #### GENERATE TIME COURSE DATA

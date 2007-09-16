@@ -1,5 +1,5 @@
 "stepback" <-
-function (y = y, d = dis, alfa = 0.05) 
+function (y = y, d = d, alfa = 0.05) 
 {
     lm1 <- lm(y ~ ., data = d)
     result <- summary(lm1)

@@ -67,11 +67,11 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2,
   \item{c.algo.used}{clustering algorith used for data partioning}
   \item{groups}{groups matrix used for plotting functions}
 }
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2006.
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{ Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
 \seealso{ \code{\link{PlotProfiles}}, \code{\link{PlotGroups}}}
 \examples{
 

@@ -1,5 +1,5 @@
 "two.ways.stepback" <- 
-function (y = y, d = dis, alfa = 0.05) 
+function (y = y, d = d, alfa = 0.05) 
 {
     OUT <- NULL
     lm1 <- lm(y ~ ., data = d)

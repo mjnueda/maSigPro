@@ -46,11 +46,11 @@ T.fit(data, design = data$dis, step.method = "backward",
   \item{edesign}{matrix of experimental design}
   \item{influ.info}{data frame of genes containing influencial data}
 }
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2006.
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
+\author{Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
 
 \seealso{\code{\link{p.vector}}, \code{\link{step}}}
 \examples{

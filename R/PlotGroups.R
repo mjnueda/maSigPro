@@ -8,8 +8,8 @@ function (data, edesign = NULL, time = edesign[, 1], groups = edesign[,
 {
     if (!is.vector(data)) {
         if (summary.mode == "representative") {
-            distances <- apply(as.matrix(dist(data, diag = T, 
-                upper = T)), 1, sum)
+            distances <- apply(as.matrix(dist(data, diag = TRUE, 
+                upper = TRUE)), 1, sum)
             representative <- names(distances)[distances == min(distances)]
             yy <- as.numeric(data[rownames(data) == representative, 
                 ])
@@ -82,9 +82,9 @@ function (data, edesign = NULL, time = edesign[, 1], groups = edesign[,
             li <- c(2:6)
             a <- reg.coeffs(coefficients = betas, groups.vector =groups.vector, 
                 group = colnames(groups)[i])
-            a <- c(a, rep(0, (5 - length(a))))
+            a <- c(a, rep(0, (7 - length(a))))
             curve(a[1] + a[2] * x + a[3] * (x^2) + a[4] * (x^3) + 
-                a[5] * (x^4), from = min(time), to = max(time), 
+                a[5] * (x^4) + a[6] * (x^5) + a[7] * (x^5), from = min(time), to = max(time), 
                 col = color1[i], add = TRUE, lty = li[i])
         }
         if (show.lines) {

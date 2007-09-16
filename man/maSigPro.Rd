@@ -12,7 +12,7 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL,
     degree = 2, time.col = 1, repl.col = 2, group.cols = c(3:ncol(edesign)), 
     Q = 0.05, alfa = Q, nvar.correction = FALSE, step.method = "backward", rsq = 0.7,
     min.obs = 3, vars = "groups", significant.intercept = "dummy", cluster.data = 1, 
-    add.IDs = FALSE, IDs = NULL, matchID.col = 1, only.names = FALSE, k = 9, 
+    add.IDs = FALSE, IDs = NULL, matchID.col = 1, only.names = FALSE, k = 9, m = 1.45, 
     cluster.method = "hclust", distance = "cor", agglo.method = "ward", iter.max = 500, 
     summary.mode = "median", color.mode = "rainbow", trat.repl.spots = "none",
     index = IDs[, (matchID.col + 1)], match = IDs[, matchID.col], rs = 0.7, 
@@ -64,6 +64,8 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL,
   \item{only.names}{ logical. If TRUE, expression values are ommited in the significant genes result
     \newline \quad     (argument of \code{\link{get.siggenes}}) }
   \item{k}{ number of clusters 
+    \newline \quad(argument of \code{\link{see.genes}}) }
+   \item{m}{m parameter when \code{"mfuzz"} clustering algorithm is used. See \code{\link[Mfuzz]{mfuzz}} 
     \newline \quad(argument of \code{\link{see.genes}}) }
   \item{cluster.method}{ clustering method for data partioning
     \newline \quad     (argument of \code{\link{see.genes}}) }
@@ -135,10 +137,10 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL,
   \item{step.alfa}{inputed significance level in stepwise regression}
   \item{influ.info }{data frame of genes containing influencial data}
 }
-\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talón, T. 2005.
+\references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{ Ana Conesa, aconesa@ivia.es; María José Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
 \seealso{ \code{\link{make.design.matrix}}, \code{\link{p.vector}}, \code{\link{T.fit}}, \code{\link{get.siggenes}}, \code{\link{see.genes}}}
 \examples{
 

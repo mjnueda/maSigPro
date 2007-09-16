@@ -1,5 +1,5 @@
 "stepfor" <-
-function (y = y, d = dis, alfa = 0.05) 
+function (y = y, d = d, alfa = 0.05) 
 {
     pval <- NULL
     design <- NULL
