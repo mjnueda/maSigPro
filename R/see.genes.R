@@ -97,7 +97,7 @@ function (data, edesign = data$edesign, time.col = 1, repl.col = 2,
 		    clusterdata[is.na(clusterdata)]<-0
 		    temp <- tempfile()
 		    write.table(clusterdata, temp, quote = FALSE, sep = "\t", row.names =TRUE, col.names = TRUE)
-		    signif <- read.exprSet(temp)
+		    signif <- readExpressionSet(temp)
 	 	    cl <- mfuzz(signif, c = k, m = m)
 		    clus<-acore(signif,cl=cl,min.acore=(1/k))
 		    for(i in 1:k){
