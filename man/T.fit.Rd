@@ -30,10 +30,14 @@ T.fit(data, design = data$dis, step.method = "backward",
      lower or higher than given threshold alfa. When nva.correction is TRUE the given significance level is corrected by the number of variables in the model
 }
 \value{
-  \item{sol}{matrix for summary results of the stepwise regression. For each selected gene the following values are given:}
-\newline \qquad {p-value of the regression ANOVA}
-\newline \qquad {R-squared of the model}
-\newline \qquad {p-value of the regression coefficients of the selected variables}
+  \item{sol}{matrix for summary results of the stepwise regression. For each
+  selected gene the following values are given:
+  \itemize{
+    \item p-value of the regression ANOVA
+    \item R-squared of the model
+    \item p-value of the regression coefficients of the selected variables
+  }
+  }
   \item{sig.profiles}{expression values for the genes contained in \code{sol}}
   \item{coefficients}{matrix containing regression coefficients for the adjusted models}
   \item{groups.coeffs}{matrix containing the coefficients of the impiclit models of each experimental group}
@@ -50,7 +54,8 @@ T.fit(data, design = data$dis, step.method = "backward",
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{Ana Conesa, \email{aconesa@ivia.es}; Maria Jose Nueda,
+\email{mj.nueda@ua.es}} 
 
 \seealso{\code{\link{p.vector}}, \code{\link{step}}}
 \examples{

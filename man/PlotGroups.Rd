@@ -37,19 +37,26 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
   \item{sub}{ plot subtitle }
 }
 \details{
-     To compute experimental groups either a edesign object must be provided, or separate values must be given for the \code{time}, \code{repvect} and \code{groups} 
-     arguments.
-\newline
+     To compute experimental groups either a edesign object must be provided,
+     or separate values must be given for the \code{time}, \code{repvect} and
+     \code{groups} arguments. 
+
      When data is a matrix, the average expression value is displayed.
-\newline
-     When there are array replicates in the data (as indicated by \code{repvect}), values are averaged by \code{repvect}.
-\newline
-     PlotGroups plots one single expression profile for each experimental group even if there are more that one genes in the data set. The way data
-     is condensated for this is given by \code{summary.mode}. When this argument takes the value \code{"representative"}, the gene with the lowest
-     distance to all genes in the cluster will be plotted. When the argument is  \code{"median"}, then median expression value is computed.
-\newline
-     When \code{show.fit} is \code{TRUE} the stepwise regression fit for the data will be computed and the regression curves will be displayed. 
-     If data is a matrix of genes and \code{summary.mode} is \code{"median"}, the regression fit will be computed for the median expression value.
+
+     When there are array replicates in the data (as indicated by
+     \code{repvect}), values are averaged by \code{repvect}.
+
+     PlotGroups plots one single expression profile for each experimental
+     group even if there are more that one genes in the data set. The way
+     data is condensated for this is given by \code{summary.mode}. When this
+     argument takes the value \code{"representative"}, the gene with the
+     lowest distance to all genes in the cluster will be plotted. When the
+     argument is  \code{"median"}, then median expression value is computed. 
+
+     When \code{show.fit} is \code{TRUE} the stepwise regression fit for the
+     data will be computed and the regression curves will be displayed.  
+     If data is a matrix of genes and \code{summary.mode} is \code{"median"},
+     the regression fit will be computed for the median expression value. 
 }
 \value{
   Plot of gene expression profiles by-group.
@@ -57,7 +64,7 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{Ana Conesa, \email{aconesa@ivia.es}; Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \seealso{\code{\link{PlotProfiles}}}
 

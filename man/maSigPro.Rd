@@ -21,82 +21,172 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL,
 }
 
 \arguments{
-  \item{data}{ matrix with normalized gene expression data. Genes must be in rows and arrays in columns. Row names must contain geneIDs
-    \newline \quad	(argument of \code{\link{p.vector}})}
-  \item{edesign}{ matrix of experimental design. Row names must contain arrayIDs
-    \newline \quad      (argument of \code{\link{make.design.matrix}} and \code{\link{see.genes}})}
-  \item{matrix}{ design matrix for regression analysis. By default design is calculated with make.design.matrix
-     \newline \quad     (argument of \code{\link{p.vector}} and \code{\link{T.fit}}, by default computed by \code{\link{make.design.matrix}})}
+  \item{data}{ matrix with normalized gene expression data. Genes must be in
+  rows and arrays in columns. Row names must contain geneIDs
+
+    (argument of \code{\link{p.vector}})}
+  \item{edesign}{ matrix of experimental design. Row names must contain
+  arrayIDs 
+
+    (argument of \code{\link{make.design.matrix}} and \code{\link{see.genes}})}
+  \item{matrix}{ design matrix for regression analysis. By default design is
+  calculated with make.design.matrix
+
+        (argument of \code{\link{p.vector}} and \code{\link{T.fit}}, by
+        default computed by \code{\link{make.design.matrix}})}
+
   \item{groups.vector}{ vector indicating experimental group of each variable 
-    \newline \quad      (argument of \code{\link{get.siggenes}} and \code{\link{see.genes}}, by default computed by \code{\link{make.design.matrix}})}
-  \item{degree}{ the degree of the regression fit polynome. \code{degree} = 1 returns lineal regression, \code{degree} = 2 returns quadratic regression, etc...
-    \newline \quad      (argument of \code{\link{make.design.matrix}}) }
-  \item{time.col}{ column in edesign containing time values. Default is first column
-    \newline \quad      (argument of \code{\link{make.design.matrix}} and \code{\link{see.genes}}) }
-  \item{repl.col}{ column in edesign containing coding for replicates arrays. Default is second column
-    \newline \quad      (argument of \code{\link{make.design.matrix}} and \code{\link{see.genes}}) }
-  \item{group.cols}{columns in \code{edesign} indicating the coding for each group of the experiment (see \code{\link{make.design.matrix}})
-    \newline \quad      (argument of \code{\link{make.design.matrix}} and \code{\link{see.genes}}) }
+    
+    (argument of \code{\link{get.siggenes}} and
+    \code{\link{see.genes}}, by default computed by
+    \code{\link{make.design.matrix}})}
+ 
+  \item{degree}{ the degree of the regression fit polynome. \code{degree} = 1
+    returns lineal regression, \code{degree} = 2 returns quadratic regression,
+    etc... 
+
+    (argument of \code{\link{make.design.matrix}}) }
+
+  \item{time.col}{ column in edesign containing time values. Default is first
+    column 
+
+    (argument of \code{\link{make.design.matrix}} and
+    \code{\link{see.genes}}) } 
+  \item{repl.col}{ column in edesign containing coding for replicates
+    arrays. Default is second column 
+
+    (argument of \code{\link{make.design.matrix}} and \code{\link{see.genes}})
+    }
+
+  \item{group.cols}{columns in \code{edesign} indicating the coding for each
+  group of the experiment (see \code{\link{make.design.matrix}})
+
+    (argument of \code{\link{make.design.matrix}} and
+  \code{\link{see.genes}}) } 
+
   \item{Q}{ level of false discovery rate (FDR) control
-    \newline \quad      (argument of \code{\link{p.vector}})}
-  \item{alfa}{ significance level used for variable selection in the stepwise regression
-    \newline \quad      (argument of \code{\link{T.fit}})}
-  \item{nvar.correction}{logical for indicating correcting of stepwise regression significance level
-    \newline \quad      (argument of \code{\link{T.fit}})}
+
+      (argument of \code{\link{p.vector}})}
+  \item{alfa}{ significance level used for variable selection in the stepwise
+  regression
+
+      (argument of \code{\link{T.fit}})}
+
+  \item{nvar.correction}{logical for indicating correcting of stepwise
+    regression significance level 
+         (argument of \code{\link{T.fit}})}
+
   \item{step.method}{ argument to be passed to the step function. 
-    \newline \quad  Can be either \code{"backward"}, \code{"forward"}, \code{"two.ways.backward"} or \code{"two.ways.forward"} }
-  \item{rsq}{ cut-off level at the R-squared value for the stepwise regression fit. 
-    \newline \quad Only genes with R-squared greater than \code{rsq} are selected }
-  \item{min.obs}{ genes with less than this number of true numerical values will be excluded from the analysis 
-    \newline \quad      (argument of \code{\link{p.vector}} and \code{\link{T.fit}})}
+
+     Can be either \code{"backward"}, \code{"forward"},
+  \code{"two.ways.backward"} or \code{"two.ways.forward"} } 
+
+  \item{rsq}{ cut-off level at the R-squared value for the stepwise regression
+  fit. 
+
+   Only genes with R-squared greater than \code{rsq} are selected } 
+
+  \item{min.obs}{ genes with less than this number of true numerical values
+    will be excluded from the analysis  
+
+    (argument of \code{\link{p.vector}} and \code{\link{T.fit}})}
+
   \item{vars}{ variables for which to extract significant genes
-    \newline \quad     (argument of \code{\link{get.siggenes}})}
-  \item{significant.intercept}{ experimental groups for which significant intercept coefficients are considered
-    \newline \quad     (argument of \code{\link{get.siggenes}})}
+
+    (argument of \code{\link{get.siggenes}})}
+
+  \item{significant.intercept}{ experimental groups for which significant
+    intercept coefficients are considered 
+
+     (argument of \code{\link{get.siggenes}})}
+
   \item{cluster.data}{ Type of data used by the cluster algorithm
-    \newline \quad     (argument of \code{\link{see.genes}}) }
-  \item{add.IDs}{ logical indicating whether to include additional gene id's in the significant genes result 
-    \newline \quad     (argument of \code{\link{get.siggenes}}) }
-  \item{IDs}{ matrix contaning additional gene id information (required when \code{add.IDs} is TRUE)
-    \newline \quad     (argument of \code{\link{get.siggenes}}) }
-  \item{matchID.col}{ number of matching column in matrix IDs for adding genes ids
-    \newline \quad     (argument of\code{\link{get.siggenes}}) }
-  \item{only.names}{ logical. If TRUE, expression values are ommited in the significant genes result
-    \newline \quad     (argument of \code{\link{get.siggenes}}) }
+
+    (argument of \code{\link{see.genes}}) }
+
+  \item{add.IDs}{ logical indicating whether to include additional gene id's
+    in the significant genes result  
+
+    (argument of \code{\link{get.siggenes}}) }
+
+  \item{IDs}{ matrix contaning additional gene id information (required when
+    \code{add.IDs} is TRUE) 
+
+     (argument of \code{\link{get.siggenes}}) }
+
+  \item{matchID.col}{ number of matching column in matrix IDs for adding genes
+    ids 
+        (argument of\code{\link{get.siggenes}}) }
+
+  \item{only.names}{ logical. If TRUE, expression values are ommited in the
+  significant genes result
+
+    (argument of \code{\link{get.siggenes}}) }
+
   \item{k}{ number of clusters 
-    \newline \quad(argument of \code{\link{see.genes}}) }
-   \item{m}{m parameter when \code{"mfuzz"} clustering algorithm is used. See \code{\link[Mfuzz]{mfuzz}} 
-    \newline \quad(argument of \code{\link{see.genes}}) }
+
+    (argument of \code{\link{see.genes}}) }
+
+   \item{m}{m parameter when \code{"mfuzz"} clustering algorithm is used. See
+    \code{\link[Mfuzz]{mfuzz}} 
+ 
+    (argument of \code{\link{see.genes}}) }
+
   \item{cluster.method}{ clustering method for data partioning
-    \newline \quad     (argument of \code{\link{see.genes}}) }
-  \item{distance}{ distance measurement function used when \code{cluster.method} is \code{"hclust"}
-    \newline \quad     (argument of \code{\link{see.genes}}) }
-  \item{agglo.method}{ aggregation method used when \code{cluster.method} is \code{"hclust"}
-    \newline \quad     (argument of \code{see.genes}) }
-  \item{iter.max}{ number of iterations when \code{cluster.method} is \code{"kmeans"}
-    \newline \quad     (argument of \code{\link{see.genes}}) }
-  \item{summary.mode}{ the method to condensate expression information when more than one gene is present in the data. 
-    \newline \quad Possible values are \code{"representative"} and \code{"median"} 
-    \newline \quad     (argument of \code{\link{PlotGroups}}) }  
- \item{color.mode}{ color scale for plotting profiles. Can be either \code{"rainblow"} or \code{"gray"}
-    \newline \quad     (argument of \code{\link{PlotProfiles}}) }  
+
+     (argument of \code{\link{see.genes}}) }
+
+  \item{distance}{ distance measurement function used when
+    \code{cluster.method} is \code{"hclust"} 
+    
+    (argument of \code{\link{see.genes}}) }
+
+  \item{agglo.method}{ aggregation method used when \code{cluster.method} is
+    \code{"hclust"} 
+     (argument of \code{see.genes}) }
+
+   \item{iter.max}{ number of iterations when \code{cluster.method} is
+    \code{"kmeans"} 
+    
+    (argument of \code{\link{see.genes}}) }
+
+  \item{summary.mode}{ the method to condensate expression information when
+    more than one gene is present in the data.  
+
+ Possible values are \code{"representative"} and \code{"median"} 
+
+    (argument of \code{\link{PlotGroups}}) }  
+
+ \item{color.mode}{ color scale for plotting profiles. Can be either
+    \code{"rainblow"} or \code{"gray"} 
+
+    (argument of \code{\link{PlotProfiles}}) }  
+
   \item{trat.repl.spots}{ treatment givent to replicate spots. Possible values are \code{"none"} and \code{"average"}
-    \newline \quad     (argument of \code{\link{get.siggenes}}) }
+    
+     (argument of \code{\link{get.siggenes}}) }
   \item{index}{ argument of the \code{\link{average.rows}} function to use when \code{trat.repl.spots} is \code{"average"}
-    \newline \quad     (argument of \code{\link{get.siggenes}}) }
+
+     (argument of \code{\link{get.siggenes}}) }
   \item{match}{ argument of the \code{link{\average.rows}} function to use when \code{trat.repl.spots} is \code{"average"}
-    \newline \quad     (argument of \code{\link{get.siggenes}}) }
+
+     (argument of \code{\link{get.siggenes}}) }
   \item{rs}{ minimun pearson correlation coefficient for replicated spots profiles to be averaged
-    \newline \quad     (argument of \code{\link{get.siggenes}}) }
+
+     (argument of \code{\link{get.siggenes}}) }
   \item{show.fit}{ logical indicating whether regression fit curves must be plotted
-    \newline \quad     (argument of \code{\link{see.genes}}) }
+
+     (argument of \code{\link{see.genes}}) }
   \item{show.lines}{ logical indicating whether a line must be drawn joining plotted data points for reach group
-    \newline \quad     (argument of \code{\link{see.genes}})}
+
+  (argument of \code{\link{see.genes}})}
   \item{pdf}{ logical indicating whether a pdf results file must be generated
-    \newline \quad     (argument of \code{\link{see.genes}})}
+
+     (argument of \code{\link{see.genes}})}
   \item{cexlab}{ graphical parameter maginfication to be used for x labels in plotting functions }
   \item{legend}{ logical indicating whether legend must be added when plotting profiles 
-   \newline \quad (argument of \code{\link{see.genes}}) }
+
+ (argument of \code{\link{see.genes}}) }
   \item{main}{ title for pdf results file }
   \item{...}{ other graphical function arguments}
 }
@@ -108,21 +198,35 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL,
     gene ID information is wanted to be included in the result of significant genes, a third IDs matrix containing this 
     information will be required (see \code{\link{get.siggenes}} for details).
 
-    Basiscally in the function calls subsequent steps of the maSigPro approach which is:
-  \newline \qquad Make a general regression model with dummies to indicate different experimental groups.
-  \newline \qquad Select significant genes on the basis of this general model, applying fdr control.
-  \newline \qquad Find significant variables for each gene, using stepwise regression.
-  \newline \qquad Extract and display significant genes for any set of variables or experimental groups.
+    Basiscally in the function calls subsequent steps of the maSigPro approach
+  which is:
+  \itemize{
+      \item Make a general regression model with dummies to indicate different
+      experimental groups. 
+      \item Select significant genes on the basis of this general model,
+      applying fdr control. 
+      \item Find significant variables for each gene, using stepwise
+      regression. 
+      \item Extract and display significant genes for any set of variables or
+      experimental groups. 
+   }
 }
 \value{
   \item{summary}{a vector or matrix listing significant genes for the variables given by the function parameters}
   \item{sig.genes}{a list with detailed information on the significant genes found for the variables given by the function parameters. Each element of the list is also a list containing:
-  \newline \qquad \code{sig.profiles}: expression values of significant genes.The cluster assingment of each gene is given in the last column
-  \newline \qquad \code{coefficients}: regression coefficients for significant genes
-  \newline \qquad \code{t.score}: value of the t statistics of significant genes
-  \newline \qquad \code{sig.pvalues}: p-values of the regression coefficients for significant genes
-  \newline \qquad \code{g}: number of genes
-  \newline \qquad \dots :arguments passed by previous functions}
+  
+ \code{sig.profiles}: expression values of significant genes.The cluster assingment of each gene is given in the last column
+
+ \code{coefficients}: regression coefficients for significant genes
+
+ \code{t.score}: value of the t statistics of significant genes
+
+ \code{sig.pvalues}: p-values of the regression coefficients for significant genes
+
+ \code{g}: number of genes
+
+ \dots :arguments passed by previous functions}
+
   \item{input.data }{input analysis data}
   \item{G}{ number of input genes}
   \item{edesign}{matrix of experimental design}

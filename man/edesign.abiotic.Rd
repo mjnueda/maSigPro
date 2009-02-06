@@ -15,13 +15,18 @@
   }
 }
 \details{
- Arrays are given in rows and experiment descriptors are given in columns. Row names contain array names.
- \newline	
-    \code{"Time"} indicates the values that variable Time takes in each hybridization.
- \newline
-  \code{"Replicates"} is an index indicating replicate hyridizations, i.e. hybridizations are numbered, giving replicates the same number.
- \newline
-	\code{"Control"}, \code{"Cold"}, \code{"Heat"} and \code{"Salt"} columns indicate array assigment to experimental groups, coding with 1 and 0 whether each array belongs to that group or not.
+ Arrays are given in rows and experiment descriptors are given in columns. Row
+ names contain array names.
+
+    \code{"Time"} indicates the values that variable Time takes in each
+    hybridization. 
+
+    \code{"Replicates"} is an index indicating replicate hyridizations,
+    i.e. hybridizations are numbered, giving replicates the same number. 
+
+    \code{"Control"}, \code{"Cold"}, \code{"Heat"} and \code{"Salt"} columns
+    indicate array assigment to experimental groups, coding with 1 and 0
+    whether each array belongs to that group or not. 
 }
 
 \references{

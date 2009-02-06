@@ -29,20 +29,34 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
 }
 \details{
     There are 3 possible values for the vars argument:
- \newline \qquad \code{"all"}: generates one single matrix or gene list with all significant genes.
- \newline \qquad \code{"each"}: generates as many significant genes extractions as variables in the general regression model. Each extraction contains the significant genes for that variable.
- \newline \qquad \code{"groups"}: generates a significant genes extraction for each experimental group.  
- \newline  The difference between \code{"each"} and \code{"groups"} is that in the first case the variables of the same group (e.g.  \code{"TreatmentA"} and 
-     \code{"time*TreatmentA" }) will be extracted separately and in the second case jointly.
- \newline
-    When \code{add.IDs} is \code{TRUE}, a matrix of gene ids must be provided as argument of IDs, the \code{matchID.col} 
-    column of which having same levels as in the row names of \code{sig.profiles}. The option \code{only.names} is \code{TRUE} will generate a vector of significant genes or a matrix when \code{add.IDs} is set also to \code{TRUE}.
- \newline
+ 
+   \qquad \code{"all"}: generates one single matrix or gene list with all
+ significant genes. 
+
+  \qquad \code{"each"}: generates as many significant genes extractions as
+ variables in the general regression model. Each extraction contains the
+ significant genes for that variable. 
+ 
+  \qquad \code{"groups"}: generates a significant genes extraction for each
+ experimental group.   
+ 
+  The difference between \code{"each"} and \code{"groups"} is that in the
+     first case the variables of the same group (e.g.  \code{"TreatmentA"} and
+     \code{"time*TreatmentA" }) will be extracted separately and in the second
+     case jointly. 
+
+    When \code{add.IDs} is \code{TRUE}, a matrix of gene ids must be provided
+    as argument of IDs, the \code{matchID.col} 
+    column of which having same levels as in the row names of
+    \code{sig.profiles}. The option \code{only.names} is \code{TRUE} will
+    generate a vector of significant genes or a matrix when \code{add.IDs} is
+    set also to \code{TRUE}.
+
     When \code{trat.repl.spots} is \code{"average"}, \code{match} and \code{index} vectors are required for the \code{\link{average.rows}} function.
     In gene expression data context, the \code{index} vector would contain geneIDs and indicate which spots 
     are replicates. The \code{match} vector is used to match these genesIDs to rows in the significant genes 
     matrix, and must have the same levels as the row names of \code{sig.profiles}.
- \newline
+
     The argument \code{significant.intercept} modulates the treatment for intercept coefficients to apply for selecting significant genes
     when \code{vars} equals \code{"groups"}. There are three possible values: \code{"none"}, no significant intercept (differences) are
     considered for significant gene selection, \code{"dummy"}, includes genes with significant intercept differences between control and experimental
@@ -55,13 +69,21 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
 
 \value{
   \item{summary}{a vector or matrix listing significant genes for the variables given by the function parameters}
-  \item{sig.genes}{a list with detailed information on the significant genes found for the variables given by the function parameters. Each element of the list is also a list containing:
-   \newline \quad \code{sig.profiles}: expression values of significant genes
-   \newline \quad \code{coefficients}: regression coefficients of the adjusted models
-   \newline \quad \code{groups.coeffs}: regression coefficients of the impiclit models of each experimental group
-   \newline \quad \code{sig.pvalues}: p-values of the regression coefficients for significant genes
-   \newline \quad \code{g}: number of genes
-   \newline \quad \code{...}: arguments passed by previous functions}
+  \item{sig.genes}{a list with detailed information on the significant genes
+    found for the variables given by the function parameters. Each element of
+    the list is also a list containing:
+    \describe{
+      \item{\code{sig.profiles}:}{ expression values of significant genes}
+      \item{\code{coefficients}:}{ regression coefficients of the adjusted
+      models} 
+      \item{\code{groups.coeffs}:}{ regression coefficients of the impiclit
+         models of each experimental group} 
+      \item{\code{sig.pvalues}:}{ p-values of the regression coefficients for
+         significant genes} 
+      \item{\code{g}:}{ number of genes}
+      \item{\code{...}:}{ arguments passed by previous functions}
+    }
+  }
 }
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 

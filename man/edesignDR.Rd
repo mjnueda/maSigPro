@@ -8,20 +8,21 @@
 \usage{data(edesignDR)}
 \format{
   A matrix with 54 rows and 7 columns
-\describe{
+
       rows [1:54] "Array1" "Array2" "Array3" "Array4" ...
-\newline
+
       columns [1:7] "Time" "Replicates" "Control" "Placebo" "Low" "Medium" "High" 
-  }
+
 }
 
 \details{
- Arrays are given in rows and experiment descriptors are given in columns. Row names contain array names.
- \newline	
+ Arrays are given in rows and experiment descriptors are given in columns. Row
+ names contain array names. 
+
 \code{"Time"} indicates the values that variable Time takes in each hybridization.
- \newline
+
 \code{"Replicates"} is an index indicating replicate hyridizations, i.e. hybridizations are numbered, giving replicates the same number.
- \newline
+
 \code{"Control"}, \code{"Placebo"}, \code{"Low"}, \code{"Medium"} and \code{"High"} columns indicate array assigment to experimental groups, coding with 1 and 0 whether each array belongs to that group or not.
 }
 

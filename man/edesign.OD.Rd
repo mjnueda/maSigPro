@@ -3,7 +3,7 @@
 \docType{data}
 \title{ Experimental design with a measured independent variable}
 \description{
-  code{edesign.OD} contains the experimental design of a E.coli growth time course microarray experiment with a temperature shift treatment. The OD of each culture was measured and used in the experimental design as independent variable.
+  \code{edesign.OD} contains the experimental design of a E.coli growth time course microarray experiment with a temperature shift treatment. The OD of each culture was measured and used in the experimental design as independent variable.
 }
 \usage{data(edesign.OD)}
 \format{

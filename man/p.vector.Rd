@@ -18,9 +18,12 @@ p.vector(data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3)
   \item{min.obs}{genes with less than this number of true numerical values will be excluded from the analysis. Default is  3 (minimun value for a quadratic fit) }
 }
 \details{
-\code{rownames(design)} and \code{colnames(data)} must be identical vectors and indicate array naming.
- \newline   \code{rownames(data)} should contain unique gene IDs.
- \newline   \code{colnames(design)} are the given names for the variables in the regression model.
+\code{rownames(design)} and \code{colnames(data)} must be identical vectors
+and indicate array naming.
+
+ \code{rownames(data)} should contain unique gene IDs.
+
+ \code{colnames(design)} are the given names for the variables in the regression model.
 }
 \value{
   \item{SELEC}{matrix containing the expression values for significant genes}
@@ -37,7 +40,8 @@ p.vector(data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3)
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{Ana Conesa, \email{aconesa@ivia.es}; Maria Jose Nueda,
+\email{mj.nueda@ua.es}} 
 
 \seealso{ \code{\link{T.fit}}, \code{\link{lm}}}
 \examples{
