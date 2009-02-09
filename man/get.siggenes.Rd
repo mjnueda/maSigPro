@@ -7,9 +7,11 @@
 }
 \usage{
 get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1, 
-             only.names = FALSE, vars = c("all", "each", "groups"), significant.intercept = "dummy", 
+             only.names = FALSE, vars = c("all", "each", "groups"),
+	     significant.intercept = "dummy",  
              groups.vector = NULL, trat.repl.spots = "none", 
-             index = IDs[, (matchID.col + 1)], match = IDs[, matchID.col], r = 0.7)
+             index = IDs[, (matchID.col + 1)], match = IDs[, matchID.col], 
+	     r = 0.7) 
 }
 
 \arguments{
@@ -30,14 +32,14 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
 \details{
     There are 3 possible values for the vars argument:
  
-   \qquad \code{"all"}: generates one single matrix or gene list with all
+    \code{"all"}: generates one single matrix or gene list with all
  significant genes. 
 
-  \qquad \code{"each"}: generates as many significant genes extractions as
+   \code{"each"}: generates as many significant genes extractions as
  variables in the general regression model. Each extraction contains the
  significant genes for that variable. 
  
-  \qquad \code{"groups"}: generates a significant genes extraction for each
+   \code{"groups"}: generates a significant genes extraction for each
  experimental group.   
  
   The difference between \code{"each"} and \code{"groups"} is that in the
