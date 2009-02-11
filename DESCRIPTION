@@ -1,6 +1,6 @@
 Package: maSigPro
 Type: Package
-Title: Significant Gene Expression Profile Differeneces in Time Course Microarray Data 
+Title: Significant Gene Expression Profile Differences in Time Course Microarray Data 
 Version: 1.15.2
 Author: Ana Conesa <aconesa@cipf.es>, Maria Jose Nueda <mj.nueda@ua.es>
 Maintainer: Ana Conesa <aconesa@cipf.es>
