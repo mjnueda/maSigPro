@@ -35,23 +35,7 @@ function (data, edesign = data$edesign, time.col = 1, repl.col = 2,
     }
     kdata <- NULL
     out <- TRUE
-    if (any(NAs == 0) & nrow(dat) > 1) {
-        library("marray")
-        library("EMV")
-        GRcol <- maPalette(low = "green", high = "red", k = 50)
-        cexRow = min(0.8, 1/log10(nrow(dat)))
-        cexCol = max(0.4, (min(0.8, (0.76 - (0.015 * (max(nchar(colnames(dat)))))))))
-        kdata <- knn(as.matrix(dat))$data
-        colnames(kdata) <- substr(colnames(dat), 1, 25)
-        rownames(kdata) <- rownames(dat)
-        heatmap(as.matrix(kdata), col = GRcol, cexRow = cexRow, 
-            cexCol = cexCol, main = main)
-    }
-    else {
-        print("warning: no rows without missing values or less than 2 rows; impossible to compute heatmap")
-    }
-    if (newX11)
-        X11()
+
     if (nrow(dat) > 1) {
         if (cluster.data != 1 || cluster.data != "sig.profiles") {
             if (any(is.na(clusterdata))) 
