@@ -1,17 +1,17 @@
+importFrom(Biobase, addVigs2WinMenu, readExpressionSet)
+
 importFrom(graphics, abline, axis, curve, lines, par, plot)
 
-importFrom(grDevices, dev.off, replayPlot, X11)
+importFrom(grDevices, dev.off, X11)
 
-importFrom(stats, as.dist, as.ts, coef, cor, cutree, dendrapply,
-           deviance, dist, end, formula, frequency, hclust,
-           influence.measures, IQR, is.leaf, kmeans, knots, lm, median,
-           naprint, p.adjust, pf, pnorm, print.anova, printCoefmat, pt,
-           quantile, reformulate, residuals, sd, start, symnum, terms,
-           time, ts, tsp, write.ftable)
+importFrom(limma, vennDiagram)
 
-importFrom(utils, browseURL, menu, str, toBibtex, write.table,
-           zip.file.extract)
+importFrom(Mfuzz, acore, mfuzz)
+
+importFrom(stats, as.dist, cor, cutree, dist, hclust,
+           influence.measures, kmeans, lm, median, p.adjust, pf, sd)
 
 
-export(make.design.matrix,p.vector,T.fit,get.siggenes,see.genes)
-
+export(average.rows, get.siggenes, i.rank, make.design.matrix, maSigPro,
+       p.vector, PlotGroups, PlotProfiles, position, reg.coeffs, see.genes,
+       stepback, stepfor, suma2Venn, T.fit, two.ways.stepback, two.ways.stepfor)

@@ -1,8 +1,6 @@
 "suma2Venn" <-
 function (x, ...) 
 {
-
-library("limma")
 total <- NULL
 ## Number of different elements
   for (i in 1:ncol(x)) 

@@ -75,30 +75,29 @@ function (data, edesign = data$edesign, time.col = 1, repl.col = 2,
                 cut <- kmeans(clusterdata, k, iter.max)$cluster
                 c.algo.used = paste("kmeans", k, iter.max, sep = "_")
             }
-                        else if (cluster.method == "mfuzz") { 
-                library(Mfuzz)
+            else if (cluster.method == "mfuzz") { 
                 n<-dim(clusterdata)[2]
-		    clusterdata[is.na(clusterdata)]<-0
-		    temp <- tempfile()
-		    write.table(clusterdata, temp, quote = FALSE, sep = "\t", row.names =TRUE, col.names = TRUE)
-		    signif <- readExpressionSet(temp)
-	 	    cl <- mfuzz(signif, c = k, m = m)
-		    clus<-acore(signif,cl=cl,min.acore=(1/k))
-		    for(i in 1:k){
-		    	clus[[i]]<-transform(clus[[i]],cluster= i )
-		    }
-		    cut0<-clus[[1]][,c(1,3)]
-		    for(i in 2:k){
-		    	cut0<-rbind(cut0, clus[[i]][,c(1,3)])
-		    }
-		    cut<-transform(clusterdata, name="")
-		    cut<-transform(cut, cluster=0)
-		    cut<-cut[,c(n+1,n+2)]
-		    cut[,1]<-rownames(cut)
-		    for(i in 1:dim(clusterdata)[1]){
-			cut[i,2]<-cut0[cut[i,1],2]
-		    }
-		    cut<-cut[,2]
+                clusterdata[is.na(clusterdata)]<-0
+                temp <- tempfile()
+                write.table(clusterdata, temp, quote = FALSE, sep = "\t", row.names =TRUE, col.names = TRUE)
+                signif <- readExpressionSet(temp)
+                cl <- mfuzz(signif, c = k, m = m)
+                clus<-acore(signif,cl=cl,min.acore=(1/k))
+                for(i in 1:k){
+                    clus[[i]]<-transform(clus[[i]],cluster= i )
+                }
+                cut0<-clus[[1]][,c(1,3)]
+                for(i in 2:k){
+                    cut0<-rbind(cut0, clus[[i]][,c(1,3)])
+                }
+                cut<-transform(clusterdata, name="")
+                cut<-transform(cut, cluster=0)
+                cut<-cut[,c(n+1,n+2)]
+                cut[,1]<-rownames(cut)
+                for(i in 1:dim(clusterdata)[1]){
+                    cut[i,2]<-cut0[cut[i,1],2]
+                }
+                cut<-cut[,2]
                 c.algo.used = paste("mfuzz", k, m, sep = "_")
             }
             else stop("Invalid cluster algorithm")
