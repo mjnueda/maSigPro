@@ -9,8 +9,9 @@
 \format{
    A matrix with 36 rows and 6 columns
 \describe{
-      rows [1:36] "Control 3h 1" "Control 3h 2" "Control 3h 3" "Control 9h 1" ...
-\newline
+      rows [1:36] "Control 3h 1" "Control 3h 2" "Control 3h 3" "Control
+      9h 1" ...
+
       columns [1:6] "Time" "Replicates" "Control" "Cold" "Heat" "Salt" 
   }
 }

@@ -168,7 +168,8 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL,
   \item{index}{ argument of the \code{\link{average.rows}} function to use when \code{trat.repl.spots} is \code{"average"}
 
      (argument of \code{\link{get.siggenes}}) }
-  \item{match}{ argument of the \code{link{\average.rows}} function to use when \code{trat.repl.spots} is \code{"average"}
+  \item{match}{ argument of the \code{link{average.rows}} function to
+  use when \code{trat.repl.spots} is \code{"average"} 
 
      (argument of \code{\link{get.siggenes}}) }
   \item{rs}{ minimun pearson correlation coefficient for replicated spots profiles to be averaged
