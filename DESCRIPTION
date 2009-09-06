@@ -1,7 +1,7 @@
 Package: maSigPro
 Type: Package
 Title: Significant Gene Expression Profile Differences in Time Course Microarray Data 
-Version: 1.17.1
+Version: 1.17.2
 Author: Ana Conesa <aconesa@cipf.es>, Maria Jose Nueda <mj.nueda@ua.es>
 Maintainer: Ana Conesa <aconesa@cipf.es>
 Description: maSigPro is a regression based approach to find genes for which there are significant gene expression profile 
@@ -10,5 +10,5 @@ Depends: R (>= 2.3.1), stats, Biobase
 Imports: Biobase, graphics, grDevices, limma, Mfuzz, stats, utils
 URL: http://bioinfo.cipf.es/
 LazyLoad: yes
-License: GPL (version 2 or newer)
+License: GPL (>= 2)
 biocViews: Microarray, DifferentialExpression, TimeCourse
