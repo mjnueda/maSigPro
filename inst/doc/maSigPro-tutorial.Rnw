@@ -277,7 +277,7 @@ Use {\bf see.genes()} to visualize the result of a group of genes, for example, 
 $ControlvsSalt$ comparison. {\bf see.genes()} performs a cluster analysis 
 to group genes by similar profiles. The resulting clusters are then plotted in two fashions: as experiment-wide 
 expression profiles and as by-groups profiles. The first plot (Figure \ref{fig:plotprofiles}) will help to evaluate the consistency of the 
-clusters while the second plot shows clearly the differences between groups (Figure \ref{fig:plotGroups}).
+clusters while the second plot shows clearly the differences between groups (Figure \ref{fig:PLOTGROUPS}).
 
 \begin{Schunk}
 \begin{Sinput}
@@ -296,10 +296,10 @@ see.genes(sigs$sig.genes$ColdvsControl, main = "ColdvsControl", show.fit = T,
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=6in,height=6in,angle=0]{plotGroups}
+\includegraphics[width=6in,height=6in,angle=0]{PLOTGROUPS}
 \end{center}
 \caption{Expression Profiles ColdvsControl significant genes }
-\protect\label{fig:plotGroups}
+\protect\label{fig:PLOTGROUPS}
 \end{figure}
 %------------------------------------------------------------------------------
 \subsection{The {\bf maSigPro} wrapper function}
