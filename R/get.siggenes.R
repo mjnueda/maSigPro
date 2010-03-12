@@ -1,5 +1,4 @@
-"get.siggenes" <-
-function (tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1, 
+get.siggenes<-function (tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1, 
     only.names = FALSE, vars = c("all", "each", "groups"), significant.intercept = "dummy", 
     groups.vector = NULL, trat.repl.spots = "none", index = IDs[, 
         (matchID.col + 1)], match = IDs[, matchID.col], r = 0.7) 
@@ -100,8 +99,19 @@ function (tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
             else stop("invalid significant.intercept value, must be one of: all, dummy, none")
             for (i in 1:length(group)) {
                 group.sig <- sig.pvalues[, grep("p.valor", colnames(sig.pvalues))]
-                group.sig <- group.sig[, selc]
-                group.sig <- group.sig[, groups.vector[selc] == group[i]]
+cnames1<-colnames(group.sig)               
+		group.sig <- as.data.frame(group.sig[, selc])
+# In case 1 series, degree=1 and significant intercept="dummy", only time variable is in group.sig:
+if(length(selc)==1) {colnames(group.sig)<-cnames1[selc] }
+             
+cnames2<-colnames(group.sig)
+ 		group.sig <- as.data.frame(group.sig[, groups.vector[selc] == 
+                  group[i]])
+if(ncol(group.sig)==1 )
+{
+group.sig<-as.data.frame(group.sig)
+colnames(group.sig)<-cnames2[groups.vector[selc]==group[i]]
+}
                 ps <- sig.pvalues[which(apply(group.sig, 1, any)), 
                   ]
                 sigs <- sig.profiles[which(apply(group.sig, 1, 
@@ -188,3 +198,4 @@ function (tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
     names(output) <- c("sig.genes", "summary")
     output
 }
+
