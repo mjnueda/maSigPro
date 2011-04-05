@@ -20,14 +20,14 @@
 
 \begin{document}
 \title{\textbf{maSigPro User's Guide}}
-\author{Ana Conesa$^1$ and María J. Nueda$^2$}
+\author{Ana Conesa and Maria J. Nueda}
 \date{7 October 2009}
 \maketitle
 
 \begin{center}
-1. Centro de Investigación Príncipe Felipe, Valencia, Spain. \\
+1. Centro de Investigacion Principe Felipe, Valencia, Spain. \\
 {\tt aconesa@cipf.es}\\
-2. Departamento de Estadística e I.O. Universidad de Alicante, Spain. \\
+2. Departamento de Estadistica e I.O. Universidad de Alicante, Spain. \\
 {\tt mj.nueda@ua.es}\\
 \end{center}
 
