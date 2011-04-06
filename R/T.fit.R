@@ -74,8 +74,9 @@ function (data, design = data$dis, step.method = "backward",
                   coeff[position(dis, novar[m]) + 1] <- NA
                 }
             }
-            p.valor = (t <- rep("NA", (length(vars.in) + 1)))
-            vars.out <- NULL
+           p.valor = as.numeric( rep(NA, (length(vars.in) + 1)) )
+
+       
             if (result$coefficients[, 4][rownames(result$coefficients) == 
                 "(Intercept)"] < alfa) {
                 coeff[1] <- result$coefficients[, 1][rownames(result$coefficients) == 
@@ -93,7 +94,7 @@ function (data, design = data$dis, step.method = "backward",
                     vars.in[j - 1]]
                   t[j] <- result$coefficients[, 3][rownames(result$coefficients) == 
                     vars.in[j - 1]]
-                  vars.out <- cbind(vars.out, vars.out[j - 1])
+                  
                 }
             }
             if (!all(is.na(p.valor))) {
@@ -145,7 +146,7 @@ function (data, design = data$dis, step.method = "backward",
         }
     }
     if (ncol(influ.info) > 2) {
-        print(paste("Warning:", ncol(influ.info)-1, "genes with influential data at slot influ.info. Model validation for these genes is recommended"))
+        print(paste("Influence:", ncol(influ.info)-1, "genes with influential data at slot influ.info. Model validation for these genes is recommended"))
     }
     influ.info <- influ.info[, -1]
     output <- list(sol, sig.profiles, coefficients, group.coeffs, 
