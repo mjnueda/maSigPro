@@ -74,8 +74,8 @@ function (data, design = data$dis, step.method = "backward",
                   coeff[position(dis, novar[m]) + 1] <- NA
                 }
             }
-           p.valor = as.numeric( rep(NA, (length(vars.in) + 1)) )
-
+	p.valor <- t <- as.numeric( rep(NA, (length(vars.in) + 1)) )
+           
        
             if (result$coefficients[, 4][rownames(result$coefficients) == 
                 "(Intercept)"] < alfa) {
