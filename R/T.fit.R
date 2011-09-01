@@ -149,7 +149,7 @@ function (data, design = data$dis, step.method = "backward",
         print(paste("Influence:", ncol(influ.info)-1, "genes with influential data at slot influ.info. Model validation for these genes is recommended"))
     }
     influ.info <- influ.info[, -1]
-    output <- list(sol, sig.profiles, coefficients, group.coeffs, 
+    output <- list(sol, sig.profiles, coefficients, as.data.frame(group.coeffs), 
         t.score, vars.in, G, g, dat, dis, step.method, groups.vector, 
         edesign, influ.info)
     names(output) <- c("sol", "sig.profiles", "coefficients", 

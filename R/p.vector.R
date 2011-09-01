@@ -52,8 +52,11 @@ function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3)
             BH.alfa <- sortp[i]
         }
     }
-    SELEC <- dat[which(p.adjusted <= Q), ]
-    if (nrow(SELEC) == 0) 
+
+   genes.selected <- rownames(dat)[which(p.adjusted <= Q)]
+   SELEC <- as.matrix(as.data.frame(dat)[genes.selected, ])
+
+     if (nrow(SELEC) == 0) 
         print("no significant genes")
     output <- list(SELEC, p.vector, p.adjusted, G, g, BH.alfa, nrow(SELEC), dis, dat, 
         min.obs, Q, groups.vector, edesign)
