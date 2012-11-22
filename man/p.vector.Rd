@@ -7,7 +7,7 @@
      and returns a list of FDR corrected significant genes.
 }
 \usage{
-p.vector(data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3)
+p.vector(data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, family=gaussian())
 }
 
 \arguments{
@@ -16,7 +16,9 @@ p.vector(data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3)
   \item{Q}{significance level}
   \item{MT.adjust}{argument to pass to \code{p.adjust} function indicating the method for multiple testing adjustment of p.value}
   \item{min.obs}{genes with less than this number of true numerical values will be excluded from the analysis. Default is  3 (minimun value for a quadratic fit) }
+  \item{family}{the distribution function to be used in the glm model. It must be specified as a function: gaussian(), poisson(), negative.binomial(theta)...}
 }
+
 \details{
 \code{rownames(design)} and \code{colnames(data)} must be identical vectors
 and indicate array naming.
@@ -40,7 +42,7 @@ and indicate array naming.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, \email{aconesa@ivia.es}; Maria Jose Nueda,
+\author{Ana Conesa, \email{aconesa@cipf.es}; Maria Jose Nueda,
 \email{mj.nueda@ua.es}} 
 
 \seealso{ \code{\link{T.fit}}, \code{\link{lm}}}

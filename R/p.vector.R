@@ -1,5 +1,4 @@
-"p.vector" <-
-function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3) 
+p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, family=gaussian()) 
 {
     if (is.data.frame(design) || is.matrix(design)) {
         dis <- design
@@ -20,27 +19,41 @@ function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3)
     n <- dim(dat)[2]
     p <- dim(dis)[2]
     p.vector <- vector(mode = "numeric", length = g)
-    p.vector.corre <- vector(mode = "numeric", length = g)
-    F.vector <- vector(mode = "numeric", length = g)
+    bondad <- NULL
+
     for (i in 1:g) {
-        dis <- round(dis, 5)
+
         y <- as.numeric(dat[i, ])
-        reg <- lm(y ~ ., data = dis)
-        result <- summary(reg)
-        if (is.null(result$fstatistic[1])) 
-            p.value = 1
-        if (!is.null(result$fstatistic[1])) 
-            p.vector[i] <- 1 - pf(result$fstatistic[1], result$fstatistic[2], 
-                result$fstatistic[3])
+
         div <- c(1:round(g/100)) * 100
         if (is.element(i, div)) 
             print(paste(c("fitting gene", i, "out of", g), collapse = " "))
-    }
+
+        model.glm<- glm(y~.,data=dis , family=family)
+	  if(model.glm$null.deviance==0) { p.vector[i]=1 } else{
+
+        model.glm.0<-glm(y~1, family=family)
+
+        if(family$family=="gaussian")
+        {
+                test<-anova(model.glm.0,model.glm,test="F")
+                if( is.na(test[6][2,1]) ) {p.vector[i]=1}
+                else{ p.vector[i]=test[6][2,1]}
+        }
+        else
+        {
+                test<-anova(model.glm.0,model.glm,test="Chisq")
+                if( is.na(test[5][2,1]) ) {p.vector[i]=1}
+                else{ p.vector[i]=test[5][2,1]}
+
+        }
+ }
+}
     p.vector <- as.matrix(p.vector)
     rownames(p.vector) <- rownames(dat)
     colnames(p.vector) <- c("p.value")
     p.adjusted <- p.adjust(p.vector, method = MT.adjust, n = length(p.vector))
-    BH.alfa=NULL
+    BH.alfa = NULL
     if (MT.adjust == "BH") {
         sortp <- sort(p.vector)
         i <- length(sortp)
@@ -53,14 +66,17 @@ function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3)
         }
     }
 
-   genes.selected <- rownames(dat)[which(p.adjusted <= Q)]
+    genes.selected <- rownames(dat)[which(p.adjusted <= Q)]
+ 
    SELEC <- as.matrix(as.data.frame(dat)[genes.selected, ])
 
-     if (nrow(SELEC) == 0) 
+      if (nrow(SELEC) == 0) 
         print("no significant genes")
-    output <- list(SELEC, p.vector, p.adjusted, G, g, BH.alfa, nrow(SELEC), dis, dat, 
-        min.obs, Q, groups.vector, edesign)
-    names(output) <- c("SELEC", "p.vector", "p.adjusted", "G", "g", "BH.alfa", 
-        "i", "dis", "dat", "min.obs", "Q", "groups.vector", "edesign")
+    output <- list(SELEC, p.vector, p.adjusted, G, g, BH.alfa, 
+        nrow(SELEC), dis, dat, min.obs, Q, groups.vector, edesign, family)
+    names(output) <- c("SELEC", "p.vector", "p.adjusted", "G", 
+        "g", "BH.alfa", "i", "dis", "dat", "min.obs", "Q", "groups.vector", 
+        "edesign", "family")
     output
 }
+ 

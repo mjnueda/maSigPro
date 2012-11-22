@@ -1,12 +1,12 @@
-"T.fit" <-
-function (data, design = data$dis, step.method = "backward", 
-    min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE) 
+T.fit <- function (data, design = data$dis, step.method = "backward", 
+    min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family=data$family) 
 {
     if (is.list(data)) {
         dat <- as.matrix(data$SELEC)
         dat <- rbind(c(rep(1, ncol(dat))), dat)
         groups.vector <- data$groups.vector
-        groups.vector <- c(groups.vector[nchar(groups.vector)==min(nchar(groups.vector))][1], groups.vector)
+        groups.vector <- c(groups.vector[nchar(groups.vector) == 
+            min(nchar(groups.vector))][1], groups.vector)
         edesign <- data$edesign
         G <- data$g
     }
@@ -25,47 +25,70 @@ function (data, design = data$dis, step.method = "backward",
     n <- dim(dat)[2]
     p <- dim(dis)[2]
     vars.in <- colnames(dis)
-    sol <- coefficients <-  group.coeffs <-  t.score <-  sig.profiles <- NULL
+    sol <- coefficients <- group.coeffs <- t.score <- sig.profiles <- NULL
     influ.info <- matrix(NA, nrow = nrow(dis), ncol = 1)
     rownames(influ.info) <- rownames(dis)
-    if (nvar.correction) alfa <- alfa/ncol(dis)
+    if (nvar.correction) 
+        alfa <- alfa/ncol(dis)
     for (i in 2:(g + 1)) {
         y <- as.numeric(dat[i, ])
         name <- rownames(dat)[i]
         if (step.method == "backward") {
-            reg <- stepback(y = y, d = dis, alfa = alfa)
+            reg <- stepback(y = y, d = dis, alfa = alfa, family=family)
         }
         else if (step.method == "forward") {
-            reg <- stepfor(y = y, d = dis, alfa = alfa)
+            reg <- stepfor(y = y, d = dis, alfa = alfa, family=family)
         }
         else if (step.method == "two.ways.backward") {
-            reg <- two.ways.stepback(y = y, d = dis, alfa = alfa)
+            reg <- two.ways.stepback(y = y, d = dis, alfa = alfa, family=family)
         }
         else if (step.method == "two.ways.forward") {
-            reg <- two.ways.stepfor(y = y, d = dis, alfa = alfa)
+            reg <- two.ways.stepfor(y = y, d = dis, alfa = alfa, family=family)
         }
         else stop("stepwise method must be one of backward, forward, two.ways.backward, two.ways.forward")
         div <- c(1:round(g/100)) * 100
         if (is.element(i, div)) 
             print(paste(c("fitting gene", i, "out of", g), collapse = " "))
-        lmf <- lm(y ~ ., data = as.data.frame(dis))
+        lmf <- glm(y ~ ., data = as.data.frame(dis),family=family)
         result <- summary(lmf)
-        novar <- vars.in[!is.element(vars.in, names(result$coefficients[,  4]))]
+        novar <- vars.in[!is.element(vars.in, names(result$coefficients[, 
+            4]))]
         influ <- influence.measures(reg)$is.inf
-        influ <- influ[, c(ncol(influ) - 3,ncol(influ) - 1)]
+        influ <- influ[, c(ncol(influ) - 3, ncol(influ) - 1)]
         influ1 <- which(apply(influ, 1, all))
         if (length(influ1) != 0) {
-            paste.names <- function(a) {paste(names(a)[a], collapse="/")}
+            paste.names <- function(a) {
+                paste(names(a)[a], collapse = "/")
+            }
             match <- match(rownames(dis), rownames(influ))
-            influ <-as.data.frame(apply(influ, 1, paste.names))
-            influ.info <- cbind(influ.info, influ[match,])
-		colnames(influ.info)[ncol(influ.info)] <- name
+            influ <- as.data.frame(apply(influ, 1, paste.names))
+            influ.info <- cbind(influ.info, influ[match, ])
+            colnames(influ.info)[ncol(influ.info)] <- name
         }
         result <- summary(reg)
-        if (!is.null(result$fstatistic[1])) {
+        if ( (!(result$aic==-Inf) & !is.na(result$aic) & family$family=="gaussian") | family$family!="gaussian")
+
+ { 
             k <- i
-            p.value <- 1 - pf(result$fstatistic[1], result$fstatistic[2], 
-                result$fstatistic[3])
+           
+# Computing p-values
+
+	model.glm.0<-glm(y~1, family=family)
+
+	if(family$family=="gaussian")
+	{
+		test <- anova(model.glm.0, reg, test="F")
+		p.value = test[6][2,1]
+	}
+	else
+	{
+		test <- anova(model.glm.0, reg, test="Chisq")
+		p.value = test[5][2,1]
+	}
+# Computing goodness of fitting:
+
+	bondad <- (reg$null.deviance-reg$deviance)/reg$null.deviance
+
             beta.coeff <- result$coefficients[, 1]
             beta.p.valor <- result$coefficients[, 4]
             coeff <- rep(0, (length(vars.in) + 1))
@@ -74,8 +97,7 @@ function (data, design = data$dis, step.method = "backward",
                   coeff[position(dis, novar[m]) + 1] <- NA
                 }
             }
-	p.valor <- t <- as.numeric( rep(NA, (length(vars.in) + 1)) )
-           
+       	p.valor <- t <- as.numeric( rep(NA, (length(vars.in) + 1)) )
        
             if (result$coefficients[, 4][rownames(result$coefficients) == 
                 "(Intercept)"] < alfa) {
@@ -94,11 +116,11 @@ function (data, design = data$dis, step.method = "backward",
                     vars.in[j - 1]]
                   t[j] <- result$coefficients[, 3][rownames(result$coefficients) == 
                     vars.in[j - 1]]
-                  
+                
                 }
             }
             if (!all(is.na(p.valor))) {
-                sol <- rbind(sol, as.numeric(c(p.value, result$r.squared, 
+                sol <- rbind(sol, as.numeric(c(p.value, bondad, 
                   p.valor)))
                 coefficients <- rbind(coefficients, coeff)
                 t.score <- rbind(t.score, t)
@@ -126,7 +148,8 @@ function (data, design = data$dis, step.method = "backward",
         colnames(sig.profiles) <- colnames(dat)
         if (!is.null(groups.vector) & !is.null(edesign)) {
             groups <- colnames(edesign)[3:ncol(edesign)]
-            degree <- (length(groups.vector)/length(groups)) - 1
+            degree <- (length(groups.vector)/length(groups)) - 
+                1
             for (w in 1:nrow(coefficients)) {
                 A <- NULL
                 col.names <- NULL
@@ -146,7 +169,7 @@ function (data, design = data$dis, step.method = "backward",
         }
     }
     if (ncol(influ.info) > 2) {
-        print(paste("Influence:", ncol(influ.info)-1, "genes with influential data at slot influ.info. Model validation for these genes is recommended"))
+        print(paste("Influence:", ncol(influ.info) - 1, "genes with influential data at slot influ.info. Model validation for these genes is recommended"))
     }
     influ.info <- influ.info[, -1]
     output <- list(sol, sig.profiles, coefficients, as.data.frame(group.coeffs), 
@@ -157,3 +180,4 @@ function (data, design = data$dis, step.method = "backward",
         "dis", "step.method", "groups.vector", "edesign", "influ.info")
     output
 }
+
