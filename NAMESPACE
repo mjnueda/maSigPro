@@ -11,6 +11,7 @@ importFrom(Mfuzz, acore, mfuzz)
 importFrom(stats, as.dist, cor, cutree, dist, hclust,
            influence.measures, kmeans, lm, median, p.adjust, pf, sd)
 
+importFrom(MASS, negative.binomial)
 
 export(average.rows, get.siggenes, i.rank, make.design.matrix, maSigPro,
        p.vector, PlotGroups, PlotProfiles, position, reg.coeffs, see.genes,

@@ -7,7 +7,7 @@ Maintainer: Maria Jose Nueda <mj.nueda@ua.es>
 Description: maSigPro is a regression based approach to find genes for which there are significant gene expression profile 
 	differences between experimental groups in time course microarray experiments.
 Depends: R (>= 2.3.1), stats, Biobase
-Imports: Biobase, graphics, grDevices, limma, Mfuzz, stats, utils
+Imports: Biobase, graphics, grDevices, limma, Mfuzz, stats, utils, MASS
 URL: http://bioinfo.cipf.es/
 LazyLoad: yes
 License: GPL (>= 2)
