@@ -1,8 +1,8 @@
 "two.ways.stepback" <- 
-function (y = y, d = d, alfa = 0.05) 
+function (y = y, d = d, alfa = 0.05 , family = family) 
 {
     OUT <- NULL
-    lm1 <- lm(y ~ ., data = d)
+    lm1 <- glm(y ~ ., data = d, family = family)
     result <- summary(lm1)$coefficients[, 4]
     max <- max(result[-1], na.rm = TRUE)
     d <- d[, names(result)[-1]]
@@ -26,7 +26,7 @@ function (y = y, d = d, alfa = 0.05)
         for (i in 1:ncol(OUT)) {
             sub <- cbind(d, OUT[, i])
             sub <- as.data.frame(sub)
-            lm2 <- lm(y ~ ., data = sub)
+            lm2 <- glm(y ~ ., data = sub, family = family)
             result <- summary(lm2)$coefficients[, 4]
             pval[i] <- result[j + 1]
         }
@@ -55,7 +55,7 @@ function (y = y, d = d, alfa = 0.05)
             for (i in 1:ncol(OUT)) {
                 sub <- cbind(d, OUT[, i])
                 sub <- as.data.frame(sub)
-                lm2 <- lm(y ~ ., data = sub)
+                lm2 <- glm(y ~ ., data = sub, family = family)
                 result <- summary(lm2)
                 pval[i] <- result$coefficients[, 4][j + 1]
             }
@@ -69,14 +69,14 @@ function (y = y, d = d, alfa = 0.05)
                 min = 1
             }
         }
-        lm1 <- lm(y ~ ., data = d)
+        lm1 <- glm(y ~ ., data = d, family = family)
         result <- summary(lm1)$coefficients[, 4]
         max <- max(result[-1], na.rm = TRUE)
         if (length(result[-1]) == 1) {
             max <- result[-1]
             if (max > alfa) {
                 max = 0
-                lm1 <- lm(y ~ 1)
+                lm1 <- glm(y ~ 1, family = family)
             }
         }
     }

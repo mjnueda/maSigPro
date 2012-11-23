@@ -1,15 +1,15 @@
 "stepfor" <-
-function (y = y, d = d, alfa = 0.05) 
+function (y = y, d = d, alfa = 0.05, family = family)  
 {
     pval <- NULL
     design <- NULL
     j = 1
-    resul0 <- summary(lm(y ~ ., data = d))$coefficients[, 4]
+    resul0 <- summary(glm(y ~ ., data = d, family = family))$coefficients[, 4]
     d <- as.data.frame(d[, names(resul0)[-1]])
     for (i in 1:ncol(d)) {
         sub <- cbind(design, d[, i])
         sub <- as.data.frame(sub)
-        lm2 <- lm(y ~ ., data = sub)
+        lm2 <- glm(y ~ ., data = sub, family = family)
         result <- summary(lm2)
         pval[i] <- result$coefficients[, 4][j + 1]
     }
@@ -23,13 +23,17 @@ function (y = y, d = d, alfa = 0.05)
         design <- as.data.frame(design)
         colnames(design)[j] <- colnames(d)[pos]
         j = j + 1
-        d <- as.data.frame(d[, -pos])
+
+	  if (ncol(d) == 2) { lastname <- colnames(d)[!b] }
+	  d <- as.data.frame(d[, -pos])
+	  if(ncol(d) == 1) {colnames(d) = lastname}
+   
         pval <- NULL
         if (ncol(d) != 0) {
             for (i in 1:ncol(d)) {
                 sub <- cbind(design, d[, i])
                 sub <- as.data.frame(sub)
-                lm2 <- lm(y ~ ., data = sub)
+                lm2 <- glm(y ~ ., data = sub, family = family)
                 result <- summary(lm2)
                 pval[i] <- result$coefficients[, 4][j + 1]
             }
@@ -38,10 +42,10 @@ function (y = y, d = d, alfa = 0.05)
         else min <- 1
     }
     if (is.null(design)) {
-        lm1 <- lm(y ~ 1)
+        lm1 <- glm(y ~ 1, family = family)
     }
     else {
-        lm1 <- lm(y ~ ., data = design)
+        lm1 <- glm(y ~ ., data = design, family = family)
     }
     return(lm1)
 }
