@@ -112,19 +112,14 @@ if(ncol(group.sig)==1 )
 group.sig<-as.data.frame(group.sig)
 colnames(group.sig)<-cnames2[groups.vector[selc]==group[i]]
 }
-                ps <- sig.pvalues[which(apply(group.sig, 1, any)), 
-                  ]
-                sigs <- sig.profiles[which(apply(group.sig, 1, 
-                  any)), ]
-                coeffs <- coefficients[which(apply(group.sig, 
-                  1, any)), ]
-                gc <- group.coeffs[which(apply(group.sig, 1, 
-                  any)), ]
+                ps <- sig.pvalues[which(apply(group.sig, 1,  function(x){any(!is.na(x))})),]
+                sigs <- sig.profiles[which(apply(group.sig, 1, function(x){any(!is.na(x))})), ]
+                coeffs <- coefficients[which(apply(group.sig, 1,  function(x){any(!is.na(x))})), ]
+                gc <- group.coeffs[which(apply(group.sig, 1, function(x){any(!is.na(x))})), ]
                 if (nrow(sigs) > 0) 
                   names.sigs <- rownames(sigs)
                 else names.sigs <- NULL
-                summary[, i] <- c(names.sigs, rep(" ", nrow(sig.profiles) - 
-                  nrow(sigs)))
+                summary[, i] <- c(names.sigs, rep(" ", nrow(sig.profiles)- nrow(sigs)))
                 sig.genes[[i]] <- list(sigs, coeffs, gc, ps, 
                   nrow(ps), edesign, groups.vector)
                 names(sig.genes[[i]]) <- c("sig.profiles", "coefficients", 
