@@ -6,14 +6,16 @@
   \code{two.ways.stepback} fits a linear regression model applying backward-stepwise strategy.
 }
 \usage{
-two.ways.stepback(y = y, d = d, alfa = 0.05)
+two.ways.stepback(y = y, d = d, alfa = 0.05, family = family)
 }
 
 \arguments{
   \item{y}{ dependent variable }
   \item{d}{ data frame containing by columns the set of variables that could be in the selected model }
   \item{alfa}{ significance level to decide if a variable stays or not in the model}
+ \item{family}{the distribution function to be used in the glm model}
 }
+
 \details{
   The strategy begins analysing a model with all the variables included in d. If all the variables are statistically 
   significant (all the variables have a p-value less than alfa)  this model will be the result. If not, the less 
@@ -35,7 +37,7 @@ two.ways.stepback(y = y, d = d, alfa = 0.05)
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{ Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
 \seealso{ \code{\link{lm}}, \code{\link{step}}, \code{\link{stepfor}}, \code{\link{stepback}}, \code{\link{two.ways.stepfor}}}
 
 \examples{

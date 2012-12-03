@@ -19,7 +19,7 @@ numerical. Column position for the given variable.
 
 }
 
-\author{ Ana Conesa, aconesa@ivia.es}
+\author{ Ana Conesa, aconesa@cipf.es}
 
 \examples{
 x <- matrix(c(1, 1, 2, 2, 3, 3),ncol = 3,nrow = 2)

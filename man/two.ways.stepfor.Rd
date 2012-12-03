@@ -6,14 +6,16 @@
    \code{two.ways.stepfor} fits a linear regression model applying forward-stepwise strategy.
 }
 \usage{
-two.ways.stepfor(y = y, d = d, alfa = 0.05)
+two.ways.stepfor(y = y, d = d, alfa = 0.05, family = family)
 }
 
 \arguments{
   \item{y}{ dependent variable }
   \item{d}{ data frame containing by columns the set of variables that could be in the selected model }
   \item{alfa}{ significance level to decide if a variable stays or not in the model}
+  \item{family}{the distribution function to be used in the glm model}
 }
+
 \details{
 The strategy begins analysing all the possible models with only one of the variables included in \code{d}. 
 The most statistically significant variable (with the lowest p-value) is included in the model and then 
@@ -36,7 +38,7 @@ variables to include. Each time that a variable enters the model, the p-values o
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
 
-\author{ Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
 
 \seealso{ \code{\link{lm}}, \code{\link{step}}, \code{\link{stepback}}, \code{\link{stepfor}}, \code{\link{two.ways.stepback}}}
 

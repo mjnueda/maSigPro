@@ -64,7 +64,7 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{Ana Conesa, \email{aconesa@ivia.es}; Maria Jose Nueda, \email{mj.nueda@ua.es}}
+\author{Ana Conesa, \email{aconesa@cipf.es}; Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \seealso{\code{\link{PlotProfiles}}}
 

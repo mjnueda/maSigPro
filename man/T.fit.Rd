@@ -7,7 +7,7 @@
 }
 \usage{
 T.fit(data, design = data$dis, step.method = "backward", 
-      min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE)
+      min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family = data$family)
 }
 
 \arguments{
@@ -19,7 +19,9 @@ T.fit(data, design = data$dis, step.method = "backward",
   \item{min.obs}{ genes with less than this number of true numerical values will be excluded from the analysis }
   \item{alfa}{significance level used for variable selection in the stepwise regression }
   \item{nvar.correction}{argument for correcting T.fit significance level. See details}
+  \item{family}{the distribution function to be used in the glm model. It must be the same used in p.vector}
 }
+
 \details{
      In the maSigPro approach \code{\link{p.vector}} and \code{\link{T.fit}} are subsequent steps, meaning that significant genes are
      first selected on the basis of a general model and then the significant variables for each gene are found by step-wise regression. 
@@ -54,7 +56,7 @@ T.fit(data, design = data$dis, step.method = "backward",
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, \email{aconesa@ivia.es}; Maria Jose Nueda,
+\author{Ana Conesa, \email{aconesa@cipf.es}; Maria Jose Nueda,
 \email{mj.nueda@ua.es}} 
 
 \seealso{\code{\link{p.vector}}, \code{\link{step}}}

@@ -24,7 +24,7 @@ average.rows(x, index, match, r = 0.7)
     a matrix of averaged rows
 }
 
-\author{Ana Conesa, aconesa@ivia.es}
+\author{Ana Conesa, aconesa@cipf.es}
 
 \examples{
 

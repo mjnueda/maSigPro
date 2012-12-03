@@ -91,7 +91,7 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
 \examples{
 
 #### GENERATE TIME COURSE DATA

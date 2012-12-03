@@ -71,7 +71,7 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2,
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{ Ana Conesa, aconesa@ivia.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
 \seealso{ \code{\link{PlotProfiles}}, \code{\link{PlotGroups}}}
 \examples{
 

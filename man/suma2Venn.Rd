@@ -27,7 +27,7 @@ matrix of 1 and 0 which can be taken by the
 \code{\link[limma:venn]{vennDiagram}} funcion 
 }
 
-\author{ Ana Conesa, aconesa@ivia.es}
+\author{ Ana Conesa, aconesa@cipf.es}
 
 \seealso{ \code{\link[limma:venn]{vennDiagram}}}
 \examples{
