@@ -1,5 +1,5 @@
 T.fit <- function (data, design = data$dis, step.method = "backward", 
-    min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family=data$family) 
+    min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family=gaussian() ) 
 {
     if (is.list(data)) {
         dat <- as.matrix(data$SELEC)
@@ -9,6 +9,7 @@ T.fit <- function (data, design = data$dis, step.method = "backward",
             min(nchar(groups.vector))][1], groups.vector)
         edesign <- data$edesign
         G <- data$g
+	  family <- data$family
     }
     else {
         G <- nrow(data)
