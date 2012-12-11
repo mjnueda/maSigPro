@@ -15,7 +15,6 @@ stepback(y = y, d = d, alfa = 0.05, family = family)
   \item{alfa}{ significance level to decide if a variable stays or not in the model}
   \item{family}{the distribution function to be used in the glm model}
 }
-}
 \details{
   The strategy begins analysing a model with all the variables included in d. 
   If all variables are statistically significant (all variables have a p-value less than alfa)
