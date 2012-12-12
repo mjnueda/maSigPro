@@ -1,4 +1,4 @@
-stepback <- function (y = y, d = d, alfa = 0.05, family = family) 
+stepback <- function (y = y, d = d, alfa = 0.05, family = gaussian() ) 
 {
     lm1 <- glm(y ~ ., data = d, family=family)
     result <- summary(lm1)

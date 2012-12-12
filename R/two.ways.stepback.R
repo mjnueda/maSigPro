@@ -1,5 +1,5 @@
 "two.ways.stepback" <- 
-function (y = y, d = d, alfa = 0.05 , family = family) 
+function (y = y, d = d, alfa = 0.05 , family = gaussian() ) 
 {
     OUT <- NULL
     lm1 <- glm(y ~ ., data = d, family = family)

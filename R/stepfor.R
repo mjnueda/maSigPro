@@ -1,5 +1,5 @@
 "stepfor" <-
-function (y = y, d = d, alfa = 0.05, family = family)  
+function (y = y, d = d, alfa = 0.05, family = gaussian())  
 {
     pval <- NULL
     design <- NULL
