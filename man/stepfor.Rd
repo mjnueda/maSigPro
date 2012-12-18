@@ -6,7 +6,7 @@
   \code{stepfor} fits a linear regression model applying forward-stepwise strategy.
 }
 \usage{
-stepfor(y = y, d = d, alfa = 0.05, family = family)
+stepfor(y = y, d = d, alfa = 0.05, family = gaussian() )
 }
 
 \arguments{

@@ -6,7 +6,7 @@
   \code{two.ways.stepback} fits a linear regression model applying backward-stepwise strategy.
 }
 \usage{
-two.ways.stepback(y = y, d = d, alfa = 0.05, family = family)
+two.ways.stepback(y = y, d = d, alfa = 0.05, family = gaussian() )
 }
 
 \arguments{

@@ -7,7 +7,7 @@
 }
 \usage{
 T.fit(data, design = data$dis, step.method = "backward", 
-      min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family = data$family)
+      min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family = gaussian())
 }
 
 \arguments{

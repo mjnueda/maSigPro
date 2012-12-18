@@ -6,7 +6,7 @@
    \code{stepback} fits a linear regression model applying a backward-stepwise strategy.
 }
 \usage{
-stepback(y = y, d = d, alfa = 0.05, family = family)
+stepback(y = y, d = d, alfa = 0.05, family = gaussian() )
 }
 
 \arguments{

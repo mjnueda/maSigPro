@@ -6,7 +6,7 @@
    \code{two.ways.stepfor} fits a linear regression model applying forward-stepwise strategy.
 }
 \usage{
-two.ways.stepfor(y = y, d = d, alfa = 0.05, family = family)
+two.ways.stepfor(y = y, d = d, alfa = 0.05, family = gaussian() )
 }
 
 \arguments{
