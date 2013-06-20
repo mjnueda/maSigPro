@@ -1,15 +1,15 @@
 "two.ways.stepfor" <-
-function (y = y, d = d, alfa = 0.05, family = gaussian() ) 
+function (y = y, d = d, alfa = 0.05, family = gaussian() , epsilon=0.00001) 
 {
     pval <- NULL
     design <- NULL
     j = 1
-    resul0 <- summary(glm(y ~ ., data = d, family = family))$coefficients[, 4]
+    resul0 <- summary(glm(y ~ ., data = d, family = family, epsilon=epsilon))$coefficients[, 4]
     d <- as.data.frame(d[, names(resul0)[-1]])
     for (i in 1:ncol(d)) {
         sub <- cbind(design, d[, i])
         sub <- as.data.frame(sub)
-        lm2 <- glm(y ~ ., data = sub, family = family)
+        lm2 <- glm(y ~ ., data = sub, family = family, epsilon=epsilon)
         result <- summary(lm2)
         pval[i] <- result$coefficients[, 4][j + 1]
     }
@@ -30,7 +30,7 @@ function (y = y, d = d, alfa = 0.05, family = gaussian() )
             d <- as.data.frame(d)
             colnames(d) <- lastname
         }
-        result2 <- summary(glm(y ~ ., data = design, family = family))$coefficients[, 
+        result2 <- summary(glm(y ~ ., data = design, family = family, epsilon=epsilon))$coefficients[, 
             4]
         max <- max(result2[-1], na.rm = TRUE)
         while (max > alfa) {
@@ -48,7 +48,7 @@ function (y = y, d = d, alfa = 0.05, family = gaussian() )
                 design <- as.data.frame(design)
                 colnames(design) <- lastname
             }
-            result2 <- summary(glm(y ~ ., data = design, family = family))$coefficients[, 
+            result2 <- summary(glm(y ~ ., data = design, family = family, epsilon=epsilon))$coefficients[, 
                 4]
             max <- max(result2[-1], na.rm = TRUE)
         }
@@ -57,7 +57,7 @@ function (y = y, d = d, alfa = 0.05, family = gaussian() )
         for (i in 1:ncol(d)) {
             sub <- cbind(design, d[, i])
             sub <- as.data.frame(sub)
-            lm2 <- glm(y ~ ., data = sub , family = family)
+            lm2 <- glm(y ~ ., data = sub , family = family, epsilon=epsilon)
             result <- summary(lm2)
             pval[i] <- result$coefficients[, 4][j + 1]
         }
@@ -72,10 +72,10 @@ function (y = y, d = d, alfa = 0.05, family = gaussian() )
         }
     }
     if (is.null(design)) {
-        lm1 <- glm(y ~ 1, family = family)
+        lm1 <- glm(y ~ 1, family = family, epsilon=epsilon)
     }
     else {
-        lm1 <- glm(y ~ ., data = design, family = family)
+        lm1 <- glm(y ~ ., data = design, family = family, epsilon=epsilon)
     }
     return(lm1)
 }

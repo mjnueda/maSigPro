@@ -1,4 +1,4 @@
-p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, family=gaussian()) 
+p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, family=gaussian(), epsilon=0.00001) 
 {
     if (is.data.frame(design) || is.matrix(design)) {
         dis <- design
@@ -29,10 +29,10 @@ p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs =
         if (is.element(i, div)) 
             print(paste(c("fitting gene", i, "out of", g), collapse = " "))
 
-        model.glm<- glm(y~.,data=dis , family=family)
+        model.glm<- glm(y~.,data=dis , family=family, epsilon=epsilon)
 	  if(model.glm$null.deviance==0) { p.vector[i]=1 } else{
 
-        model.glm.0<-glm(y~1, family=family)
+        model.glm.0<-glm(y~1, family=family, epsilon=epsilon)
 
         if(family$family=="gaussian")
         {

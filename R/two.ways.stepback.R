@@ -1,8 +1,8 @@
 "two.ways.stepback" <- 
-function (y = y, d = d, alfa = 0.05 , family = gaussian() ) 
+function (y = y, d = d, alfa = 0.05 , family = gaussian() , epsilon=0.00001) 
 {
     OUT <- NULL
-    lm1 <- glm(y ~ ., data = d, family = family)
+    lm1 <- glm(y ~ ., data = d, family = family, epsilon=epsilon)
     result <- summary(lm1)$coefficients[, 4]
     max <- max(result[-1], na.rm = TRUE)
     d <- d[, names(result)[-1]]
@@ -26,7 +26,7 @@ function (y = y, d = d, alfa = 0.05 , family = gaussian() )
         for (i in 1:ncol(OUT)) {
             sub <- cbind(d, OUT[, i])
             sub <- as.data.frame(sub)
-            lm2 <- glm(y ~ ., data = sub, family = family)
+            lm2 <- glm(y ~ ., data = sub, family = family, epsilon=epsilon)
             result <- summary(lm2)$coefficients[, 4]
             pval[i] <- result[j + 1]
         }
@@ -55,7 +55,7 @@ function (y = y, d = d, alfa = 0.05 , family = gaussian() )
             for (i in 1:ncol(OUT)) {
                 sub <- cbind(d, OUT[, i])
                 sub <- as.data.frame(sub)
-                lm2 <- glm(y ~ ., data = sub, family = family)
+                lm2 <- glm(y ~ ., data = sub, family = family, epsilon=epsilon)
                 result <- summary(lm2)
                 pval[i] <- result$coefficients[, 4][j + 1]
             }
@@ -69,14 +69,14 @@ function (y = y, d = d, alfa = 0.05 , family = gaussian() )
                 min = 1
             }
         }
-        lm1 <- glm(y ~ ., data = d, family = family)
+        lm1 <- glm(y ~ ., data = d, family = family, epsilon=epsilon)
         result <- summary(lm1)$coefficients[, 4]
         max <- max(result[-1], na.rm = TRUE)
         if (length(result[-1]) == 1) {
             max <- result[-1]
             if (max > alfa) {
                 max = 0
-                lm1 <- glm(y ~ 1, family = family)
+                lm1 <- glm(y ~ 1, family = family, epsilon=epsilon)
             }
         }
     }

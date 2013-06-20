@@ -6,7 +6,7 @@
   \code{stepfor} fits a linear regression model applying forward-stepwise strategy.
 }
 \usage{
-stepfor(y = y, d = d, alfa = 0.05, family = gaussian() )
+stepfor(y = y, d = d, alfa = 0.05, family = gaussian(), epsilon=0.00001  )
 }
 
 \arguments{
@@ -14,6 +14,7 @@ stepfor(y = y, d = d, alfa = 0.05, family = gaussian() )
   \item{d}{ data frame containing by columns the set of variables that could be in the selected model }
   \item{alfa}{ significance level to decide if a variable stays or not in the model}
   \item{family}{the distribution function to be used in the glm model}
+  \item{epsilon} {argument to pass to \code{glm.control}, convergence tolerance in the iterative process to estimate de glm model}
 }
 
 \details{

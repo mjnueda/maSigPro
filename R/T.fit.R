@@ -1,5 +1,5 @@
 T.fit <- function (data, design = data$dis, step.method = "backward", 
-    min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family=gaussian() ) 
+    min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family=gaussian(), epsilon=0.00001 ) 
 {
     if (is.list(data)) {
         dat <- as.matrix(data$SELEC)
@@ -35,22 +35,22 @@ T.fit <- function (data, design = data$dis, step.method = "backward",
         y <- as.numeric(dat[i, ])
         name <- rownames(dat)[i]
         if (step.method == "backward") {
-            reg <- stepback(y = y, d = dis, alfa = alfa, family=family)
+            reg <- stepback(y = y, d = dis, alfa = alfa, family=family, epsilon=epsilon)
         }
         else if (step.method == "forward") {
-            reg <- stepfor(y = y, d = dis, alfa = alfa, family=family)
+            reg <- stepfor(y = y, d = dis, alfa = alfa, family=family, epsilon=epsilon)
         }
         else if (step.method == "two.ways.backward") {
-            reg <- two.ways.stepback(y = y, d = dis, alfa = alfa, family=family)
+            reg <- two.ways.stepback(y = y, d = dis, alfa = alfa, family=family, epsilon=epsilon)
         }
         else if (step.method == "two.ways.forward") {
-            reg <- two.ways.stepfor(y = y, d = dis, alfa = alfa, family=family)
+            reg <- two.ways.stepfor(y = y, d = dis, alfa = alfa, family=family, epsilon=epsilon)
         }
         else stop("stepwise method must be one of backward, forward, two.ways.backward, two.ways.forward")
         div <- c(1:round(g/100)) * 100
         if (is.element(i, div)) 
             print(paste(c("fitting gene", i, "out of", g), collapse = " "))
-        lmf <- glm(y ~ ., data = as.data.frame(dis),family=family)
+        lmf <- glm(y ~ ., data = as.data.frame(dis),family=family, epsilon=epsilon)
         result <- summary(lmf)
         novar <- vars.in[!is.element(vars.in, names(result$coefficients[, 
             4]))]
@@ -74,7 +74,7 @@ T.fit <- function (data, design = data$dis, step.method = "backward",
            
 # Computing p-values
 
-	model.glm.0<-glm(y~1, family=family)
+	model.glm.0<-glm(y~1, family=family, epsilon=epsilon)
 
 	if(family$family=="gaussian")
 	{
