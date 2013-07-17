@@ -20,7 +20,7 @@ T.fit(data, design = data$dis, step.method = "backward",
   \item{alfa}{significance level used for variable selection in the stepwise regression }
   \item{nvar.correction}{argument for correcting T.fit significance level. See details}
   \item{family}{the distribution function to be used in the glm model. It must be the same used in p.vector}
-  \item{epsilon} {argument to pass to \code{glm.control}, convergence tolerance in the iterative process to estimate de glm model}
+  \item{epsilon}{argument to pass to \code{glm.control}, convergence tolerance in the iterative process to estimate de glm model}
 }
 
 \details{
