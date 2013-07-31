@@ -7,7 +7,7 @@
      and returns a list of FDR corrected significant genes.
 }
 \usage{
-p.vector(data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, family=gaussian(), epsilon=0.00001)
+p.vector(data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, counts=FALSE, family=NULL, theta=10, epsilon=0.00001)
 }
 
 \arguments{
@@ -16,8 +16,11 @@ p.vector(data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, family=ga
   \item{Q}{significance level}
   \item{MT.adjust}{argument to pass to \code{p.adjust} function indicating the method for multiple testing adjustment of p.value}
   \item{min.obs}{genes with less than this number of true numerical values will be excluded from the analysis. Default is  3 (minimun value for a quadratic fit) }
-  \item{family}{the distribution function to be used in the glm model. It must be specified as a function: gaussian(), poisson(), negative.binomial(theta)...}
-  \item{epsilon}{argument to pass to \code{glm.control}, convergence tolerance in the iterative process to estimate de glm model}
+  \item{counts}{a logical indicating whether your data are counts}
+  \item{family}{the distribution function to be used in the glm model. It must be specified as a function: gaussian(), poisson(), negative.binomial(theta)...
+		If NULL family will be negative.binomial(theta) when counts=TRUE or gaussian() when counts=FALSE }
+  \item{theta}{theta parameter for negative.binomial family} 
+ \item{epsilon}{argument to pass to \code{glm.control}, convergence tolerance in the iterative process to estimate de glm model}
 }
 
 \details{

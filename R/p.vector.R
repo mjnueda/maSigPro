@@ -1,4 +1,4 @@
-p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, family=gaussian(), epsilon=0.00001) 
+p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, counts=FALSE, family=NULL, theta=10, epsilon=0.00001) 
 {
     if (is.data.frame(design) || is.matrix(design)) {
         dis <- design
@@ -9,6 +9,10 @@ p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs =
         dis <- as.data.frame(design$dis)
         groups.vector <- design$groups.vector
         edesign <- design$edesign
+    }
+    if (is.null(family)) {
+	if(!counts) { family=gaussian() }
+	if(counts)  { family=negative.binomial(theta) }
     }
     dat <- as.matrix(data)
     dat <- dat[, as.character(rownames(dis))]
