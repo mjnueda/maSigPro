@@ -9,7 +9,6 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage{Sweave}
 \usepackage{url}
-\usepackage{auto-pst-pdf}
 \usepackage{amsmath,pstricks,fullpage}
 \usepackage[authoryear,round]{natbib}
 \usepackage{hyperref}
@@ -22,7 +21,7 @@
 \begin{document}
 \title{\textbf{maSigPro User's Guide}}
 \author{Ana Conesa and Maria J. Nueda}
-\date{5 December 2012}
+\date{30 July 2013}
 \maketitle
 
 \begin{center}
@@ -52,7 +51,7 @@ model will be useful to cluster together significant genes with similar expressi
 to visualize the results.
 This document is a example-based guide for the use of \textbf{maSigPro}. We recommend to open a
 R sesion and go through this tutorial running the code given at the different sections. The
-guide does not provides a detailed description of the functions of the package or demonstrates
+guide does not provide a detailed description of the functions of the package or demonstrates
 the statistical basis of the methodology. The later is described in the work by \citep{Conesa2006}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -64,7 +63,7 @@ the R prompt:
 library(maSigPro) # load maSigPro library
 @
 
-The on-line help of {\bf maSigPro} can be started by typing at the R promt:
+The on-line help of {\bf maSigPro} can be started by typing at the R prompt:
 
 \begin{Schunk}
 \begin{Sinput}
@@ -73,10 +72,19 @@ The on-line help of {\bf maSigPro} can be started by typing at the R promt:
 \end{Sinput}
 \end{Schunk}
 
-The analysis approach implemented in \textbf{maSigPro} is executed in 5 major steps which are run
+The analysis approach implemented in \textbf{maSigPro} is executed in 5 major steps (Figure \ref{fig:pipeline}) which are run
 by the package core functions {\bf make.design.matrix()}, {\bf p.vector()}, {\bf T.fit()}, {\bf get.siggenes()}
 and {\bf see.genes()}. Additionally, the package provides the wrapping function {\bf maSigPro()}
 which executes the entire analysis in one go.
+
+\begin{figure}
+\begin{center}
+\includegraphics{pipeline.jpg}
+\caption{maSigPro pipeline. Major functions.}
+\protect\label{fig:pipeline}
+\end{center}
+\end{figure}
+
 In the following section we will explain the usage of each of these funcions using as example a
 data set from a multiple series time course experiment. At the end of this document we will
 also explain how to apply {\bf maSigPro} to other experimental designs.
@@ -202,18 +210,21 @@ This function has two major arguments, {\tt rsq} and {\tt vars}.
 
 \begin{description}
 \item
-{\tt rsq} is a cutt-off value for the R-squared of the regression model.
+{\tt rsq:} is a cutt-off value for the R-squared of the regression model.
 {\item}
-{\tt vars} is used to indicate how to group variables to show results. There are 3 possible values:
-\end{description}
+{\tt vars:} is used to indicate how to group variables to show results. There are 3 possible values:
 
-
+\begin{description}
+\item 
 {"{\tt groups}":} This will generate a list of significant genes for each experimental group. The list corresponding to the reference group will contain genes whose expression profile is significantly different from a 0 profile. The lists corresponding to the remaining experimental groups will contain genes whose profiles are different from the reference group.
 \\
+\item
 {"{\tt all}":} One unique list of significant genes a any model variable will be produced.
 \\
+\item
 {"{\tt each}":} There will be as many lists as variables in the regression model. This can be used to analyze specific differences, for example genes that have linear or saturation kinetics.
-
+\end{description}
+\end{description}
 
 <<results=hide>>=
 sigs <- get.siggenes(tstep, rsq = 0.6, vars = "groups")
@@ -235,15 +246,18 @@ names(sigs$sig.genes$ColdvsControl)
 command will make a Venn diagram of the significant genes for the three stress experimental groups 
 (Figure \ref{fig:venn}).
 
-<<eval=FALSE>>=
+
+%<<eval=FALSE>>=
+
+<<venn1,fig=TRUE,prefix=FALSE,echo=TRUE,include=FALSE>>=
 suma2Venn(sigs$summary[, c(2:4)])
 @
 \begin{figure}
 \begin{center}
 \includegraphics[height=7cm,width=7cm,angle=0]{venn1}
 \caption{Venn Diagram for Cold, Heat and Salt stress significant genes}
+\protect\label{fig:venn}
 \end{center}
-\label{fig:venn}
 \end{figure}
 
 {\bf PlotGroups()} creates a plot of gene expression profiles by experimental group. For example, STMDE66 is a gene which shows 
@@ -254,14 +268,15 @@ between control and heat experimental groups (Figure \ref{fig:plotSTMDE66}).
 STMDE66 <- data.abiotic[rownames(data.abiotic)=="STMDE66", ]
 @
 
-<<eval=FALSE>>=
+
+<<plotGroups1,fig=TRUE,prefix=FALSE,echo=TRUE,include=FALSE>>=
 PlotGroups (STMDE66, edesign = edesign.abiotic)
 @
 
 We can also add to the plot the regression curve computed for this gene.
-<<eval=FALSE>>=
+<<plotGroups2,fig=TRUE,prefix=FALSE,echo=TRUE,include=FALSE>>=
 PlotGroups (STMDE66, edesign = edesign.abiotic, show.fit = T, 
-            dis = design$dis, groups.vector = design$groups.vector)
+dis = design$dis, groups.vector = design$groups.vector)
 @
 
 \begin{figure}
@@ -377,12 +392,14 @@ The following example illustrates how to build the {\tt edesign} matrix when a c
 \end{Sinput}
 \end{Schunk}
 
+In this example Array1 and Array2 do not belong to any treatment. They are a common reference for all groups, values without any treatment at time 0.
+
 %-----------------------------------------------------------------------------------------------------------------------------
 \subsection{Using Measured Parameters as Independent Variable}
 The regression approach followed by {\bf maSigPro} allows that gene expression profile differences can not only be evaluated as a 
-function of Time but another variables, such as a physiological parameter measured at the experimental condition, can be used aswell 
+function of Time but another variables, such as a physiological parameter measured at the experimental condition, can be used as well 
 as the independent variable.\\
-The following example illustrates to to build the {\tt edesign} matrix in such case. In this experiment gene expression was analyzed 
+The following example illustrates how to build the {\tt edesign} matrix in such case. In this experiment gene expression was analyzed 
 as a response to a temperature shift in a growing {\it E.coli } culture. The culture OD was measured for each sample.
 
 \begin{Schunk}
@@ -390,46 +407,83 @@ as a response to a temperature shift in a growing {\it E.coli } culture. The cul
 > data(edesign.OD)
 \end{Sinput}
 \end{Schunk}
-%-----------------------------------------------------------------------------------------------------------------------------
-\subsection{Long Time Series}
-
-The methodology described in this tutorial works fine with short time series experiments (up to 4 or 5 time points) where biologically 
-meaningful responses can be modelled with polynomes up to a degree of 3. When a large number of time points is evaluated, an alternative 
-to polynomials models with high degree on the time is the piecewise regression or splines regression. In this approach the time points 
-can be split in two or more sets and in each set a polynomial with low degree can be fitted (Figure \ref{fig:splines}). To consider these models 
-new dummy variables must be included in the model. Now the dummies will differenciate between groups defined by a cut time (in the 
-example, d1=1 if t>t*).
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=3in,height=2in,angle=0]{SPLINES}
-\end{center}
-\caption{Dummy definition by splines regression}
-\protect\label{fig:splines}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Next Generation-Sequencing series}\label{section-NGS}
 
-\textbf{maSigPro} uses \textbf{lm()} function to fit a linear model where statistics for inference use normal distribution. This is the right treatment when dealing 
-with normal distributed data or big samples. However, for non-normal small samples, results can not be correct. 
+\textbf{maSigPro} uses \textbf{lm()} function to fit a linear model where statistics for inference use normal distribution. This is the right treatment when dealing
+with normal distributed data or big samples. However, for non-normal small samples, results can not be correct.
 
-The statistical distribution for tag counts data as Next Generation-Sequencing data may be Poisson or Binomial. Recent studies suggest an overdispersion
-of the data, so the negative binomial can model these distributions in a better way.
+The statistical distribution for tag counts data as RNA-Seq data may be Poisson or Binomial. However, the overdispersion of the data suggest the Negative Binomial (NB) can model these distributions in a better way. This distribution depends on a $\theta$ parameter to model the overdispersion that is related to the mean($\mu$) in the following way:
+$$Y \sim NB(\theta), Var(Y)=\mu + \frac{\mu}{\theta}$$
 
-Recently, \textbf{maSigPro} has been adapted to take into account non-normal distribution of the data. A new argument named \texttt{family} 
-has been added to maSigPro. By default \texttt{family=gaussian()}. 
-Other families: binomial, poisson, quasipoisson,... See \texttt{?family}. 
+\textbf{maSigPro} has been adapted to take into account non-normal distribution of the data. New arguments have been added in \texttt{p.vector} function to deal with this type of data in a proper way:
+\begin{description}
+\item
+{\tt counts:} a logical indicating whether your data are counts. By default is FALSE for microarray treatment.
+\item
+{\tt theta:} $\theta$ parameter for negative.binomial family. By default $\theta=10$.
+{\item}
+{\tt family:} the distribution function to be used in the GLM. It must be specified as a function: gaussian(), poisson(), negative.binomial(theta)... If NULL family will be negative.binomial(theta) when counts=TRUE or gaussian() when counts=FALSE.
+\end{description}
 
-We can also use negative.binomial(theta) from MASS package. This family needs the specification
-of the \texttt{theta} parameter.
+The recommended analysis to deal with RNA-Seq data is the GLM with negative.binomial family. $\theta$ must be specified and it can be computed by using available methods as edgeR (\citep{Robinson2010}). The application of maSigPro with several values of $\theta$ to the same datasets did not reveal significant differences in gene selection. 
+Taking this into consideration we have put by default $\theta=10$ for being an average value. 
+Moreover we give to the user the option of applying whatever exponential family to explore other possibilities.
+
+\texttt{NBdata} is a subset of a bigger normalized dataset with 2 experimental groups, 6 time-points and 3 replicates. 
+Simulation has been done by using a negative binomial distribution with $\theta=5$ to illustrate this section. The first 20 genes are simulated with changes among time. \texttt{NBdesign} is the design matrix.
 
 <<eval=FALSE>>=
-NGS.p <- p.vector(data, design, family=negative.binomial(2))
-NGS.t <- t.fit(NGS.p)
-@ 
+data(NBdata)
+data(NBdesign)
+@
+<<>>=
+d <- make.design.matrix(NBdesign)
+@
 
-Changing family in p.vector is enough. Further functions will take this argument from a \texttt{p.vector} object.
+If we can use maSigPro with $theta=10$:
+
+<<>>=
+library(MASS)
+NBp <- p.vector(NBdata, d, counts=TRUE)
+NBt <- T.fit(NBp)
+get<-get.siggenes(NBt, vars="all")
+get$summary
+@
+
+These genes can be grouped in 4 clusters \ref{fig:NB1}:
+
+\begin{Schunk}
+\begin{Sinput}
+see.genes(get$sig.genes, k = 4)
+\end{Sinput}
+\end{Schunk}
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=5in,height=5in]{PlotNB}
+\caption{Cluster Analysis significant genes}
+\protect\label{fig:NB1}
+\end{center}
+\end{figure}
+
+
+If we can use maSigPro with a specific $theta$, in this case, $theta=5$:
+
+<<>>=
+NBp <- p.vector(NBdata, d, counts=TRUE, theta=5)
+@
+
+Also, a specific family, for instance, poisson can be specified. In such case counts and theta parameters are omitted.
+
+<<>>=
+NBp <- p.vector(NBdata, d, family=poisson() )
+@
+
+Changing this arguments in p.vector is enough. Further functions will take these arguments from a \texttt{p.vector} object.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
