@@ -1,0 +1,48 @@
+% \VignetteIndexEntry{maSigPro Vignette}
+% \VignetteDepends{maSigPro}
+% \VignetteKeywords{Expression Analysis, Time course}
+% \VignettePackage{maSigPro}
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{Sweave}
+\usepackage{url}
+\usepackage{amsmath,pstricks,fullpage}
+\usepackage[authoryear,round]{natbib}
+\usepackage{hyperref}
+\usepackage{a4wide}
+\usepackage[T1]{fontenc}
+\parindent 0in
+
+\begin{document}
+
+\title{maSigPro: Analysis of gene expression Significant Profiles}
+\author{A.Conesa and M.J.Nueda}
+\date{30 July 2013}
+\maketitle
+
+\begin{center}
+1. Centro de Investigacion Principe Felipe, Valencia, Spain. \\
+{\tt aconesa@cipf.es}\\
+2. Departamento de Estadistica e I.O. Universidad de Alicante, Spain. \\
+{\tt mj.nueda@ua.es}\\
+\end{center}
+
+{\bf maSigPro} is a R package for the analysis of single and multiseries time course microarray and RNA-Seq experiments.
+\\
+{\bf maSigPro} follows a two steps regression strategy to find genes with significant temporal expression changes and significant differences between experimetal groups.
+The method firstly defines a general regression model for the data where the experimental groups are identified by dummy variables.
+The procedure adjusts this global model by the least squared technique to identify differentially expressed genes and selects significant genes aplying false discovery rate control procedure.
+Secondly, stepwise regression is applied as a variable selection strategy to study differences between experimental groups and to find statistically significant different profiles.
+The coefficients obtained in the second regression model will be useful to cluster together significant genes with similar expression patterns and to visualize the results.
+\\
+To obtain the User's Guide you need to install the maSigPro package. Type at the R prompt:
+
+
+\begin{Schunk}
+\begin{Sinput}
+> library(maSigProUsersGuide)
+> maSigProRUsersGuide()
+\end{Sinput}
+\end{Schunk}
+
+\end{document}
