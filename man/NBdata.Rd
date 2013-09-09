@@ -10,8 +10,6 @@
 \usage{data(NBdata)}
 \format{
   A data frame with 100 observations on 36 numeric variables.
-  \describe{
-  }
 }
 \details{
 This dataset is part of a larger simulated and normalized dataset with 2 experimental groups, 6 time-points and 3 replicates.
