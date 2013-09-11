@@ -40,8 +40,8 @@ To obtain the User's Guide you need to install the maSigPro package. Type at the
 
 \begin{Schunk}
 \begin{Sinput}
-> library(maSigProUsersGuide)
-> maSigProRUsersGuide()
+> library(maSigPro)
+> maSigProUsersGuide()
 \end{Sinput}
 \end{Schunk}
 
