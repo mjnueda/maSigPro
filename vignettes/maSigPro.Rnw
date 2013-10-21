@@ -6,6 +6,7 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage{Sweave}
 \usepackage{url}
+\usepackage{auto-pst-pdf}
 \usepackage{amsmath,pstricks,fullpage}
 \usepackage[authoryear,round]{natbib}
 \usepackage{hyperref}
