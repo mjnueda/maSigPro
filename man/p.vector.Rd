@@ -104,7 +104,7 @@ rownames(edesign) <- paste("Array", c(1:36), sep = "")
 tc.p <- p.vector(tc.DATA, design = make.design.matrix(edesign), Q = 0.05)
 tc.p$i # number of significant genes
 tc.p$SELEC # expression value of signficant genes
-tc.p$BH.alfa # p.value at FDR control
+tc.p$FDR # p.value at FDR control
 tc.p$p.adjusted# adjusted p.values
 
 }
