@@ -70,10 +70,10 @@ p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs =
 
 #-------------------------------------------------------------------------
 
-    output <- list(SELEC, p.vector, p.adjusted, G, g, BH.alfa, 
+    output <- list(SELEC, p.vector, p.adjusted, G, g, FDR, 
         nrow(SELEC), dis, dat, min.obs, Q, groups.vector, edesign, family)
     names(output) <- c("SELEC", "p.vector", "p.adjusted", "G", 
-        "g", "BH.alfa", "i", "dis", "dat", "min.obs", "Q", "groups.vector", 
+        "g", "FDR", "i", "dis", "dat", "min.obs", "Q", "groups.vector", 
         "edesign", "family")
     output
 }

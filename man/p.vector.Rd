@@ -36,7 +36,7 @@ and indicate array naming.
   \item{p.vector}{vector containing the computed p-values}
   \item{G}{total number of input genes}
   \item{g}{number of genes taken in the regression fit}
-  \item{BH.alfa }{p-value at FDR \code{ Q} control when Benajamini & Holderberg (BH) correction is used}
+  \item{FDR}{p-value at FDR \code{ Q} control when Benajamini & Holderberg (BH) correction is used}
   \item{i}{number of significant genes}
   \item{dis}{design matrix used in the regression fit}
   \item{dat}{matrix of expression value data used in the regression fit}
