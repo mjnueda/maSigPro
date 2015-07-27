@@ -23,8 +23,8 @@ p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs =
     n <- dim(dat)[2]
     p <- dim(dis)[2]
     p.vector <- vector(mode = "numeric", length = g)
-    bondad <- NULL
 
+#----------------------------------------------------------------------
     for (i in 1:g) {
 
         y <- as.numeric(dat[i, ])
@@ -53,29 +53,23 @@ p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs =
         }
  }
 }
+
+#----------------------------------------------------------------------
+    p.adjusted <- p.adjust(p.vector, method = MT.adjust, n = length(p.vector))
+    genes.selected <- rownames(dat)[which(p.adjusted <= Q)]
+
+    FDR <- sort(p.vector)[length(genes.selected)]
+   
+    SELEC <- as.matrix(as.data.frame(dat)[genes.selected, ])
+      if (nrow(SELEC) == 0) 
+        print("no significant genes")
+
     p.vector <- as.matrix(p.vector)
     rownames(p.vector) <- rownames(dat)
     colnames(p.vector) <- c("p.value")
-    p.adjusted <- p.adjust(p.vector, method = MT.adjust, n = length(p.vector))
-    BH.alfa = NULL
-    if (MT.adjust == "BH") {
-        sortp <- sort(p.vector)
-        i <- length(sortp)
-        while (i >= 1 && sortp[i] > (Q * i)/g) i <- i - 1
-        if (i == 0) {
-            BH.alfa <- 0
-        }
-        else {
-            BH.alfa <- sortp[i]
-        }
-    }
 
-    genes.selected <- rownames(dat)[which(p.adjusted <= Q)]
- 
-   SELEC <- as.matrix(as.data.frame(dat)[genes.selected, ])
+#-------------------------------------------------------------------------
 
-      if (nrow(SELEC) == 0) 
-        print("no significant genes")
     output <- list(SELEC, p.vector, p.adjusted, G, g, BH.alfa, 
         nrow(SELEC), dis, dat, min.obs, Q, groups.vector, edesign, family)
     names(output) <- c("SELEC", "p.vector", "p.adjusted", "G", 

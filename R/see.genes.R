@@ -2,7 +2,7 @@
 function (data, edesign = data$edesign, time.col = 1, repl.col = 2, 
     group.cols = c(3:ncol(edesign)), names.groups = colnames(edesign)[3:ncol(edesign)], 
     cluster.data = 1, groups.vector = data$groups.vector, k = 9, m = 1.45, 
-    cluster.method = "hclust", distance = "cor", agglo.method = "ward", 
+    cluster.method = "hclust", distance = "cor", agglo.method = "ward.D", 
     show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
     alfa = 0.05, nvar.correction = FALSE, show.lines = TRUE, iter.max = 500, 
     summary.mode = "median", color.mode = "rainbow", cexlab = 1, legend = TRUE, 

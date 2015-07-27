@@ -3,8 +3,8 @@ function (data, edesign = NULL, time = edesign[, 1], groups = edesign[,
     c(3:ncol(edesign))], repvect = edesign[, 2], show.fit = FALSE, 
     dis = NULL, step.method = "backward", min.obs = 2, alfa = 0.05, nvar.correction = FALSE,
     summary.mode = "median", show.lines = TRUE, groups.vector = NULL, 
-    xlab = "time", cex.xaxis = 1, ylim = NULL, main = NULL, cexlab = 0.8, 
-    legend = TRUE, sub = NULL) 
+    xlab = "Time", ylab = "Expression value", cex.xaxis = 1, ylim = NULL, main = NULL, cexlab = 0.8, 
+    legend = TRUE, sub = NULL ) 
 {
     if (!is.vector(data)) {
         if (summary.mode == "representative") {
@@ -13,12 +13,10 @@ function (data, edesign = NULL, time = edesign[, 1], groups = edesign[,
             representative <- names(distances)[distances == min(distances)]
             yy <- as.numeric(data[rownames(data) == representative, 
                 ])
-            ylab = "expression value"
             sub <- paste("Representative:", representative)
         }
         else if (summary.mode == "median") {
             yy <- apply(as.matrix(data), 2, median, na.rm = TRUE)
-            ylab = "average expression value"
             sub <- paste("Median profile of ", nrow(data), " genes")
         }
         else stop("not valid summary.mode")
@@ -29,8 +27,7 @@ function (data, edesign = NULL, time = edesign[, 1], groups = edesign[,
     else if (length(data) != 0) {
         yy <- as.numeric(data)
         sub <- rownames(data)
-        ylab = "expression value"
-    }
+        }
     else stop("empty data")
     if (is.null(ncol(groups))) {
         ncol = 1
