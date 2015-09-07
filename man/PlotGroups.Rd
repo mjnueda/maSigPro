@@ -10,7 +10,7 @@
 PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(edesign))], 
            repvect = edesign[,2], show.fit = FALSE, dis = NULL, step.method = "backward", 
            min.obs = 2, alfa = 0.05, nvar.correction = FALSE, summary.mode = "median", show.lines = TRUE, groups.vector = NULL, 
-           xlab = "time", ylab = "Expression value", "cex.xaxis = 1, ylim = NULL, main = NULL, cexlab = 0.8, legend = TRUE, sub = NULL)
+           xlab = "time", ylab = "Expression value", cex.xaxis = 1, ylim = NULL, main = NULL, cexlab = 0.8, legend = TRUE, sub = NULL)
 }
 
 \arguments{
