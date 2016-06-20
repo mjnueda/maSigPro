@@ -34,7 +34,7 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2,
   \item{k}{number of clusters for data partioning }
   \item{m}{m parameter when \code{"mfuzz"} clustering algorithm is used. See \code{\link[Mfuzz]{mfuzz}} }
   \item{cluster.method}{clustering method for data partioning. Currently \code{"hclust"}, \code{"kmeans"} and  \code{"mfuzz"} are supported}
-  \item{distance}{distance measurement function for when \code{cluster.method} is \code{\link{hclust}}}
+  \item{distance}{distance measurement function when \code{cluster.method} is \code{\link{hclust}}}
   \item{agglo.method}{aggregation method used when \code{cluster.method} is \code{\link{hclust}} }
   \item{show.fit}{logical indicating whether regression fit curves must be plotted }
   \item{dis}{regression design matrix }

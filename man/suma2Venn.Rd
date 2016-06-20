@@ -3,40 +3,41 @@
 
 \title{ Creates a Venn Diagram from a matrix of characters}
 \description{
-\code{suma2Venn} transforms a matrix of characters into a binary matrix and creates 
-a vennDiagram of the common elements between columns
+\code{suma2Venn} transforms a matrix or a data frame with characters into a list to draw and display a Venn diagram with up to 7 sets
 }
 
 \usage{
-suma2Venn(x, ...)
+suma2Venn(x, size = 30, cexil = 0.9, cexsn = 1, zcolor = heat.colors(ncol(x)), ...)
 }
 
 \arguments{
-  \item{x}{ data frame of character values}
-  \item{\dots}{ plotting arguments for the vennDiagram function }
+  \item{x}{ matrix or data frame of character values}
+  \item{size}{ Plot size, in centimeters}
+  \item{cexil}{ Character expansion for the intersection labels}
+  \item{cexsn}{ Character expansion for the set names}
+  \item{zcolor}{A vector of colors for the custom zones}
+  \item{\dots}{ Additional plotting arguments for the venn function }
 }
 \details{
-  \code{suma2Venn} creates a list of all elements of a matrix or data frame of characters and computes  
-the presence/absence of each element in each column of the matrix. This results is a numeric
-matrix of 1 and 0 which can be taken by the
-\code{\link[limma:venn]{vennDiagram}} to generate a Venn Plot 
+  \code{suma2Venn} creates a list with the columns of a matrix or a data frame of characters which can be taken by the
+\code{\link[venn:venn]{venn}} to generate a Venn Diagram 
 }
 
 \value{
 \code{suma2Venn} returns a Venn Plot such as that created by the
-\code{\link[limma:venn]{vennDiagram}} funcion 
+\code{\link[venn:venn]{venn}} funcion 
 }
 
-\author{ Ana Conesa, aconesa@cipf.es}
+\author{ María José Nueda, mj.nueda@ua.es}
 
-\seealso{ \code{\link[limma:venn]{vennDiagram}}}
+\seealso{ \code{\link[venn:venn]{venn}}}
 \examples{
-a <- c("a","b","c", "d", "e", NA, NA)
-b <- c("a","b","f", NA, NA, NA, NA)
-c <- c("b","e","f", "h", "i", "j", "k")
-x <- cbind(a, b,c)
+A <- c("a","b","c", "d", "e", NA, NA)
+B <- c("a","b","f", NA, NA, NA, NA)
+C <- c("a","b","e","f", "h", "i", "j", "k")
+x <- cbind(A, B, C)
 suma2Venn(x)
 
 }
-\keyword{ misc }
 \keyword{ aplot }
+
