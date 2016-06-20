@@ -1,22 +1,19 @@
-"suma2Venn" <-
-function (x, ...) 
+"suma2Venn" <- function (x, size = 30, cexil = 0.9, cexsn = 1, zcolor = heat.colors(ncol(x)),...) 
 {
-total <- NULL
-## Number of different elements
-  for (i in 1:ncol(x)) 
-    total <- unique(c(total, as.character(x[,i])))
-total <- total[total!=" "]
-## Creat matrix of counts
-  counts <- matrix(0,nrow = length(total), ncol = ncol(x))
-  colnames(counts) <- colnames(x)
-  rownames(counts) <- total
-  for(j in 1:ncol(x)) {
-        counts[, j] [is.element(total, x[,j])] <- 1
-  }
-## create Venn diagram
-  if (ncol(counts) <= 3) {
-    vennDiagram(counts, ...)
-  }  else print("venn diagram cannot be made: too many columns")
-  
+ G <- ncol(x)
+ L <- vector("list", G )
+ names(L) <- colnames(x)
+ for (i in 1:G)
+	{
+	y <- as.character(x[,i])
+	y <- y[y!=" "]
+	L[[i]]<-y
+	}
+
+     venn(L, size = size, cexil = cexil, cexsn = cexsn, zcolor = zcolor, ...)
+
 }
+
+
+
 

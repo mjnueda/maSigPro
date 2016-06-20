@@ -1,4 +1,4 @@
-p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, counts=FALSE, family=NULL, theta=10, epsilon=0.00001) 
+p.vector <- function (data, design, Q = 0.05, MT.adjust = "BH", min.obs = ncol(design$dis)+1, counts=FALSE, family=NULL, theta=10, epsilon=0.00001) 
 {
     if (is.data.frame(design) || is.matrix(design)) {
         dis <- design
@@ -10,15 +10,27 @@ p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs =
         groups.vector <- design$groups.vector
         edesign <- design$edesign
     }
+
     if (is.null(family)) {
 	if(!counts) { family=gaussian() }
 	if(counts)  { family=negative.binomial(theta) }
     }
+
     dat <- as.matrix(data)
     dat <- dat[, as.character(rownames(dis))]
     G <- nrow(dat)
+
+# Removing rows with many missings:
+
     count.na <- function(x) (length(x) - length(x[is.na(x)]))
     dat <- dat[apply(dat, 1, count.na) >= min.obs, ]
+
+# Removing rows with all ceros:
+
+    sumatot <- apply(dat, 1, sum)
+    counts0 <- which(sumatot == 0)
+    if (length(counts0) > 0) { dat <- dat[-counts0,] } 
+
     g <- dim(dat)[1]
     n <- dim(dat)[2]
     p <- dim(dis)[2]
@@ -49,7 +61,6 @@ p.vector <- function (data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs =
                 test<-anova(model.glm.0,model.glm,test="Chisq")
                 if( is.na(test[5][2,1]) ) {p.vector[i]=1}
                 else{ p.vector[i]=test[5][2,1]}
-
         }
  }
 }
