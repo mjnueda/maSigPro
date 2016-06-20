@@ -4,7 +4,7 @@ importFrom(graphics, abline, axis, curve, lines, par, plot)
 
 importFrom(grDevices, dev.off, X11)
 
-importFrom(limma, vennDiagram)
+importFrom(venn, venn)
 
 importFrom(Mfuzz, acore, mfuzz)
 
