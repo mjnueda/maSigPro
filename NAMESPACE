@@ -2,14 +2,14 @@ importFrom(Biobase, addVigs2WinMenu, readExpressionSet)
 
 importFrom(graphics, abline, axis, curve, lines, par, plot)
 
-importFrom(grDevices, dev.off, X11)
+importFrom(grDevices, dev.off, X11, heat.colors)
 
 importFrom(venn, venn)
 
-importFrom(Mfuzz, acore, mfuzz)
+importFrom(mclust, Mclust)
 
-importFrom(stats, as.dist, cor, cutree, dist, hclust,
-           influence.measures, kmeans, lm, median, p.adjust, pf, sd)
+importFrom(stats, as.dist, cor, cutree, dist, hclust, influence.measures, 
+	   kmeans, lm, median, p.adjust, pf, sd, anova, gaussian, glm, heatmap)
 
 importFrom(MASS, negative.binomial)
 
