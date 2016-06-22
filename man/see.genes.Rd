@@ -14,7 +14,7 @@
 \usage{
 see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2, 
     group.cols = c(3:ncol(edesign)), names.groups = colnames(edesign)[3:ncol(edesign)], 
-    cluster.data = 1, groups.vector = data$groups.vector, k = 9, m = 1.45, 
+    cluster.data = 1, groups.vector = data$groups.vector, k = 9, k.mclust=FALSE, 
     cluster.method = "hclust", distance = "cor", agglo.method = "ward.D", 
     show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
     alfa = 0.05, nvar.correction = FALSE, show.lines = TRUE, iter.max = 500, 
@@ -32,8 +32,8 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2,
   \item{cluster.data}{type of data used by the cluster algorithm (see details) }
   \item{groups.vector}{vector indicating the experimental group to which each variable belongs }
   \item{k}{number of clusters for data partioning }
-  \item{m}{m parameter when \code{"mfuzz"} clustering algorithm is used. See \code{\link[Mfuzz]{mfuzz}} }
-  \item{cluster.method}{clustering method for data partioning. Currently \code{"hclust"}, \code{"kmeans"} and  \code{"mfuzz"} are supported}
+  \item{k.mclust}{TRUE for computing the optimal number of clusters with Mclust algorithm}
+  \item{cluster.method}{clustering method for data partioning. Currently \code{"hclust"}, \code{"kmeans"} and  \code{"Mclust"} are supported}
   \item{distance}{distance measurement function when \code{cluster.method} is \code{\link{hclust}}}
   \item{agglo.method}{aggregation method used when \code{cluster.method} is \code{\link{hclust}} }
   \item{show.fit}{logical indicating whether regression fit curves must be plotted }
