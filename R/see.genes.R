@@ -1,13 +1,16 @@
 "see.genes" <-
 function (data, edesign = data$edesign, time.col = 1, repl.col = 2, 
     group.cols = c(3:ncol(edesign)), names.groups = colnames(edesign)[3:ncol(edesign)], 
-    cluster.data = 1, groups.vector = data$groups.vector, k = 9, m = 1.45, 
+    cluster.data = 1, groups.vector = data$groups.vector, k = 9, k.mclust=FALSE,   
     cluster.method = "hclust", distance = "cor", agglo.method = "ward.D", 
     show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
     alfa = 0.05, nvar.correction = FALSE, show.lines = TRUE, iter.max = 500, 
     summary.mode = "median", color.mode = "rainbow", cexlab = 1, legend = TRUE, 
     newX11 = TRUE,  ylim = NULL, main = NULL, ...) 
 {
+
+#--------------------------------- DATA PREPARATION ---------------------------------
+
     time = edesign[, time.col]
     repvect = edesign[, repl.col]
     groups = edesign[, group.cols]
@@ -20,87 +23,97 @@ function (data, edesign = data$edesign, time.col = 1, repl.col = 2,
         clusterdata <- data[[cluster.data]]
         dat <- as.data.frame(data$sig.profiles)
     }
-    clusterdata <- clusterdata
-    if (nrow(dat) > 1) {
-        dat <- as.data.frame(dat[, (ncol(dat) - length(time) + 
-            1):ncol(dat)])
-        count.na <- function(x) length(x[is.na(x)])
-        NAs <- apply(as.matrix(dat), 1, count.na)
-        count.noNa <- function(x) (length(x) - length(x[is.na(x)]))
-        dat <- dat[which(apply(as.matrix(dat), 1, count.noNa) >= 
-            2), ]
-    }
-    else {
-        NAs <- 1
-    }
-    kdata <- NULL
-    out <- TRUE
 
-    if (nrow(dat) > 1) {
-        if (cluster.data != 1 || cluster.data != "sig.profiles") {
-            if (any(is.na(clusterdata))) 
-                clusterdata[is.na(clusterdata)] <- 0
+if (nrow(dat) > 1) {
+
+#--------------------------------- NAs REMOVEMENT ---------------------------------
+        dat <- as.data.frame(dat[, (ncol(dat) - length(time) + 1):ncol(dat)])
+        count.noNa <- function(x) (length(x) - length(x[is.na(x)]))
+        dat <- dat[which(apply(as.matrix(dat), 1, count.noNa) >=  length(unique(repvect))), ]
+        clusterdata <- dat
+
+#--------------------------------- NAs TREATMENT ---------------------------------
+# If cluster.data is beta or t.values, they are changed for 0s.
+# With profiles, for mean value of the same type of replicate.
+
+  if (any(is.na(clusterdata))) {
+	if( cluster.method == "kmeans" || cluster.method=="Mclust") {
+
+	  if ( all(cluster.data != 1, cluster.data != "sig.profiles") ) {
+			 clusterdata[is.na(clusterdata)] <- 0
         }
-        else if (is.na(all(dist(clusterdata) > 0)) || (cluster.method == 
-            "kmeans" & any(is.na(clusterdata))) || (distance == 
-            "cor" & any(sd(t(clusterdata), na.rm = TRUE) == 0))) {
-            if (!is.null(kdata)) {
-                clusterdata <- kdata
-            }
-            else {
-                clusterdata <- NULL
-            }
-        }
-        clusterdata <- clusterdata
+	  else {
+	  mean.replic <- function(x){ tapply(as.numeric(x), repvect, mean,na.rm=TRUE) }
+	  MR <- t( apply(clusterdata, 1, mean.replic) )
+	  # por si acaso todos los valores de una misma réplica son NAs:
+		 if( any(is.na(MR)) ) {
+		   row.mean <- t(apply(MR, 1, mean, na.rm=TRUE ))
+		   MRR<-matrix(row.mean,nrow(MR),ncol(MR) )
+		   MR[is.na(MR)] <- MRR[is.na(MR)]
+		  }
+	  data.noNA <- matrix(NA,nrow(clusterdata),ncol(clusterdata))
+	  u.repvect <- unique(repvect)
+	  for (i in 1:nrow(clusterdata)){
+	    for(j in 1:length(u.repvect)) {
+	    data.noNA[i, repvect==u.repvect[j] ] = MR[i,u.repvect[j]]
+	  }
+	  }
+	clusterdata<-data.noNA
+	}
+  }
+  }
+        
+#--------------------------------------------------------------------------
+# CLUSTERING
+#--------------------------------------------------------------------------
         if (!is.null(clusterdata)) {
-            k <- min(k, nrow(dat), na.rm = TRUE)
+ heatmap(as.matrix(clusterdata))
+             k <- min(k, nrow(dat), na.rm = TRUE)
+
+#--------------------------------------------
+# hclust
+#--------------------------------------------
             if (cluster.method == "hclust") {
                 if (distance == "cor") {
-                  dcorrel <- matrix(rep(1, nrow(clusterdata)^2), 
-                    nrow(clusterdata), nrow(clusterdata)) - cor(t(clusterdata), 
+                  dcorrel <- matrix(rep(1, nrow(clusterdata)^2), nrow(clusterdata), nrow(clusterdata)) - cor(t(clusterdata), 
                     use = "pairwise.complete.obs")
                   clust <- hclust(as.dist(dcorrel), method = agglo.method)
-                  c.algo.used = paste(cluster.method, "cor", 
-                    agglo.method, sep = "_")
+                  c.algo.used = paste(cluster.method, "cor", agglo.method, sep = "_")
                 }
                 else {
-                  clust <- hclust(dist(clusterdata, method = distance), 
-                    method = agglo.method)
+                  clust <- hclust(dist(clusterdata, method = distance), method = agglo.method)
                   c.algo.used = paste(cluster.method, distance, 
                     agglo.method, sep = "_")
                 }
                 cut <- cutree(clust, k = k)
             }
+#--------------------------------------------
+# kmeans
+#--------------------------------------------
             else if (cluster.method == "kmeans") {
                 cut <- kmeans(clusterdata, k, iter.max)$cluster
                 c.algo.used = paste("kmeans", k, iter.max, sep = "_")
             }
-            else if (cluster.method == "mfuzz") { 
-                n<-dim(clusterdata)[2]
-                clusterdata[is.na(clusterdata)]<-0
-                temp <- tempfile()
-                write.table(clusterdata, temp, quote = FALSE, sep = "\t", row.names =TRUE, col.names = TRUE)
-                signif <- readExpressionSet(temp)
-                cl <- mfuzz(signif, c = k, m = m)
-                clus<-acore(signif,cl=cl,min.acore=(1/k))
-                for(i in 1:k){
-                    clus[[i]]<-transform(clus[[i]],cluster= i )
-                }
-                cut0<-clus[[1]][,c(1,3)]
-                for(i in 2:k){
-                    cut0<-rbind(cut0, clus[[i]][,c(1,3)])
-                }
-                cut<-transform(clusterdata, name="")
-                cut<-transform(cut, cluster=0)
-                cut<-cut[,c(n+1,n+2)]
-                cut[,1]<-rownames(cut)
-                for(i in 1:dim(clusterdata)[1]){
-                    cut[i,2]<-cut0[cut[i,1],2]
-                }
-                cut<-cut[,2]
-                c.algo.used = paste("mfuzz", k, m, sep = "_")
-            }
+
+#--------------------------------------------
+# Mclust
+#--------------------------------------------
+   else if (cluster.method == "Mclust") {
+	if (k.mclust) {
+	  my.mclust <- Mclust(clusterdata)
+	  k=my.mclust$G
+	}
+	else {	
+	my.mclust <- Mclust(clusterdata,k) 
+	}
+	cut <- my.mclust$class
+	c.algo.used = paste("Mclust", k, sep = "_")
+	}
+
+#--------------------------------------------------------------------------
             else stop("Invalid cluster algorithm")
+
+#--------------------------------------------------------------------------
             if (newX11) 
                 X11()
             groups <- as.matrix(groups)
@@ -146,7 +159,7 @@ function (data, edesign = data$edesign, time.col = 1, repl.col = 2,
             cut <- 1
         }
     }
-    else if (nrow(dat) == 1) {
+  else if (nrow(dat) == 1) {
         if (newX11) 
             X11()
         PlotProfiles(data = dat, repvect = repvect, main = NULL, 
