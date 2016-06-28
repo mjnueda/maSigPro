@@ -10,4 +10,4 @@ Imports: Biobase, graphics, grDevices, venn, mclust, stats, utils, MASS
 URL: http://bioinfo.cipf.es/
 LazyLoad: yes
 License: GPL (>= 2)
-biocViews: Microarray, RNA-Seq, DifferentialExpression, TimeCourse
+biocViews: Microarray, RNA-Seq, Differential Expression, TimeCourse
