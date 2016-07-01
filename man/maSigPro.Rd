@@ -12,7 +12,7 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL,
     degree = 2, time.col = 1, repl.col = 2, group.cols = c(3:ncol(edesign)), 
     Q = 0.05, alfa = Q, nvar.correction = FALSE, step.method = "backward", rsq = 0.7,
     min.obs = 3, vars = "groups", significant.intercept = "dummy", cluster.data = 1, 
-    add.IDs = FALSE, IDs = NULL, matchID.col = 1, only.names = FALSE, k = 9, m = 1.45, 
+    add.IDs = FALSE, IDs = NULL, matchID.col = 1, only.names = FALSE, k = 9,  
     cluster.method = "hclust", distance = "cor", agglo.method = "ward.D", iter.max = 500, 
     summary.mode = "median", color.mode = "rainbow", trat.repl.spots = "none",
     index = IDs[, (matchID.col + 1)], match = IDs[, matchID.col], rs = 0.7, 
@@ -123,16 +123,9 @@ maSigPro(data, edesign, matrix = "AUTO", groups.vector = NULL,
 
     (argument of \code{\link{get.siggenes}}) }
 
-  \item{k}{ number of clusters 
+  \item{k}{ number of clusters (argument of \code{\link{see.genes}}) }
 
-    (argument of \code{\link{see.genes}}) }
-
-   \item{m}{m parameter when \code{"mfuzz"} clustering algorithm is used. See
-    \code{\link[Mfuzz]{mfuzz}} 
- 
-    (argument of \code{\link{see.genes}}) }
-
-  \item{cluster.method}{ clustering method for data partioning
+   \item{cluster.method}{ clustering method for data partioning
 
      (argument of \code{\link{see.genes}}) }
 
