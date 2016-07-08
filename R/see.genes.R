@@ -67,7 +67,7 @@ if (nrow(dat) > 1) {
 # CLUSTERING
 #--------------------------------------------------------------------------
         if (!is.null(clusterdata)) {
- heatmap(as.matrix(clusterdata))
+# heatmap(as.matrix(clusterdata))
              k <- min(k, nrow(dat), na.rm = TRUE)
 
 #--------------------------------------------

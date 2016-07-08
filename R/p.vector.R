@@ -1,4 +1,4 @@
-p.vector <- function (data, design, Q = 0.05, MT.adjust = "BH", min.obs = ncol(design$dis)+1, counts=FALSE, family=NULL, theta=10, epsilon=0.00001) 
+p.vector <- function (data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, counts=FALSE, family=NULL, theta=10, epsilon=0.00001) 
 {
     if (is.data.frame(design) || is.matrix(design)) {
         dis <- design

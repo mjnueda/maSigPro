@@ -7,7 +7,7 @@
      and returns a list of FDR corrected significant genes.
 }
 \usage{
-p.vector(data, design = NULL, Q = 0.05, MT.adjust = "BH", min.obs = 3, counts=FALSE, family=NULL, theta=10, epsilon=0.00001)
+p.vector(data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, counts=FALSE, family=NULL, theta=10, epsilon=0.00001)
 }
 
 \arguments{
