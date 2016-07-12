@@ -25,10 +25,11 @@ suma2Venn(x, size = 30, cexil = 0.9, cexsn = 1, zcolor = heat.colors(ncol(x)), .
 
 \value{
 \code{suma2Venn} returns a Venn Plot such as that created by the
-\code{\link[venn:venn]{venn}} funcion 
+\code{\link[venn:venn]{venn}} function
+ 
 }
 
-\author{ María José Nueda, mj.nueda@ua.es}
+\author{ Maria J. Nueda, mj.nueda@ua.es}
 
 \seealso{ \code{\link[venn:venn]{venn}}}
 \examples{
