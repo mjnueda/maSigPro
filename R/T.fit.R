@@ -89,7 +89,7 @@ T.fit <- function (data, design = data$dis, step.method = "backward",
 # Computing goodness of fitting:
 
 	bondad <- (reg$null.deviance-reg$deviance)/reg$null.deviance
-
+	if(bondad<0){bondad=0}
             beta.coeff <- result$coefficients[, 1]
             beta.p.valor <- result$coefficients[, 4]
             coeff <- rep(0, (length(vars.in) + 1))
