@@ -10,7 +10,7 @@
 PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(edesign))], 
            repvect = edesign[,2], show.fit = FALSE, dis = NULL, step.method = "backward", 
            min.obs = 2, alfa = 0.05, nvar.correction = FALSE, summary.mode = "median", show.lines = TRUE, groups.vector = NULL, 
-           xlab = "Time", ylab = "Expression value", cex.xaxis = 1, ylim = NULL, main = NULL, cexlab = 0.8, legend = TRUE, sub = NULL)
+           xlab = "Time", ylab = "Expression value", cex.xaxis = 1, ylim = NULL, main = NULL, cexlab = 0.8, legend = TRUE, sub = NULL, item = NULL)
 }
 
 \arguments{
@@ -36,11 +36,13 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
   \item{cexlab}{ graphical parameter maginfication to be used for x axis label in plotting functions  }
   \item{legend}{ logical indicating whether legend must be added when plotting profiles}
   \item{sub}{ plot subtitle }
+  \item{item}{Name of the analysed items to show}
 }
 \details{
      To compute experimental groups either a edesign object must be provided,
      or separate values must be given for the \code{time}, \code{repvect} and
-     \code{groups} arguments. 
+     \code{groups} arguments.
+ 
 
      When data is a matrix, the average expression value is displayed.
 
@@ -52,12 +54,15 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
      data is condensated for this is given by \code{summary.mode}. When this
      argument takes the value \code{"representative"}, the gene with the
      lowest distance to all genes in the cluster will be plotted. When the
-     argument is  \code{"median"}, then median expression value is computed. 
+     argument is  \code{"median"}, then median expression value is computed.
+ 
 
      When \code{show.fit} is \code{TRUE} the stepwise regression fit for the
-     data will be computed and the regression curves will be displayed.  
+     data will be computed and the regression curves will be displayed. 
+ 
      If data is a matrix of genes and \code{summary.mode} is \code{"median"},
-     the regression fit will be computed for the median expression value. 
+     the regression fit will be computed for the median expression value.
+ 
 }
 \value{
   Plot of gene expression profiles by-group.

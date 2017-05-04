@@ -7,7 +7,7 @@
      and returns a list of FDR corrected significant genes.
 }
 \usage{
-p.vector(data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, counts=FALSE, family=NULL, theta=10, epsilon=0.00001)
+p.vector(data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, counts=FALSE, family=NULL, theta=10, epsilon=0.00001, item="gene")
 }
 
 \arguments{
@@ -21,6 +21,7 @@ p.vector(data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, counts=FALSE, fa
 		If NULL family will be negative.binomial(theta) when counts=TRUE or gaussian() when counts=FALSE }
   \item{theta}{theta parameter for negative.binomial family} 
  \item{epsilon}{argument to pass to \code{glm.control}, convergence tolerance in the iterative process to estimate de glm model}
+ \item{item}{Name of the analysed item to show in the screen while p.vector is in process }
 }
 
 \details{

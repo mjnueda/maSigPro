@@ -19,7 +19,7 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2,
     show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
     alfa = 0.05, nvar.correction = FALSE, show.lines = TRUE, iter.max = 500, 
     summary.mode = "median", color.mode = "rainbow", cexlab = 1, legend = TRUE, 
-    newX11 = TRUE,  ylim = NULL, main = NULL, ...) 
+    newX11 = TRUE,  ylim = NULL, main = NULL, item="genes", ...) 
 }
 
 \arguments{
@@ -49,7 +49,7 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2,
   \item{cexlab}{ graphical parameter maginfication to be used for x labels in plotting functions }
   \item{legend}{logical indicating whether legend must be added when plotting profiles  }
   \item{main}{plot title} 
-  \item{ylim}{range of the y axis to be used by \code{\link{PlotProfiles}} and \code{\link{PlotGroups}} }   
+  \item{ylim}{range of the y axis to be used by \code{\link{PlotProfiles}} and \code{\link{PlotGroups}} }    \item{item}{Name of the analysed items to show}
   \item{newX11}{when \code{TRUE}, plot each type of plot in a diferent graphical device }
   \item{\dots}{other graphical function argument }
 }

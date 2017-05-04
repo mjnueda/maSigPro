@@ -9,7 +9,7 @@ Function for visualization of gene expression profiles
 }
 \usage{
 PlotProfiles(data, cond, main = NULL, cex.xaxis = 0.5, ylim = NULL, 
-    repvect, sub = NULL, color.mode = "rainbow") 
+    repvect, sub = NULL, color.mode = "rainbow", item = NULL) 
 }
 
 \arguments{
@@ -21,6 +21,7 @@ PlotProfiles(data, cond, main = NULL, cex.xaxis = 0.5, ylim = NULL,
   \item{repvect}{ index vector indicating experimental replicates}
   \item{sub}{ plot subtitle  }
   \item{color.mode}{ color scale for plotting profiles. Can be either \code{"rainblow"} or \code{"gray"}}
+  \item{item}{Name of the analysed items to show}
 }
 \details{
 The \code{repvect} argument is used to indicate with vertical lines groups of replicated arrays.

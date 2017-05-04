@@ -1,4 +1,4 @@
-p.vector <- function (data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, counts=FALSE, family=NULL, theta=10, epsilon=0.00001) 
+p.vector <- function (data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, counts=FALSE, family=NULL, theta=10, epsilon=0.00001, item="gene") 
 {
     if (is.data.frame(design) || is.matrix(design)) {
         dis <- design
@@ -43,7 +43,7 @@ p.vector <- function (data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, cou
 
         div <- c(1:round(g/100)) * 100
         if (is.element(i, div)) 
-            print(paste(c("fitting gene", i, "out of", g), collapse = " "))
+            print(paste(c("fitting ",item, i, "out of", g), collapse = " "))
 
         model.glm<- glm(y~.,data=dis , family=family, epsilon=epsilon)
 	  if(model.glm$null.deviance==0) { p.vector[i]=1 } else{

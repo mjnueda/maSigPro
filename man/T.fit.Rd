@@ -7,7 +7,7 @@
 }
 \usage{
 T.fit(data, design = data$dis, step.method = "backward", 
-      min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family = gaussian(), epsilon=0.00001)
+      min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family = gaussian(), epsilon=0.00001, item="gene")
 }
 
 \arguments{
@@ -21,6 +21,7 @@ T.fit(data, design = data$dis, step.method = "backward",
   \item{nvar.correction}{argument for correcting T.fit significance level. See details}
   \item{family}{the distribution function to be used in the glm model. It must be the same used in p.vector}
   \item{epsilon}{argument to pass to \code{glm.control}, convergence tolerance in the iterative process to estimate de glm model}
+  \item{item}{Name of the analysed item to show in the screen while T.fit is in process}
 }
 
 \details{

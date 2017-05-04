@@ -6,7 +6,7 @@ function (data, edesign = data$edesign, time.col = 1, repl.col = 2,
     show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
     alfa = 0.05, nvar.correction = FALSE, show.lines = TRUE, iter.max = 500, 
     summary.mode = "median", color.mode = "rainbow", cexlab = 1, legend = TRUE, 
-    newX11 = TRUE,  ylim = NULL, main = NULL, ...) 
+    newX11 = TRUE,  ylim = NULL, main = NULL, item ="genes",...) 
 {
 
 #--------------------------------- DATA PREPARATION ---------------------------------
@@ -127,7 +127,7 @@ if (nrow(dat) > 1) {
             for (i in 1:(k)) {
                 PlotProfiles(data = dat[cut == i, ], repvect = repvect, 
                   main = i, ylim = ylim, color.mode = color.mode, 
-                  cond = rownames(edesign), ...)
+                  cond = rownames(edesign), item = item, ...)
             }
             if (newX11) 
                 X11()
@@ -150,7 +150,7 @@ if (nrow(dat) > 1) {
                   groups = groups, repvect = repvect, summary.mode = summary.mode, 
                   xlab = "time", main = paste("Cluster", j, sep = " "), 
                   ylim = ylim, cexlab = cexlab, legend = legend, 
-                  groups.vector = groups.vector, ...)
+                  groups.vector = groups.vector, item = item, ...)
             }
         }
         else {

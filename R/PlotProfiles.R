@@ -1,6 +1,6 @@
 "PlotProfiles" <-
 function (data, cond, main = NULL, cex.xaxis = 0.5, ylim = NULL, 
-    repvect, sub = NULL, color.mode = "rainbow") 
+    repvect, sub = NULL, color.mode = "rainbow", item = NULL ) 
 {
     pos.vline <- repvect[1:length(repvect)] - c(0, repvect[1:(length(repvect) - 
         1)])
@@ -21,8 +21,8 @@ function (data, cond, main = NULL, cex.xaxis = 0.5, ylim = NULL,
         else nom <- NULL
         plot(x = c(1:n), y = data[1, ], type = "l", col = 1, 
             ylim = ylim, ylab = "expression value", xlab = " ", 
-            main = paste("Cluster ", main, "(", m, " genes )", 
-                nom), xaxt = "n")
+            main = paste("Cluster", main, "(",m, item, ")", 
+                nom, sep=" "), xaxt = "n")
         axis(1, at = 1:n, labels = substr(cond, 1, 26), cex.axis = cex.xaxis, 
             las = 2)
         if (color.mode == "rainbow") {

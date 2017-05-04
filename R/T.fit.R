@@ -1,6 +1,7 @@
 T.fit <- function (data, design = data$dis, step.method = "backward", 
-    min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family=gaussian(), epsilon=0.00001 ) 
+    min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family=gaussian(), epsilon=0.00001, item="gene" ) 
 {
+
     if (is.list(data)) {
         dat <- as.matrix(data$SELEC)
         dat <- rbind(c(rep(1, ncol(dat))), dat)
@@ -32,6 +33,7 @@ T.fit <- function (data, design = data$dis, step.method = "backward",
     if (nvar.correction) 
         alfa <- alfa/ncol(dis)
     for (i in 2:(g + 1)) {
+
         y <- as.numeric(dat[i, ])
         name <- rownames(dat)[i]
         if (step.method == "backward") {
@@ -49,7 +51,7 @@ T.fit <- function (data, design = data$dis, step.method = "backward",
         else stop("stepwise method must be one of backward, forward, two.ways.backward, two.ways.forward")
         div <- c(1:round(g/100)) * 100
         if (is.element(i, div)) 
-            print(paste(c("fitting gene", i, "out of", g), collapse = " "))
+            print(paste(c("fitting ", item, i, "out of", g), collapse = " "))
         lmf <- glm(y ~ ., data = as.data.frame(dis),family=family, epsilon=epsilon)
         result <- summary(lmf)
         novar <- vars.in[!is.element(vars.in, names(result$coefficients[, 
