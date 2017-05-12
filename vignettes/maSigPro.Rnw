@@ -17,15 +17,16 @@
 \begin{document}
 
 \title{maSigPro: Analysis of gene expression Significant Profiles}
-\author{A.Conesa and M.J.Nueda}
-\date{30 July 2013}
+\author{ Mar\'ia J. Nueda$^{1}$ and Ana Conesa$^{2,3}$}
+\date{11 May 2017}
 \maketitle
 
 \begin{center}
-1. Centro de Investigacion Principe Felipe, Valencia, Spain. \\
-{\tt aconesa@cipf.es}\\
-2. Departamento de Estadistica e I.O. Universidad de Alicante, Spain. \\
+$^{1}$Mathematics Department, University of Alicante, Spain\\
 {\tt mj.nueda@ua.es}\\
+$^{2}$ Genomics of Gene Expression Laboratory, Centro de Investigaciones Pr\'incipe Felipe, Valencia, Spain \\
+{\tt aconesa@cipf.es}\\
+$^{3}$ Microbiology and Cell Science Department, Institute for Food and Agricultural Research, University of Florida, USA
 \end{center}
 
 {\bf maSigPro} is a R package for the analysis of single and multiseries time course microarray and RNA-Seq experiments.
@@ -35,6 +36,9 @@ The method firstly defines a general regression model for the data where the exp
 The procedure adjusts this global model by the least squared technique to identify differentially expressed genes and selects significant genes aplying false discovery rate control procedure.
 Secondly, stepwise regression is applied as a variable selection strategy to study differences between experimental groups and to find statistically significant different profiles.
 The coefficients obtained in the second regression model will be useful to cluster together significant genes with similar expression patterns and to visualize the results.
+\\
+{\bf maSigPro} also includes several tools for the analysis of alternative isoform expression in time
+course transcriptomics experiments. 
 \\
 To obtain the User's Guide you need to install the maSigPro package. Type at the R prompt:
 
