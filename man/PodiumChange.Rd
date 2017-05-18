@@ -23,14 +23,16 @@ PodiumChange(get, only.sig.iso=FALSE,  comparison=c("any","groups","specific"), 
     There are 3 possible values for the comparison argument:
  
     \code{"any"}: Detects genes with Major Isoform changes in at least one experimental condition.
+    
     \code{"groups"}: Detects genes with different Major Isoform for different experimental groups.
-    \code{"specific"}: Detects genes with Major Isoform changes in a specific time interval, especified in  \code{time.points} argument and a specific experimental group, especified in                            \code{group.name} argument.
+    
+    \code{"specific"}: Detects genes with Major Isoform changes in a specific time interval, especified in       \code{time.points} argument and a specific experimental group, especified in \code{group.name} argument.
 }
 \value{
   \item{L}{Names of the genes with PodiumChange Isoforms }
   \item{data.L}{Data values of all the isoforms belonging to the genes in L}
   \item{gen.L}{gen vector with the name of the gene of each isoform}
-   \item{edesign}{matrix describing experimental design needed to visualize PodiumChange selection with \code{IsoPlot} function. It is the input of \code{make.design.matrix}.}
+  \item{edesign}{matrix describing experimental design needed to visualize PodiumChange selection with \code{IsoPlot} function. It is the input of \code{make.design.matrix}.}
 }
 \references{
   Nueda, M.J., Martorell, J., Marti, C., Tarazona, S and Conesa, A. 2017.
@@ -48,7 +50,7 @@ PodiumChange(get, only.sig.iso=FALSE,  comparison=c("any","groups","specific"), 
 }
 \author{Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
-\seealso{ \code{\link{see.siggenes}}, \code{\link{IsoModel}} }
+\seealso{ \code{\link{see.genes}}, \code{\link{IsoModel}} }
 
 
 \examples{

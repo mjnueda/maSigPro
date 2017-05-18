@@ -19,6 +19,7 @@ getDSPatterns(tableDS, Cluster.Major, Cluster.minor)
 When minor isoforms belong to different clusters, \code{tableDS} codifies them using "&". For instance: clusters 1 and 2, 
 will be represented as "1&2". In such cases quotation marks must be used (see examples).
 When minor isoforms are only in one cluster there is no need to use quotation marks.
+}
 
 \value{
  A vector with the names of the genes.

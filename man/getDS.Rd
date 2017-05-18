@@ -16,7 +16,7 @@
   }
 
 \details{
-There are 3 possible values for the vars argument: "all", "each" and "groups". See \code{\link{get.siggenes}.
+There are 3 possible values for the vars argument: "all", "each" and "groups". See \code{\link{get.siggenes}}.
 
 }
 \value{
