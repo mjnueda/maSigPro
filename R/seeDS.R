@@ -36,9 +36,10 @@ if(!cluster.all) {
 # If a plot of mDSG is asked:
 #---------------------------------------------------------------------------------------------------
 if(plot.mDSG) {
+ data.clust <- get2$sig.genes$sig.profiles
  genes.1 <- names(NT2[NT2==1])
  data.clust1 <- data.clust[gen.sig.iso2%in%genes.1,]
- H1 <- see.genes(data.clust1, edesign=mdis$edesign, cluster.method=cluster.method, k.mclust=k.mclust, k=k, item="Isoforms")
+ H1 <- see.genes(data.clust1, edesign=design$edesign, cluster.method=cluster.method, k.mclust=k.mclust, k=k, item="Isoforms")
 }
 
 ##----------------- RESULTS--------------------------------------------

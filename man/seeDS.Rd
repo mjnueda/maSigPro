@@ -53,7 +53,7 @@ Nueda, M.J., Martorell, J., Marti, C., Tarazona, S and Conesa, A. 2017.
 }
 \author{Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
-\seealso{ \code{\link{see.siggenes}}, \code{\link{IsoModel}} }
+\seealso{ \code{\link{see.genes}}, \code{\link{IsoModel}} }
 
 
 \examples{

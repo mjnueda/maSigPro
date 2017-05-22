@@ -46,6 +46,6 @@ mdis <- make.design.matrix(ISOdesign)
 MyIso <- IsoModel(data=ISOdata[,-1], gen=ISOdata[,1], design=mdis, counts=TRUE)
 Myget <- getDS(MyIso)
 see <- seeDS(Myget, cluster.all=FALSE, k=6)
-tabla <- tableDS(see)
+table <- tableDS(see)
 table$IsoTable
 }
