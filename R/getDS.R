@@ -16,7 +16,6 @@ getDS <- function(Model, vars="all", rsq=0.4)
  DSG_distributed_by_number_of_DETs<-NumIso.by.gene
  T.iso2 <- table(DSG_distributed_by_number_of_DETs, useNA='ifany')
 
-
 #--------------------------------------------------------------------------------------
 print(paste(length(selected.genes)," DSG selected"))
 print(paste(length(gen.sig.iso2)," DETs selected"))
@@ -24,7 +23,7 @@ print(T.iso2)
 
 List0 <- setdiff(selected.genes, gen.sig.iso2) # list of DSG without any DET
 
-out <- list(Model, get2, selected.genes, gen.sig.iso2, List0, NumIso.by.gene)
+out <- list(Model, get2, selected.genes, sig.iso2, List0, NumIso.by.gene)
 names(out) <- c("Model", "get2", "DSG","DET","List0", "NumIso.by.gene")
 out
 }
