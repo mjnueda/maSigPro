@@ -29,12 +29,19 @@ PodiumChange <- function(get, only.sig.iso=FALSE,  comparison=c("any","groups","
 # Here, there is not any mDSG because in this analysis it is considered only (>1 iso)
   }
   
+  if (length(gen.sig.iso2) == 0 ) print("No selected genes with more than 1 Isoform")
+  else{
 #-------------------------------------------------------
 # Major Isoform identification
 #-------------------------------------------------------
   
   time.M <- tapply(edesign[,1],repvect,mean)
-  groups.M <- apply(edesign[,3:ncol(edesign)],2,function(x){tapply(x,repvect,mean)})
+  if(ncol(edesign)==3){
+    name3 = colnames(edesign)[3]
+    edesign3 = as.data.frame(edesign[,3:ncol(edesign)])
+    colnames(edesign3) = name3
+  } else edesign3 = edesign[,3:ncol(edesign)]
+  groups.M <- apply(edesign3, 2, function(x){tapply(x,repvect,mean)})
   
   unic <- unique(gen.sig.iso2)
   Mayor=NULL
@@ -85,4 +92,5 @@ else if(comparison=="group"){
   names(output) <- c("L", "data.L", "gen.L","edesign")
   output
   }
+}
     
