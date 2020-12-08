@@ -2,23 +2,23 @@
 \alias{PlotProfiles}
 
 \title{
-Function for visualization of gene expression profiles 
+Function for visualization of gene expression profiles
 }
 \description{
-  \code{PlotProfiles} displays the expression profiles of a group of genes. 
+  \code{PlotProfiles} displays the expression profiles of a group of genes.
 }
 \usage{
-PlotProfiles(data, cond, main = NULL, cex.xaxis = 0.5, ylim = NULL, 
-    repvect, sub = NULL, color.mode = "rainbow", item = NULL) 
+PlotProfiles(data, cond, cex.axis = 0.5, ylim = NULL, repvect,
+main = NULL, sub = NULL, color.mode = "rainbow", item = NULL)
 }
 
 \arguments{
   \item{data}{ a matrix containing the gene expression data}
   \item{cond}{ vector for x axis labeling, typically array names }
-  \item{main}{ plot main title}
-  \item{cex.xaxis}{ graphical parameter maginfication to be used for x axis in plotting functions }
+  \item{cex.axis}{ graphical parameter maginfication to be used for x axis in plotting functions }
   \item{ylim}{ index vector indicating experimental replicates }
   \item{repvect}{ index vector indicating experimental replicates}
+  \item{main}{ plot main title}
   \item{sub}{ plot subtitle  }
   \item{color.mode}{ color scale for plotting profiles. Can be either \code{"rainblow"} or \code{"gray"}}
   \item{item}{Name of the analysed items to show}
@@ -31,12 +31,12 @@ The \code{repvect} argument is used to indicate with vertical lines groups of re
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{ Ana Conesa, aconesa@cipf.es, Maria Jose Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \seealso{ \code{\link{PlotGroups}} }
 \examples{
 #### GENERATE TIME COURSE DATA
-## generate n random gene expression profiles of a data set with 
+## generate n random gene expression profiles of a data set with
 ## one control plus 3 treatments, 3 time points and r replicates per time point.
 
 tc.GENE <- function(n, r,
@@ -66,7 +66,7 @@ tc.DATA <- tc.GENE(n = 10,r = 3, b3 = 0.8, c3 = -1, a4 = -0.1, b4 = -0.8, c4 = -
 rownames(tc.DATA) <- paste("gene", c(1:10), sep = "")
 colnames(tc.DATA) <- paste("Array", c(1:36), sep = "")
 
-PlotProfiles (tc.DATA, cond = colnames(tc.DATA), main = "Time Course", 
+PlotProfiles (tc.DATA, cond = colnames(tc.DATA), main = "Time Course",
               repvect = rep(c(1:12), each = 3))
 
 }

@@ -14,12 +14,12 @@
 \usage{
 see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2, 
     group.cols = c(3:ncol(edesign)), names.groups = colnames(edesign)[3:ncol(edesign)], 
-    cluster.data = 1, groups.vector = data$groups.vector, k = 9, k.mclust=FALSE, 
-    cluster.method = "hclust", distance = "cor", agglo.method = "ward.D", 
-    show.fit = FALSE, dis = NULL, step.method = "backward", min.obs = 3, 
-    alfa = 0.05, nvar.correction = FALSE, show.lines = TRUE, iter.max = 500, 
-    summary.mode = "median", color.mode = "rainbow", cexlab = 1, legend = TRUE, 
-    newX11 = TRUE,  ylim = NULL, main = NULL, item="genes", ...) 
+    cluster.data = 1, groups.vector = data$groups.vector, k = 9, k.mclust=FALSE,   
+    cluster.method = "hclust", distance = "cor", agglo.method = "ward.D",
+    show.lines = TRUE, show.fit = FALSE, dis = NULL, step.method = "backward", 
+    min.obs = 3, alfa = 0.05, nvar.correction = FALSE, iter.max = 500, 
+    summary.mode = "median", color.mode = "rainbow", ylim = NULL, item = "genes", 
+    legend = TRUE, cex.legend = 1, lty.legend = NULL,...) 
 }
 
 \arguments{
@@ -36,22 +36,22 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2,
   \item{cluster.method}{clustering method for data partioning. Currently \code{"hclust"}, \code{"kmeans"} and  \code{"Mclust"} are supported}
   \item{distance}{distance measurement function when \code{cluster.method} is \code{\link{hclust}}}
   \item{agglo.method}{aggregation method used when \code{cluster.method} is \code{\link{hclust}} }
+  \item{show.lines}{logical indicating whether a line must be drawn joining plotted data points for reach group}
   \item{show.fit}{logical indicating whether regression fit curves must be plotted }
   \item{dis}{regression design matrix }
   \item{step.method}{stepwise regression method to fit models for cluster mean profiles. Can be either \code{"backward"}, \code{"forward"}, \code{"two.ways.backward"} or \code{"two.ways.forward"} }
   \item{min.obs}{minimal number of observations for a gene to be included in the analysis}
   \item{alfa}{significance level used for variable selection in the stepwise regression }
   \item{nvar.correction}{argument for correcting \code{T.fit}significance level. See \code{\link{T.fit}} }
-  \item{show.lines}{logical indicating whether a line must be drawn joining plotted data points for reach group}
   \item{iter.max}{maximum number of iterations when \code{cluster.method} is \code{\link{kmeans}} }
   \item{summary.mode}{ the method \code{\link{PlotGroups}} takes to condensate expression information when more than one gene is present in the data. Possible values are \code{"representative"} and \code{"median"} }  
   \item{color.mode}{ color scale for plotting profiles. Can be either \code{"rainblow"} or \code{"gray"}}
-  \item{cexlab}{ graphical parameter maginfication to be used for x labels in plotting functions }
-  \item{legend}{logical indicating whether legend must be added when plotting profiles  }
-  \item{main}{plot title} 
-  \item{ylim}{range of the y axis to be used by \code{\link{PlotProfiles}} and \code{\link{PlotGroups}} }    \item{item}{Name of the analysed items to show}
-  \item{newX11}{when \code{TRUE}, plot each type of plot in a diferent graphical device }
-  \item{\dots}{other graphical function argument }
+ \item{ylim}{range of the y axis to be used by \code{\link{PlotProfiles}} and \code{\link{PlotGroups}} }    
+ \item{item}{Name of the analysed items to show}
+ \item{legend}{logical indicating whether legend must be added when plotting profiles  }
+ \item{cex.legend}{Expansion factor for legend}
+ \item{lty.legend}{To add a coloured line in the legend}
+ \item{\dots}{other graphical function argument }
 }
 \details{
     Data can be provided either as a single data matrix of expression values, or a \code{\link{get.siggenes}} object. In the later case
@@ -71,7 +71,7 @@ see.genes(data, edesign = data$edesign, time.col = 1, repl.col = 2,
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
 Bioinformatics 22, 1096-1102
 }
-\author{ Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 \seealso{ \code{\link{PlotProfiles}}, \code{\link{PlotGroups}}}
 \examples{
 
@@ -125,11 +125,11 @@ Treat3 <- c(rep(0, 27), rep(1, 9))
 edesign <- cbind(Time, Replicates, Control, Treat1, Treat2, Treat3)
 rownames(edesign) <- paste("Array", c(1:36), sep = "")
 
-see.genes(tc.DATA, edesign = edesign, k = 4, main = "Time Course")
+see.genes(tc.DATA, edesign = edesign, k = 4)
 
 # This will show the regression fit curve
 dise <- make.design.matrix(edesign)
-see.genes(tc.DATA, edesign = edesign, k = 4, main = "Time Course", show.fit = TRUE, 
+see.genes(tc.DATA, edesign = edesign, k = 4, show.fit = TRUE, 
           dis = dise$dis, groups.vector = dise$groups.vector, distance = "euclidean")
 
 }

@@ -1,10 +1,11 @@
 "PlotGroups" <- 
 function (data, edesign = NULL, time = edesign[, 1], groups = edesign[, 
-    c(3:ncol(edesign))], repvect = edesign[, 2], show.fit = FALSE, 
+    c(3:ncol(edesign))], repvect = edesign[, 2], show.lines = TRUE, show.fit = FALSE, 
     dis = NULL, step.method = "backward", min.obs = 2, alfa = 0.05, nvar.correction = FALSE,
-    summary.mode = "median", show.lines = TRUE, groups.vector = NULL, 
-    xlab = "Time", ylab = "Expression value", cex.xaxis = 1, ylim = NULL, main = NULL, cexlab = 0.8, 
-    legend = TRUE, sub = NULL, item = NULL ) 
+    summary.mode = "median", groups.vector = NULL, main = NULL, sub = NULL, 
+    xlab = "Time", ylab = "Expression value", item = NULL, ylim = NULL, pch = 21,   
+    col = NULL, legend = TRUE, cex.legend = 1, 
+    lty.legend = NULL,... ) 
 {
     if (!is.vector(data)) {
         if (summary.mode == "representative") {
@@ -22,7 +23,8 @@ if(is.null(sub)){
         }
         else stop("not valid summary.mode")
         if (dim(data)[1] == 1) {
-            sub <- rownames(data)
+            main <- rownames(data)
+            sub=NULL
         }
     }
     else if (length(data) != 0) {
@@ -56,16 +58,27 @@ if(is.null(sub)){
     abcissa <- x
     xlim = c(min(abcissa, na.rm = TRUE), max(abcissa, na.rm = TRUE) * 
         1.3)
-    color1 <- as.numeric(sort(factor(colnames(groups)))) + 1
-    color2 <- groups
-    for (j in 1:ncol) {
+    if (is.null(col)){ 
+        color1 <- as.numeric(sort(factor(colnames(groups)))) + 1
+        color2 <- groups
+      for (j in 1:ncol) {
         color2[, j] <- color2[, j] * j
     }
     color2 <- as.vector(apply(color2, 1, sum) + 1)
-    plot(x = time, y = yy, pch = 21, xlab = xlab, ylab = ylab, 
-        xaxt = "n", main = main, sub = sub, ylim = ylim, xlim = xlim, 
-        cex = cexlab, col = color2)
-    axis(1, at = unique(abcissa), labels = unique(abcissa), cex.axis = cex.xaxis)
+    }
+   else{
+        color1 <- col
+        color2 <- groups
+        for (j in 1:ncol) {
+            color2[, j] <- color2[, j] * col[j]
+        }
+        color2 <- as.vector(apply(color2, 1, sum))
+   }
+    plot(x = time, y = yy, pch = pch, xlab = xlab, ylab = ylab, main = main,
+        xaxt = "n", sub = sub, ylim = ylim, xlim = xlim, col = color2, ...)
+    arg = list(...)
+    axis(1, at = unique(abcissa), labels = unique(abcissa),
+         lwd = 1, cex.axis = arg$cex.axis)
     if (show.fit) {
         rm <- matrix(yy, nrow = 1, ncol = length(yy))
         rownames(rm) <- c("ratio medio")
@@ -83,7 +96,7 @@ if(is.null(sub)){
             a <- c(a, rep(0, (7 - length(a))))
             curve(a[1] + a[2] * x + a[3] * (x^2) + a[4] * (x^3) + 
                 a[5] * (x^4) + a[6] * (x^5) + a[7] * (x^5), from = min(time), to = max(time), 
-                col = color1[i], add = TRUE, lty = li[i])
+                col = color1[i], add = TRUE, lty = li[i],...)
         }
         if (show.lines) {
             lx <- abcissa[group != 0]
@@ -91,13 +104,14 @@ if(is.null(sub)){
             ord <- order(lx)
             lxo <- lx[ord]
             lyo <- ly[ord]
-            lines(lxo, lyo, col = color1[i])
+            lines(lxo, lyo, col = color1[i],...)
         }
     }
     op <- par(bg = "white")
     if (legend) 
-        legend(max(abcissa, na.rm = TRUE) * 1.02, ylim[1], legend = codeg, 
-            text.col = color1, col = color1, cex = cexlab, lty = 1, 
-            yjust = 0)
-    par(op)
+    legend(max(abcissa, na.rm = TRUE) * 1.02, ylim[1], legend = codeg, 
+            text.col = color1, col = color1, lty=lty.legend,
+            yjust = 0, bty="n", cex =cex.legend)
+      par(op)
 }
+

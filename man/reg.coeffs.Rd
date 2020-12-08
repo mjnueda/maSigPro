@@ -3,11 +3,12 @@
 
 \title{ Calculate true variables regression coefficients}
 \description{
-  \code{reg.coeffs} calculates back regression coefficients for true variables (experimental groups) from dummy variables regression coefficients. 
+  \code{reg.coeffs} calculates back regression coefficients for true variables (experimental groups) from dummy variables regression coefficients.
 }
 \usage{
-reg.coeffs(coefficients, indepen = groups.vector[nchar(groups.vector)==min(nchar(groups.vector))][1], groups.vector, 
-    group) 
+reg.coeffs(coefficients,
+indepen = groups.vector[nchar(groups.vector)==min(nchar(groups.vector))][1],
+groups.vector,  group)
 }
 
 \arguments{
@@ -28,7 +29,7 @@ reg.coeffs(coefficients, indepen = groups.vector[nchar(groups.vector)==min(nchar
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{ Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \examples{
 groups.vector <-c("CT", "T1vsCT", "T2vsCT", "CT", "T1vsCT","T2vsCT", "CT", "T1vsCT", "T2vsCT")

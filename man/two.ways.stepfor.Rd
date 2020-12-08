@@ -18,19 +18,19 @@ two.ways.stepfor(y = y, d = d, alfa = 0.05, family = gaussian(), epsilon=0.00001
 }
 
 \details{
-The strategy begins analysing all the possible models with only one of the variables included in \code{d}. 
-The most statistically significant variable (with the lowest p-value) is included in the model and then 
-it is considered to introduce in the model another variable analysing all the possible models with two variables 
-(the selected variable in the previous step plus a new variable). Again the most statistically significant variable 
-(with lowest p-value) is included in the model. The process is repeated till there are no more statistically significant 
-variables to include. Each time that a variable enters the model, the p-values of the current model vairables is recalculated and non significant variables will be removed.            
+The strategy begins analysing all the possible models with only one of the variables included in \code{d}.
+The most statistically significant variable (with the lowest p-value) is included in the model and then
+it is considered to introduce in the model another variable analysing all the possible models with two variables
+(the selected variable in the previous step plus a new variable). Again the most statistically significant variable
+(with lowest p-value) is included in the model. The process is repeated till there are no more statistically significant
+variables to include. Each time that a variable enters the model, the p-values of the current model vairables is recalculated and non significant variables will be removed.
 }
 
 \value{
-     \code{two.ways.stepfor} returns an object of the class \code{\link{lm}}, where the model uses 
-     \code{y} as dependent variable and all the selected variables from \code{d} as independent variables. 
-             
-     The function \code{\link{summary}} are used to obtain a summary and analysis of variance table of the results. 
+     \code{two.ways.stepfor} returns an object of the class \code{\link{lm}}, where the model uses
+     \code{y} as dependent variable and all the selected variables from \code{d} as independent variables.
+
+     The function \code{\link{summary}} are used to obtain a summary and analysis of variance table of the results.
      The generic accessor functions \code{\link{coefficients}}, \code{\link{effects}},
      \code{\link{fitted.values}} and \code{\link{residuals}} extract various useful features of the value returned by \code{\link{lm}}.
 }
@@ -39,7 +39,7 @@ variables to include. Each time that a variable enters the model, the p-values o
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
 
-\author{ Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \seealso{ \code{\link{lm}}, \code{\link{step}}, \code{\link{stepback}}, \code{\link{stepfor}}, \code{\link{two.ways.stepback}}}
 
@@ -59,7 +59,7 @@ dis <- as.data.frame(dise$dis)
 
 
 ## expression vector
-y <- c(0.082, 0.021, 0.010, 0.113, 0.013, 0.077, 0.068, 0.042, -0.056, -0.232, -0.014, -0.040, 
+y <- c(0.082, 0.021, 0.010, 0.113, 0.013, 0.077, 0.068, 0.042, -0.056, -0.232, -0.014, -0.040,
 -0.055, 0.150, -0.027, 0.064, -0.108, -0.220, 0.275, -0.130, 0.130, 1.018, 1.005, 0.931,
  -1.009, -1.101, -1.014, -0.045, -0.110, -0.128, -0.643, -0.785, -1.077, -1.187, -1.249, -1.463)
 

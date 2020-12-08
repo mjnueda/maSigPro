@@ -18,19 +18,19 @@ two.ways.stepback(y = y, d = d, alfa = 0.05, family = gaussian(), epsilon=0.0000
 }
 
 \details{
-  The strategy begins analysing a model with all the variables included in d. If all the variables are statistically 
-  significant (all the variables have a p-value less than alfa)  this model will be the result. If not, the less 
-  statistically significant variable will be removed and the model is re-calculated. The process is repeated up to 
+  The strategy begins analysing a model with all the variables included in d. If all the variables are statistically
+  significant (all the variables have a p-value less than alfa)  this model will be the result. If not, the less
+  statistically significant variable will be removed and the model is re-calculated. The process is repeated up to
   find a model with all the variables statistically significant (p-value < alpha).
-  Each time that a variable is removed from the model, it is considered the possibility of one or more removed 
-  variables to come in again.       
+  Each time that a variable is removed from the model, it is considered the possibility of one or more removed
+  variables to come in again.
 }
 
 \value{
-     \code{two.ways.stepback} returns an object of the class \code{\link{lm}}, where the model uses 
-     \code{y} as dependent variable and all the selected variables from \code{d} as independent variables. 
-             
-     The function \code{\link{summary}} are used to obtain a summary and analysis of variance table of the results. 
+     \code{two.ways.stepback} returns an object of the class \code{\link{lm}}, where the model uses
+     \code{y} as dependent variable and all the selected variables from \code{d} as independent variables.
+
+     The function \code{\link{summary}} are used to obtain a summary and analysis of variance table of the results.
      The generic accessor functions \code{\link{coefficients}}, \code{\link{effects}},
      \code{\link{fitted.values}} and \code{\link{residuals}} extract various useful features of the value returned by \code{\link{lm}}.
 }
@@ -38,7 +38,7 @@ two.ways.stepback(y = y, d = d, alfa = 0.05, family = gaussian(), epsilon=0.0000
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{ Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{ Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 \seealso{ \code{\link{lm}}, \code{\link{step}}, \code{\link{stepfor}}, \code{\link{stepback}}, \code{\link{two.ways.stepfor}}}
 
 \examples{
@@ -57,7 +57,7 @@ dis <- as.data.frame(dise$dis)
 
 
 ## expression vector
-y <- c(0.082, 0.021, 0.010, 0.113, 0.013, 0.077, 0.068, 0.042, -0.056, -0.232, -0.014, -0.040, 
+y <- c(0.082, 0.021, 0.010, 0.113, 0.013, 0.077, 0.068, 0.042, -0.056, -0.232, -0.014, -0.040,
 -0.055, 0.150, -0.027, 0.064, -0.108, -0.220, 0.275, -0.130, 0.130, 1.018, 1.005, 0.931,
  -1.009, -1.101, -1.014, -0.045, -0.110, -0.128, -0.643, -0.785, -1.077, -1.187, -1.249, -1.463)
 

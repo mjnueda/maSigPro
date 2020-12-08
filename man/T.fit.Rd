@@ -6,8 +6,10 @@
      \code{T.fit} selects the best regression model for each gene using stepwise regression.
 }
 \usage{
-T.fit(data, design = data$dis, step.method = "backward", 
-      min.obs = data$min.obs, alfa = data$Q, nvar.correction = FALSE, family = gaussian(), epsilon=0.00001, item="gene")
+T.fit(data, design = data$dis, step.method = "backward",
+      min.obs = data$min.obs, alfa = data$Q,
+      nvar.correction = FALSE, family = gaussian(),
+      epsilon=0.00001, item="gene")
 }
 
 \arguments{
@@ -26,9 +28,9 @@ T.fit(data, design = data$dis, step.method = "backward",
 
 \details{
      In the maSigPro approach \code{\link{p.vector}} and \code{\link{T.fit}} are subsequent steps, meaning that significant genes are
-     first selected on the basis of a general model and then the significant variables for each gene are found by step-wise regression. 
+     first selected on the basis of a general model and then the significant variables for each gene are found by step-wise regression.
 
-     The step regression can be \code{"backward"} or \code{"forward"} indicating whether the step procedure starts from the 
+     The step regression can be \code{"backward"} or \code{"forward"} indicating whether the step procedure starts from the
      model with all or none variables. With the \code{"two.ways.backward"} or \code{"two.ways.forward"} options the variables are both allowed to get in and out.
      At each step the p-value of each variable is computed and variables get in/out the model when this p-value is
      lower or higher than given threshold alfa. When nva.correction is TRUE the given significance level is corrected by the number of variables in the model
@@ -55,17 +57,17 @@ T.fit(data, design = data$dis, step.method = "backward",
   \item{influ.info}{data frame of genes containing influencial data}
 }
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
-maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, \email{aconesa@cipf.es}; Maria Jose Nueda,
-\email{mj.nueda@ua.es}} 
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
+
 
 \seealso{\code{\link{p.vector}}, \code{\link{step}}}
 \examples{
 
 #### GENERATE TIME COURSE DATA
-## generate n random gene expression profiles of a data set with 
+## generate n random gene expression profiles of a data set with
 ## one control plus 3 treatments, 3 time points and r replicates per time point.
 
 tc.GENE <- function(n, r,
@@ -115,14 +117,14 @@ edesign <- cbind(Time, Replicates, Control, Treat1, Treat2, Treat3)
 rownames(edesign) <- paste("Array", c(1:36), sep = "")
 
 ## run T.fit from a p.vector object
-tc.p <- p.vector(tc.DATA, design = make.design.matrix(edesign), Q = 0.01) 
+tc.p <- p.vector(tc.DATA, design = make.design.matrix(edesign), Q = 0.01)
 tc.tstep <- T.fit(data = tc.p , alfa = 0.05)
 
 ## run T.fit from a data matrix and a design matrix
 dise <- make.design.matrix(edesign)
-tc.tstep <- T.fit (data = tc.DATA[271:300,], design = dise$dis, 
+tc.tstep <- T.fit (data = tc.DATA[271:300,], design = dise$dis,
                    step.method = "two.ways.backward", min.obs = 10, alfa = 0.05)
-tc.tstep$sol # gives the p.values of the significant 
+tc.tstep$sol # gives the p.values of the significant
              # regression coefficients of the optimized models
 }
 

@@ -6,7 +6,8 @@
 This function makes a plot with the isoforms of a specific gene splitting the different experimental groups.
 }
 \usage{
-IsoPlot(get, name, only.sig.iso=FALSE, ylim=NULL, xlab = "Time",  ylab = "Expression value", points=TRUE, cex.main=3,cex.legend=1.5)
+IsoPlot(get, name, only.sig.iso=FALSE, ylim=NULL, xlab = "Time",
+ylab = "Expression value", points=TRUE, cex.main=3,cex.legend=1.5)
 }
 
 \arguments{
@@ -22,22 +23,20 @@ IsoPlot(get, name, only.sig.iso=FALSE, ylim=NULL, xlab = "Time",  ylab = "Expres
  }
 
 \details{
- The plot can be made with all the available isoforms or only with the statistilly significant ones. 
+ The plot can be made with all the available isoforms or only with the statistilly significant ones.
 }
 \value{
     Plot of isoform profiles of a specific gene by groups.
 }
 \references{
-Nueda, M.J., Martorell, J., Marti, C., Tarazona, S and Conesa, A. 2017.
-  Identification and visualization of differential isoform expression in RNA-Seq time series. 
-  In preparation.
-  
+  Nueda, M.J., Martorell, J., Marti, C., Tarazona, S., Conesa, A. 2018. Identification and visualization of differential isoform expression in RNA-seq time series. Bioinformatics. 34, 3, 524-526.
+
   Nueda, M.J., Tarazona, S., Conesa, A. 2014.
   Next maSigPro: updating maSigPro bioconductor package for RNA-seq time series.
   Bioinformatics, 30, 2598-602.
-  
+
   Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
-  maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+  maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
   Bioinformatics 22, 1096-1102.
 
 }

@@ -13,8 +13,8 @@ importFrom(stats, as.dist, cor, cutree, dist, hclust, influence.measures,
 
 importFrom(MASS, negative.binomial)
 
-export(average.rows, get.siggenes, i.rank, make.design.matrix, maSigPro, maSigProUsersGuide,
+export(average.rows, get.siggenes, i.rank, make.design.matrix, maSigProUsersGuide,
        p.vector, PlotGroups, PlotProfiles, position, reg.coeffs, see.genes,
-       stepback, stepfor, suma2Venn, T.fit, two.ways.stepback, two.ways.stepfor,IsoModel, getDS, seeDS, tableDS, PodiumChange, IsoPlot,        getDSPatterns)
+       stepback, stepfor, suma2Venn, T.fit, two.ways.stepback, two.ways.stepfor,IsoModel, getDS, seeDS, tableDS, PodiumChange, IsoPlot, getDSPatterns)
 
 

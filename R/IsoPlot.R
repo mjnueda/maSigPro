@@ -11,7 +11,7 @@ IsoPlot <- function(get, name, only.sig.iso=FALSE, ylim=NULL, xlab = "Time",  yl
   data <- get$get2$sig.genes$sig.profiles
   }
 
- data = data[gen==name,] 
+ data = data[gen==name,]
  nt=nrow(data)
  time = edesign[, 1]
  groups = edesign[, c(3:ncol(edesign))]
@@ -40,7 +40,7 @@ if (is.null(ylim)) ylims = c(min(data, na.rm = TRUE), max(data, na.rm = TRUE))
  op <- c(5,4,4,0)
  yaxt = NULL
  par(mfrow=c(1,ncol+1))
-  
+
 for(i in 1:ncol)
  {
 if(ncol==2 && i==2){
@@ -48,18 +48,18 @@ if(ncol==2 && i==2){
  op<-c(5,0,4,4) }
 
 if(ncol>2){
- if(i==ncol){ 
+ if(i==ncol){
  yaxt="n"
  op<-c(5,0,4,4)
  }
- if(i>1 && i<ncol){ 
+ if(i>1 && i<ncol){
  yaxt="n"
  op <- c(5, 2, 4, 2)
  } }
 ploti(dati=data[,group==codeg[i]], ti=time[group==codeg[i]], op=op,  ylim=ylims, ylab=ylab, xlab=xlab ,yaxt=yaxt, main=codeg[i], points, cex.main)
 }
 plot.new()
-legend("left",legend=rownames(data),title=" ", cex=cex.legend,,lty=1,col=c(2:(nt+1)),bty="n", lwd=2 )
+legend("left",legend=rownames(data),title=" ", cex=cex.legend,lty=1,col=c(2:(nt+1)),bty="n", lwd=2 )
 legend("left",legend=rep(" ",nt),title=name, cex=cex.main, bty="n", title.adj=1)
 }
 
@@ -72,7 +72,7 @@ ploti<-function(dati, ti, op, ylim=ylim, ylab=ylab, xlab=xlab ,yaxt=yaxt, main=m
 nt <- nrow(dati)
  y1 <- as.numeric(dati[1,])
  par(mar=op)
- 
+
  tii <- tapply(ti,ti,mean)
  plot(tii,tapply(y1,ti,mean), type="l", ylim=ylim, col=2, xaxt = "n", ylab=ylab, xlab=xlab ,yaxt=yaxt, main=main, cex.main=cex.main)
  axis(1, at = unique(ti), labels = unique(ti))

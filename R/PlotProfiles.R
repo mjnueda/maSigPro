@@ -1,6 +1,6 @@
 "PlotProfiles" <-
-function (data, cond, main = NULL, cex.xaxis = 0.5, ylim = NULL, 
-    repvect, sub = NULL, color.mode = "rainbow", item = NULL ) 
+function (data, cond, cex.axis = 0.5, ylim = NULL, 
+    repvect, main=NULL, sub = NULL, color.mode = "rainbow", item = NULL ) 
 {
     pos.vline <- repvect[1:length(repvect)] - c(0, repvect[1:(length(repvect) - 
         1)])
@@ -18,12 +18,11 @@ function (data, cond, main = NULL, cex.xaxis = 0.5, ylim = NULL,
         m = dim(data)[1]
         if (m == 1) 
             nom <- rownames(data)
-        else nom <- NULL
+        else nom <- paste("Cluster", main, "(",m, item, ")", sep=" ")
         plot(x = c(1:n), y = data[1, ], type = "l", col = 1, 
             ylim = ylim, ylab = "expression value", xlab = " ", 
-            main = paste("Cluster", main, "(",m, item, ")", 
-                nom, sep=" "), xaxt = "n")
-        axis(1, at = 1:n, labels = substr(cond, 1, 26), cex.axis = cex.xaxis, 
+            main = nom, xaxt = "n")
+        axis(1, at = 1:n, labels = substr(cond, 1, 26), cex.axis = cex.axis, 
             las = 2)
         if (color.mode == "rainbow") {
             abline(v = pos.vline, col = "light gray")
@@ -44,7 +43,7 @@ function (data, cond, main = NULL, cex.xaxis = 0.5, ylim = NULL,
         n = length(data)
         plot(x = c(1:n), y = data, type = "l", col = 1, ylim = ylim, 
             ylab = "expression value", sub, xaxt = "n", xlab = " ")
-        axis(1, at = 1:n, labels = cond, cex.axis = cex.xaxis, 
+        axis(1, at = 1:n, labels = cond, cex.axis = cex.axis, 
             las = 2)
         abline(v = pos.vline, col = "light gray")
     }

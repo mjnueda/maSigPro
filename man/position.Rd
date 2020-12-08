@@ -19,12 +19,12 @@ numerical. Column position for the given variable.
 
 }
 
-\author{ Ana Conesa, aconesa@cipf.es}
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \examples{
 x <- matrix(c(1, 1, 2, 2, 3, 3),ncol = 3,nrow = 2)
 colnames(x) <- c("one", "two", "three")
-position(x, "one") 
+position(x, "one")
 
 }
 \keyword{ arith}

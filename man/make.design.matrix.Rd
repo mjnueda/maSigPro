@@ -7,7 +7,7 @@
      gene expression experiments.
 }
 \usage{
-make.design.matrix(edesign, degree = 2, time.col = 1, 
+make.design.matrix(edesign, degree = 2, time.col = 1,
                    repl.col = 2, group.cols = c(3:ncol(edesign)))
 }
 
@@ -19,13 +19,13 @@ make.design.matrix(edesign, degree = 2, time.col = 1,
   \item{group.cols}{column numbers in edesign indicating the coding for each experimental group (treatment, tissue, ...). See details }
 }
 \details{
-     rownames of edesign object should contain the arrays naming (i.e. array1, array2, ...). 
+     rownames of edesign object should contain the arrays naming (i.e. array1, array2, ...).
      colnames of edesign must contain the names of experiment descriptors(i.e. "Time", "Replicates", "Treatment A", "Treatment B", etc.).
      for each experimental group a different column must be present in edesign, coding with 1 and 0 whether each array belongs to that group or not.
 
      \code{make.design.matrix} returns a design matrix where rows represent arrays and column variables of time, dummies and their interactions for up to the \code{degree} given.
      Dummies show the relative effect of each experimental group related to the first one. Single dummies indicate the abcissa component of each group.
-     $Time*dummy$ variables indicate slope changes, $Time^2*dummy$ indicates curvature changes. Higher grade values could model complex responses. 
+     $Time*dummy$ variables indicate slope changes, $Time^2*dummy$ indicates curvature changes. Higher grade values could model complex responses.
      In case experimental groups share a initial state (i.e. common time 0), no single dummies are modeled.
 }
 \value{
@@ -36,9 +36,9 @@ make.design.matrix(edesign, degree = 2, time.col = 1,
 
 }
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
-maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
 Bioinformatics 22, 1096-1102}
-\author{Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 
 \examples{

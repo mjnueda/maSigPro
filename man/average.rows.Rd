@@ -24,7 +24,7 @@ average.rows(x, index, match, r = 0.7)
     a matrix of averaged rows
 }
 
-\author{Ana Conesa, aconesa@cipf.es}
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \examples{
 
@@ -33,7 +33,7 @@ x <- matrix(rnorm(30), nrow = 6,ncol = 5)
 rownames(x) <- paste("ID", c(1, 2, 11, 12, 19, 20), sep = "")
 i <- paste("g", rep(c(1:10), each = 2), sep = "")  # index vector
 m <- paste("ID", c(1:20), sep = "")  # match vector
-average.rows(x, i, m, r = 0) 
+average.rows(x, i, m, r = 0)
 
 }
 \keyword{ arith}

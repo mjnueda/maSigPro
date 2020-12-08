@@ -20,16 +20,16 @@ suma2Venn(x, size = 30, cexil = 0.9, cexsn = 1, zcolor = heat.colors(ncol(x)), .
 }
 \details{
   \code{suma2Venn} creates a list with the columns of a matrix or a data frame of characters which can be taken by the
-\code{\link[venn:venn]{venn}} to generate a Venn Diagram 
+\code{\link[venn:venn]{venn}} to generate a Venn Diagram
 }
 
 \value{
 \code{suma2Venn} returns a Venn Plot such as that created by the
 \code{\link[venn:venn]{venn}} function
- 
+
 }
 
-\author{ Maria J. Nueda, mj.nueda@ua.es}
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \seealso{ \code{\link[venn:venn]{venn}}}
 \examples{

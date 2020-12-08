@@ -7,7 +7,7 @@
 }
 \usage{
 IsoModel(data, gen, design = NULL, Q = 0.05, min.obs = 6, minorFoldfilter = NULL,
-    counts = FALSE, family = NULL, theta = 10, epsilon = 1e-05) 
+    counts = FALSE, family = NULL, theta = 10, epsilon = 1e-05)
 }
 
 \arguments{
@@ -20,7 +20,7 @@ IsoModel(data, gen, design = NULL, Q = 0.05, min.obs = 6, minorFoldfilter = NULL
   \item{counts}{a logical indicating whether your data are counts}
   \item{family}{the distribution function to be used in the glm model. It must be specified as a function: gaussian(), poisson(), negative.binomial(theta)...
 		If NULL family will be negative.binomial(theta) when counts=TRUE or gaussian() when counts=FALSE }
-  \item{theta}{theta parameter for negative.binomial family} 
+  \item{theta}{theta parameter for negative.binomial family}
   \item{epsilon}{argument to pass to \code{glm.control}, convergence tolerance in the iterative process to estimate de glm model}
 }
 
@@ -41,22 +41,20 @@ IsoModel(data, gen, design = NULL, Q = 0.05, min.obs = 6, minorFoldfilter = NULL
   \item{Tfit}{Tfit output of isoforms that belong to selected.genes}
   }
 \references{
-  Nueda, M.J., Martorell, J., Marti, C., Tarazona, S and Conesa, A. 2017.
-  Identification and visualization of differential isoform expression in RNA-Seq time series. 
-  In preparation.
-  
+  Nueda, M.J., Martorell, J., Marti, C., Tarazona, S., Conesa, A. 2018. Identification and visualization of differential isoform expression in RNA-seq time series. Bioinformatics. 34, 3, 524-526.
+
   Nueda, M.J., Tarazona, S., Conesa, A. 2014.
   Next maSigPro: updating maSigPro bioconductor package for RNA-seq time series.
   Bioinformatics, 30, 2598-602.
-  
-  Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
-  maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+
+  Conesa, A., Nueda M.J., Ferrer, A., Talon, T. 2006.
+  maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
   Bioinformatics 22, 1096-1102.
-  
+
 
 }
 \author{Maria Jose Nueda, \email{mj.nueda@ua.es}}
- 
+
 \seealso{ \code{\link{p.vector}}, \code{\link{T.fit}} }
 \examples{
 data(ISOdata)

@@ -7,7 +7,8 @@
      and returns a list of FDR corrected significant genes.
 }
 \usage{
-p.vector(data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, counts=FALSE, family=NULL, theta=10, epsilon=0.00001, item="gene")
+p.vector(data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6,
+counts=FALSE, family=NULL, theta=10, epsilon=0.00001, item="gene")
 }
 
 \arguments{
@@ -19,7 +20,7 @@ p.vector(data, design, Q = 0.05, MT.adjust = "BH", min.obs = 6, counts=FALSE, fa
   \item{counts}{a logical indicating whether your data are counts}
   \item{family}{the distribution function to be used in the glm model. It must be specified as a function: gaussian(), poisson(), negative.binomial(theta)...
 		If NULL family will be negative.binomial(theta) when counts=TRUE or gaussian() when counts=FALSE }
-  \item{theta}{theta parameter for negative.binomial family} 
+  \item{theta}{theta parameter for negative.binomial family}
  \item{epsilon}{argument to pass to \code{glm.control}, convergence tolerance in the iterative process to estimate de glm model}
  \item{item}{Name of the analysed item to show in the screen while p.vector is in process }
 }
@@ -41,19 +42,19 @@ and indicate array naming.
   \item{i}{number of significant genes}
   \item{dis}{design matrix used in the regression fit}
   \item{dat}{matrix of expression value data used in the regression fit}
-  \item{...}{additional values from input parameters}  
+  \item{...}{additional values from input parameters}
 }
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
-maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, \email{aconesa@cipf.es}; Maria Jose Nueda,
-\email{mj.nueda@ua.es}} 
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
+
 
 \seealso{ \code{\link{T.fit}}, \code{\link{lm}}}
 \examples{
 #### GENERATE TIME COURSE DATA
-## generates n random gene expression profiles of a data set with 
+## generates n random gene expression profiles of a data set with
 ## one control plus 3 treatments, 3 time points and r replicates per time point.
 
 tc.GENE <- function(n, r,

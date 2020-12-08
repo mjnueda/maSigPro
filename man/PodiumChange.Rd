@@ -3,12 +3,13 @@
 
 \title{Detection of Genes with switchs of their major isoforms}
 \description{
-     This function provides lists of genes that have different Major isoforms (most expressed) when different intervals of the experimental conditions are considered. 
+     This function provides lists of genes that have different Major isoforms (most expressed) when different intervals of the experimental conditions are considered.
 
-     The subrange of the experimental conditions can be chosen as a specific point, all the points of a specific experimental group or at any point. 
+     The subrange of the experimental conditions can be chosen as a specific point, all the points of a specific experimental group or at any point.
 }
 \usage{
-PodiumChange(get, only.sig.iso=FALSE,  comparison=c("any","groups","specific"), group.name="Ctr", time.points=0)
+PodiumChange(get, only.sig.iso=FALSE,  comparison=c("any",
+"groups","specific"), group.name="Ctr", time.points=0)
 }
 
 \arguments{
@@ -21,11 +22,11 @@ PodiumChange(get, only.sig.iso=FALSE,  comparison=c("any","groups","specific"), 
 
 \details{
     There are 3 possible values for the comparison argument:
- 
+
     \code{"any"}: Detects genes with Major Isoform changes in at least one experimental condition.
-    
+
     \code{"groups"}: Detects genes with different Major Isoform for different experimental groups.
-    
+
     \code{"specific"}: Detects genes with Major Isoform changes in a specific time interval, especified in       \code{time.points} argument and a specific experimental group, especified in \code{group.name} argument.
 }
 \value{
@@ -35,16 +36,13 @@ PodiumChange(get, only.sig.iso=FALSE,  comparison=c("any","groups","specific"), 
   \item{edesign}{matrix describing experimental design needed to visualize PodiumChange selection with \code{IsoPlot} function. It is the input of \code{make.design.matrix}.}
 }
 \references{
-  Nueda, M.J., Martorell, J., Marti, C., Tarazona, S and Conesa, A. 2017.
-  Identification and visualization of differential isoform expression in RNA-Seq time series. 
-  In preparation.
-  
+  Nueda, M.J., Martorell, J., Marti, C., Tarazona, S., Conesa, A. 2018. Identification and visualization of differential isoform expression in RNA-seq time series. Bioinformatics. 34, 3, 524-526.
   Nueda, M.J., Tarazona, S., Conesa, A. 2014.
   Next maSigPro: updating maSigPro bioconductor package for RNA-seq time series.
   Bioinformatics, 30, 2598-602.
-  
+
   Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
-  maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+  maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
   Bioinformatics 22, 1096-1102.
 
 }
@@ -57,10 +55,12 @@ PodiumChange(get, only.sig.iso=FALSE,  comparison=c("any","groups","specific"), 
 data(ISOdata)
 data(ISOdesign)
 mdis <- make.design.matrix(ISOdesign)
-MyIso <- IsoModel(data=ISOdata[,-1], gen=ISOdata[,1], design=mdis, counts=TRUE)
+MyIso <- IsoModel(data=ISOdata[,-1], gen=ISOdata[,1], design=mdis,
+counts=TRUE)
 Myget <- getDS(MyIso)
 
-PC <- PodiumChange(Myget, only.sig.iso=TRUE, comparison="specific", group.name="Group2", time.points=c(18,24))
+PC <- PodiumChange(Myget, only.sig.iso=TRUE,
+comparison="specific", group.name="Group2", time.points=c(18,24))
 PC$L
 
 }

@@ -6,12 +6,14 @@
   This function creates lists of significant genes for a set of variables whose significance value has been computed with the \code{T.fit} function.
 }
 \usage{
-get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1, 
+get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
              only.names = FALSE, vars = c("all", "each", "groups"),
-	     significant.intercept = "dummy",  
-             groups.vector = NULL, trat.repl.spots = "none", 
-             index = IDs[, (matchID.col + 1)], match = IDs[, matchID.col], 
-	     r = 0.7) 
+	     significant.intercept = "dummy",
+
+             groups.vector = NULL, trat.repl.spots = "none",
+             index = IDs[, (matchID.col + 1)], match = IDs[, matchID.col],
+	     r = 0.7)
+
 }
 
 \arguments{
@@ -31,39 +33,43 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
 }
 \details{
     There are 3 possible values for the vars argument:
- 
+
     \code{"all"}: generates one single matrix or gene list with all
- significant genes. 
+ significant genes.
+
 
    \code{"each"}: generates as many significant genes extractions as
  variables in the general regression model. Each extraction contains the
- significant genes for that variable. 
- 
+ significant genes for that variable.
+
+
    \code{"groups"}: generates a significant genes extraction for each
- experimental group.   
- 
+ experimental group.
+
+
   The difference between \code{"each"} and \code{"groups"} is that in the
      first case the variables of the same group (e.g.  \code{"TreatmentA"} and
      \code{"time*TreatmentA" }) will be extracted separately and in the second
-     case jointly. 
+     case jointly.
+
 
     When \code{add.IDs} is \code{TRUE}, a matrix of gene ids must be provided
-    as argument of IDs, the \code{matchID.col} 
+    as argument of IDs, the \code{matchID.col}
     column of which having same levels as in the row names of
     \code{sig.profiles}. The option \code{only.names} is \code{TRUE} will
     generate a vector of significant genes or a matrix when \code{add.IDs} is
     set also to \code{TRUE}.
 
     When \code{trat.repl.spots} is \code{"average"}, \code{match} and \code{index} vectors are required for the \code{\link{average.rows}} function.
-    In gene expression data context, the \code{index} vector would contain geneIDs and indicate which spots 
-    are replicates. The \code{match} vector is used to match these genesIDs to rows in the significant genes 
+    In gene expression data context, the \code{index} vector would contain geneIDs and indicate which spots
+    are replicates. The \code{match} vector is used to match these genesIDs to rows in the significant genes
     matrix, and must have the same levels as the row names of \code{sig.profiles}.
 
     The argument \code{significant.intercept} modulates the treatment for intercept coefficients to apply for selecting significant genes
     when \code{vars} equals \code{"groups"}. There are three possible values: \code{"none"}, no significant intercept (differences) are
     considered for significant gene selection, \code{"dummy"}, includes genes with significant intercept differences between control and experimental
     groups, and \code{"all"} when both significant intercept coefficient for the control group and significant intercept
-    differences are considered for selecting significant genes.    
+    differences are considered for selecting significant genes.
 
     \code{add.IDs} = TRUE and \code{trat.repl.spots} = \code{"average"} are not compatible argumet values.
     \code{add.IDs} = TRUE and \code{only.names} = \code{TRUE} are  compatible argumet values.
@@ -77,25 +83,25 @@ get.siggenes(tstep, rsq = 0.7, add.IDs = FALSE, IDs = NULL, matchID.col = 1,
     \describe{
       \item{\code{sig.profiles}:}{ expression values of significant genes}
       \item{\code{coefficients}:}{ regression coefficients of the adjusted
-      models} 
+      models}
       \item{\code{groups.coeffs}:}{ regression coefficients of the impiclit
-         models of each experimental group} 
+         models of each experimental group}
       \item{\code{sig.pvalues}:}{ p-values of the regression coefficients for
-         significant genes} 
+         significant genes}
       \item{\code{g}:}{ number of genes}
       \item{\code{...}:}{ arguments passed by previous functions}
     }
   }
 }
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2006.
-maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments. 
+maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
 Bioinformatics 22, 1096-1102
 }
-\author{Ana Conesa, aconesa@cipf.es; Maria Jose Nueda, mj.nueda@ua.es}
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 \examples{
 
 #### GENERATE TIME COURSE DATA
-## generate n random gene expression profiles of a data set with 
+## generate n random gene expression profiles of a data set with
 ## one control plus 3 treatments, 3 time points and r replicates per time point.
 
 tc.GENE <- function(n, r,
@@ -143,16 +149,16 @@ Treat3 <- c(rep(0, 27), rep(1, 9))
 edesign <- cbind(Time, Replicates, Control, Treat1, Treat2, Treat3)
 rownames(edesign) <- paste("Array", c(1:36), sep = "")
 
-tc.p <- p.vector(tc.DATA, design = make.design.matrix(edesign), Q = 0.01) 
+tc.p <- p.vector(tc.DATA, design = make.design.matrix(edesign), Q = 0.01)
 tc.tstep <- T.fit(data = tc.p , alfa = 0.05)
 
-## This will obtain sigificant genes per experimental group 
+## This will obtain sigificant genes per experimental group
 ## which have a regression model Rsquared > 0.9
 tc.sigs <- get.siggenes (tc.tstep, rsq = 0.9, vars = "groups")
 
-## This will obtain all sigificant genes regardless the Rsquared value. 
+## This will obtain all sigificant genes regardless the Rsquared value.
 ## Replicated genes are averaged.
-IDs <- rbind(paste("feature", c(1:300), sep = ""), 
+IDs <- rbind(paste("feature", c(1:300), sep = ""),
        rep(paste("gene", c(1:150), sep = ""), each = 2))
 tc.sigs.ALL <- get.siggenes (tc.tstep, rsq = 0, vars = "all", IDs = IDs)
 tc.sigs.groups <- get.siggenes (tc.tstep, rsq = 0, vars = "groups", significant.intercept="dummy")

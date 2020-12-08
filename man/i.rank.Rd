@@ -16,7 +16,7 @@ i.rank(x)
 \value{Vector of ranked values
 }
 
-\author{Ana Conesa, aconesa@cipf.es}
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \seealso{\code{\link{rank}},\code{\link{order}}}
 \examples{

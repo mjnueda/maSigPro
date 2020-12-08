@@ -7,10 +7,14 @@
      gene expression experiment.
 }
 \usage{
-PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(edesign))], 
-           repvect = edesign[,2], show.fit = FALSE, dis = NULL, step.method = "backward", 
-           min.obs = 2, alfa = 0.05, nvar.correction = FALSE, summary.mode = "median", show.lines = TRUE, groups.vector = NULL, 
-           xlab = "Time", ylab = "Expression value", cex.xaxis = 1, ylim = NULL, main = NULL, cexlab = 0.8, legend = TRUE, sub = NULL, item = NULL)
+PlotGroups(data, edesign = NULL, time = edesign[, 1],
+groups = edesign[,c(3:ncol(edesign))], repvect = edesign[, 2],
+show.lines = TRUE, show.fit = FALSE, dis = NULL,
+step.method = "backward", min.obs = 2, alfa = 0.05,
+nvar.correction = FALSE, summary.mode = "median",
+groups.vector = NULL, main = NULL, sub = NULL, xlab = "Time",
+ylab = "Expression value", item = NULL, ylim = NULL, pch = 21,
+col = NULL, legend = TRUE, cex.legend = 1,lty.legend = NULL,... )
 }
 
 \arguments{
@@ -19,6 +23,7 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
   \item{time}{ vector indicating time assigment for each array }
   \item{groups}{ matrix indicating experimental group to which each array is assigned }
   \item{repvect}{ index vector indicating experimental replicates}
+  \item{show.lines}{ logical indicating whether a line must be drawn joining plotted data points for reach group}
   \item{show.fit}{ logical indicating whether regression fit curves must be plotted}
   \item{dis}{ regression design matrix  }
   \item{step.method}{stepwise regression method to fit models for cluster mean profiles. It can be either \code{"backward"}, \code{"forward"}, \code{"two.ways.backward"} or \code{"two.ways.forward"} }
@@ -26,23 +31,25 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
   \item{alfa}{ significance level used for variable selection in the stepwise regression }
   \item{nvar.correction}{argument for correcting stepwise regression significance level. See \code{\link{T.fit}} }
   \item{summary.mode}{ the method to condensate expression information when more than one gene is present in the data. Possible values are \code{"representative"} and \code{"median"} }
-  \item{show.lines}{ logical indicating whether a line must be drawn joining plotted data points for reach group}
-  \item{groups.vector}{ vector indicating experimental group to which each variable belongs }
-  \item{xlab}{ label for the x axis }
-  \item{ylab}{ label for the y axis }
-  \item{cex.xaxis}{ graphical parameter maginfication to be used for x axis in plotting functions }
-  \item{ylim}{ range of the y axis }
-  \item{main}{plot main title }
-  \item{cexlab}{ graphical parameter maginfication to be used for x axis label in plotting functions  }
-  \item{legend}{ logical indicating whether legend must be added when plotting profiles}
-  \item{sub}{ plot subtitle }
-  \item{item}{Name of the analysed items to show}
+\item{groups.vector}{ vector indicating experimental group to which each variable belongs }
+\item{main}{plot main title }
+\item{sub}{ plot subtitle }
+\item{xlab}{ label for the x axis }
+\item{ylab}{ label for the y axis }
+\item{item}{ name of the analysed items to show}
+\item{ylim}{ range of the y axis }
+\item{pch}{ integer specifying type of points to plot}
+\item{col}{ a vector specifying colours to plot. If missing first naturals will be used}
+\item{legend}{ logical indicating whether legend must be added when plotting profiles}
+\item{cex.legend}{Expansion factor for legend}
+\item{lty.legend}{To add a coloured line in the legend}
+\item{\dots}{other graphical function argument }
 }
 \details{
      To compute experimental groups either a edesign object must be provided,
      or separate values must be given for the \code{time}, \code{repvect} and
      \code{groups} arguments.
- 
+
 
      When data is a matrix, the average expression value is displayed.
 
@@ -55,14 +62,14 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
      argument takes the value \code{"representative"}, the gene with the
      lowest distance to all genes in the cluster will be plotted. When the
      argument is  \code{"median"}, then median expression value is computed.
- 
+
 
      When \code{show.fit} is \code{TRUE} the stepwise regression fit for the
-     data will be computed and the regression curves will be displayed. 
- 
+     data will be computed and the regression curves will be displayed.
+
      If data is a matrix of genes and \code{summary.mode} is \code{"median"},
      the regression fit will be computed for the median expression value.
- 
+
 }
 \value{
   Plot of gene expression profiles by-group.
@@ -70,14 +77,14 @@ PlotGroups(data, edesign = NULL, time = edesign[,1], groups = edesign[,c(3:ncol(
 \references{Conesa, A., Nueda M.J., Alberto Ferrer, A., Talon, T. 2005.
 maSigPro: a Method to Identify Significant Differential Expression Profiles in Time-Course Microarray Experiments.
  }
-\author{Ana Conesa, \email{aconesa@cipf.es}; Maria Jose Nueda, \email{mj.nueda@ua.es}}
+\author{Ana Conesa and Maria Jose Nueda, \email{mj.nueda@ua.es}}
 
 \seealso{\code{\link{PlotProfiles}}}
 
 \examples{
 
 #### GENERATE TIME COURSE DATA
-## generate n random gene expression profiles of a data set with 
+## generate n random gene expression profiles of a data set with
 ## one control plus 3 treatments, 3 time points and r replicates per time point.
 
 tc.GENE <- function(n, r,
